@@ -1,0 +1,21 @@
+BOOTSZ = 256W_1F00
+BOOTRST = [X]
+RSTDISBL = [ ]
+DWEN = [ ]
+SPIEN = [X]
+WDTON = [ ]
+EESAVE = [ ]
+BODLEVEL = 2V7
+CKDIV8 = [ ]
+CKOUT = [ ]
+SUT_CKSEL = EXTFSXTAL_16KCK_14CK_0MS
+
+EXTENDED = 0xFC (valid)
+HIGH = 0xDD (valid)
+LOW = 0xD7 (valid)
+
+LB = NO_LOCK
+BLB0 = NO_LOCK
+BLB1 = SPM_DISABLE
+
+LOCKBIT = 0xEF (valid)
