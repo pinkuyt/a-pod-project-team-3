@@ -1,0 +1,7 @@
+Tat ca nhung gi thay doi moi nguoi nho update vao ghi log day du nha (bao gom ngay/thang sua doi, noi dung....). Tung folder chua du lieu rieng nha. 
+Chu thich: (p/s Thu muc: noi dung folder)
+- Project code: Cai nao ve code thi up len. 
+- tai lieu: tai lieu, thong tin tham khao.
+- Report Team: tat ca report tung  tuan cua team deu up len day.
+- Tools: Pham mem ho tro lap trinh, thiet ke..
+- ......
