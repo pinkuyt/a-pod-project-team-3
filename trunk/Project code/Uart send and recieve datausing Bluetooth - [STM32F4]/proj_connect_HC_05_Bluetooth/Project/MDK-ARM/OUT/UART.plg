@@ -1,0 +1,207 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+Z:\Documents\FPT University\LOP CO BAN ARM\PROJECT\proj_connect_HC_05_Bluetooth\Project\MDK-ARM\UART.uvproj
+Project File Date:  09/23/2013
+
+<h2>Output:</h2>
+Build target 'UART'
+compiling main.c...
+..\main.h(31): warning:  #1295-D: Deprecated declaration initPA15 - give arg types
+..\main.h(32): warning:  #1295-D: Deprecated declaration setPA15On - give arg types
+..\main.h(33): warning:  #1295-D: Deprecated declaration togglePA15 - give arg types
+..\main.c(8): warning:  #1295-D: Deprecated declaration UART_recieve - give arg types
+..\main.c(19): warning:  #177-D: variable "welcome_str" was declared but never referenced
+..\main.c(266): warning:  #1-D: last line of file ends without a newline
+linking...
+Program Size: Code=4988 RO-data=424 RW-data=76 ZI-data=1300  
+FromELF: creating hex file...
+".\OUT\UART.axf" - 0 Errors, 6 Warning(s).
+Load "Z:\\Documents\\FPT University\\LOP CO BAN ARM\\PROJECT\\proj_connect_HC_05_Bluetooth\\Project\\MDK-ARM\\OUT\\UART.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'UART'
+compiling main.c...
+..\main.h(31): warning:  #1295-D: Deprecated declaration initPA15 - give arg types
+..\main.h(32): warning:  #1295-D: Deprecated declaration setPA15On - give arg types
+..\main.h(33): warning:  #1295-D: Deprecated declaration togglePA15 - give arg types
+..\main.c(8): warning:  #1295-D: Deprecated declaration UART_recieve - give arg types
+..\main.c(19): warning:  #177-D: variable "welcome_str" was declared but never referenced
+..\main.c(266): warning:  #1-D: last line of file ends without a newline
+linking...
+Program Size: Code=4996 RO-data=424 RW-data=76 ZI-data=1300  
+FromELF: creating hex file...
+".\OUT\UART.axf" - 0 Errors, 6 Warning(s).
+Load "Z:\\Documents\\FPT University\\LOP CO BAN ARM\\PROJECT\\proj_connect_HC_05_Bluetooth\\Project\\MDK-ARM\\OUT\\UART.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'UART'
+compiling main.c...
+..\main.h(31): warning:  #1295-D: Deprecated declaration initPA15 - give arg types
+..\main.h(32): warning:  #1295-D: Deprecated declaration setPA15On - give arg types
+..\main.h(33): warning:  #1295-D: Deprecated declaration togglePA15 - give arg types
+..\main.c(8): warning:  #1295-D: Deprecated declaration UART_recieve - give arg types
+..\main.c(19): warning:  #177-D: variable "welcome_str" was declared but never referenced
+..\main.c(266): warning:  #1-D: last line of file ends without a newline
+linking...
+Program Size: Code=4988 RO-data=424 RW-data=76 ZI-data=1300  
+FromELF: creating hex file...
+".\OUT\UART.axf" - 0 Errors, 6 Warning(s).
+Load "Z:\\Documents\\FPT University\\LOP CO BAN ARM\\PROJECT\\proj_connect_HC_05_Bluetooth\\Project\\MDK-ARM\\OUT\\UART.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'UART'
+compiling main.c...
+..\main.h(31): warning:  #1295-D: Deprecated declaration initPA15 - give arg types
+..\main.h(32): warning:  #1295-D: Deprecated declaration setPA15On - give arg types
+..\main.h(33): warning:  #1295-D: Deprecated declaration togglePA15 - give arg types
+..\main.c(8): warning:  #1295-D: Deprecated declaration UART_recieve - give arg types
+..\main.c(19): warning:  #177-D: variable "welcome_str" was declared but never referenced
+..\main.c(266): warning:  #1-D: last line of file ends without a newline
+linking...
+Program Size: Code=4992 RO-data=424 RW-data=76 ZI-data=1300  
+FromELF: creating hex file...
+".\OUT\UART.axf" - 0 Errors, 6 Warning(s).
+Load "Z:\\Documents\\FPT University\\LOP CO BAN ARM\\PROJECT\\proj_connect_HC_05_Bluetooth\\Project\\MDK-ARM\\OUT\\UART.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'UART'
+compiling main.c...
+..\main.h(31): warning:  #1295-D: Deprecated declaration initPA15 - give arg types
+..\main.h(32): warning:  #1295-D: Deprecated declaration setPA15On - give arg types
+..\main.h(33): warning:  #1295-D: Deprecated declaration togglePA15 - give arg types
+..\main.c(8): warning:  #1295-D: Deprecated declaration UART_recieve - give arg types
+..\main.c(55): error:  #167: argument of type "char" is incompatible with parameter of type "volatile char *"
+..\main.c(19): warning:  #177-D: variable "welcome_str" was declared but never referenced
+..\main.c(266): warning:  #1-D: last line of file ends without a newline
+".\OUT\UART.axf" - 1 Errors, 6 Warning(s).
+Target not created
+Build target 'UART'
+compiling main.c...
+..\main.h(31): warning:  #1295-D: Deprecated declaration initPA15 - give arg types
+..\main.h(32): warning:  #1295-D: Deprecated declaration setPA15On - give arg types
+..\main.h(33): warning:  #1295-D: Deprecated declaration togglePA15 - give arg types
+..\main.c(8): warning:  #1295-D: Deprecated declaration UART_recieve - give arg types
+..\main.c(55): error:  #167: argument of type "uint16_t" is incompatible with parameter of type "volatile char *"
+..\main.c(19): warning:  #177-D: variable "welcome_str" was declared but never referenced
+..\main.c(266): warning:  #1-D: last line of file ends without a newline
+".\OUT\UART.axf" - 1 Errors, 6 Warning(s).
+Target not created
+Build target 'UART'
+compiling main.c...
+..\main.h(31): warning:  #1295-D: Deprecated declaration initPA15 - give arg types
+..\main.h(32): warning:  #1295-D: Deprecated declaration setPA15On - give arg types
+..\main.h(33): warning:  #1295-D: Deprecated declaration togglePA15 - give arg types
+..\main.c(8): warning:  #1295-D: Deprecated declaration UART_recieve - give arg types
+..\main.c(19): warning:  #177-D: variable "welcome_str" was declared but never referenced
+..\main.c(267): warning:  #1-D: last line of file ends without a newline
+linking...
+Program Size: Code=5016 RO-data=424 RW-data=76 ZI-data=1300  
+FromELF: creating hex file...
+".\OUT\UART.axf" - 0 Errors, 6 Warning(s).
+Load "Z:\\Documents\\FPT University\\LOP CO BAN ARM\\PROJECT\\proj_connect_HC_05_Bluetooth\\Project\\MDK-ARM\\OUT\\UART.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Load "Z:\\Documents\\FPT University\\LOP CO BAN ARM\\PROJECT\\proj_connect_HC_05_Bluetooth\\Project\\MDK-ARM\\OUT\\UART.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'UART'
+compiling main.c...
+..\main.h(31): warning:  #1295-D: Deprecated declaration initPA15 - give arg types
+..\main.h(32): warning:  #1295-D: Deprecated declaration setPA15On - give arg types
+..\main.h(33): warning:  #1295-D: Deprecated declaration togglePA15 - give arg types
+..\main.c(8): warning:  #1295-D: Deprecated declaration UART_recieve - give arg types
+..\main.c(19): warning:  #177-D: variable "welcome_str" was declared but never referenced
+..\main.c(267): warning:  #1-D: last line of file ends without a newline
+linking...
+Program Size: Code=5024 RO-data=424 RW-data=76 ZI-data=1300  
+FromELF: creating hex file...
+".\OUT\UART.axf" - 0 Errors, 6 Warning(s).
+Load "Z:\\Documents\\FPT University\\LOP CO BAN ARM\\PROJECT\\proj_connect_HC_05_Bluetooth\\Project\\MDK-ARM\\OUT\\UART.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'UART'
+compiling main.c...
+..\main.h(31): warning:  #1295-D: Deprecated declaration initPA15 - give arg types
+..\main.h(32): warning:  #1295-D: Deprecated declaration setPA15On - give arg types
+..\main.h(33): warning:  #1295-D: Deprecated declaration togglePA15 - give arg types
+..\main.c(8): warning:  #1295-D: Deprecated declaration UART_recieve - give arg types
+..\main.c(19): warning:  #177-D: variable "welcome_str" was declared but never referenced
+..\main.c(268): warning:  #1-D: last line of file ends without a newline
+linking...
+Program Size: Code=5024 RO-data=424 RW-data=76 ZI-data=1300  
+FromELF: creating hex file...
+".\OUT\UART.axf" - 0 Errors, 6 Warning(s).
+Build target 'UART'
+compiling main.c...
+..\main.h(31): warning:  #1295-D: Deprecated declaration initPA15 - give arg types
+..\main.h(32): warning:  #1295-D: Deprecated declaration setPA15On - give arg types
+..\main.h(33): warning:  #1295-D: Deprecated declaration togglePA15 - give arg types
+..\main.c(8): warning:  #1295-D: Deprecated declaration UART_recieve - give arg types
+..\main.c(19): warning:  #177-D: variable "welcome_str" was declared but never referenced
+..\main.c(267): warning:  #1-D: last line of file ends without a newline
+linking...
+Program Size: Code=5024 RO-data=424 RW-data=76 ZI-data=1300  
+FromELF: creating hex file...
+".\OUT\UART.axf" - 0 Errors, 6 Warning(s).
+Load "Z:\\Documents\\FPT University\\LOP CO BAN ARM\\PROJECT\\proj_connect_HC_05_Bluetooth\\Project\\MDK-ARM\\OUT\\UART.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'UART'
+compiling main.c...
+..\main.h(31): warning:  #1295-D: Deprecated declaration initPA15 - give arg types
+..\main.h(32): warning:  #1295-D: Deprecated declaration setPA15On - give arg types
+..\main.h(33): warning:  #1295-D: Deprecated declaration togglePA15 - give arg types
+..\main.c(8): warning:  #1295-D: Deprecated declaration UART_recieve - give arg types
+..\main.c(19): warning:  #177-D: variable "welcome_str" was declared but never referenced
+..\main.c(267): warning:  #1-D: last line of file ends without a newline
+linking...
+Program Size: Code=5016 RO-data=424 RW-data=76 ZI-data=1300  
+FromELF: creating hex file...
+".\OUT\UART.axf" - 0 Errors, 6 Warning(s).
+Load "Z:\\Documents\\FPT University\\LOP CO BAN ARM\\PROJECT\\proj_connect_HC_05_Bluetooth\\Project\\MDK-ARM\\OUT\\UART.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'UART'
+compiling main.c...
+..\main.h(31): warning:  #1295-D: Deprecated declaration initPA15 - give arg types
+..\main.h(32): warning:  #1295-D: Deprecated declaration setPA15On - give arg types
+..\main.h(33): warning:  #1295-D: Deprecated declaration togglePA15 - give arg types
+..\main.c(8): warning:  #1295-D: Deprecated declaration UART_recieve - give arg types
+..\main.c(19): warning:  #177-D: variable "welcome_str" was declared but never referenced
+..\main.c(267): warning:  #1-D: last line of file ends without a newline
+linking...
+Program Size: Code=5016 RO-data=424 RW-data=76 ZI-data=1300  
+FromELF: creating hex file...
+".\OUT\UART.axf" - 0 Errors, 6 Warning(s).
+Load "Z:\\Documents\\FPT University\\LOP CO BAN ARM\\PROJECT\\proj_connect_HC_05_Bluetooth\\Project\\MDK-ARM\\OUT\\UART.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'UART'
+compiling main.c...
+..\main.h(31): warning:  #1295-D: Deprecated declaration initPA15 - give arg types
+..\main.h(32): warning:  #1295-D: Deprecated declaration setPA15On - give arg types
+..\main.h(33): warning:  #1295-D: Deprecated declaration togglePA15 - give arg types
+..\main.c(8): warning:  #1295-D: Deprecated declaration UART_recieve - give arg types
+..\main.c(19): warning:  #177-D: variable "welcome_str" was declared but never referenced
+..\main.c(267): warning:  #1-D: last line of file ends without a newline
+linking...
+Program Size: Code=5016 RO-data=424 RW-data=76 ZI-data=1300  
+FromELF: creating hex file...
+".\OUT\UART.axf" - 0 Errors, 6 Warning(s).
+Load "Z:\\Documents\\FPT University\\LOP CO BAN ARM\\PROJECT\\proj_connect_HC_05_Bluetooth\\Project\\MDK-ARM\\OUT\\UART.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
