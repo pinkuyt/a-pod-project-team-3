@@ -1,14 +1,17 @@
 #include "main.h"
 
 /* Private variables ---------------------------------------------------------*/
+__IO uint64_t delay_1 = 0,delay_2 = 0,delay_3 = 0,delay_4 = 0,delay_5 = 0;
+
 //UART connection  
 static __IO uint32_t TimingDelay;
-void UARTSend(const unsigned char * pucBuffer, unsigned long ulCount);
+//void UARTSend(const unsigned char * pucBuffer, unsigned long ulCount);
 volatile char received_string[MAX_STRLEN+1]; // this will hold the recieved string
-int UART_recieve();// recieve
+//int UART_recieve();// recieve
 void USART_puts(USART_TypeDef* USARTx,volatile char *s);
-void usart_send_string(char* string);//
-uint8_t buffer_string[250];
+//void usart_send_string(char* string);//
+uint16_t buffer_string[250];
+volatile char StringLoop[] = "The quick brown fox jumps over the lazy dog\r\n";
 
 /* Method definition ---------------------------------------------------------*/
 
@@ -20,14 +23,16 @@ int main(void) {
   u8 loop = 1;
 	uint16_t rev;
 	volatile char *rev2;
-	//uint8_t button = 0; 
+	uint16_t getChar;
 	
 	
   
   initPA15();
   init_USART1(BT_BAUD);
+	systick_init();
 	led_Init();
 	button_init();
+	UART2_CONFIG(9600);// 
 	
     
   setPA15On();
@@ -41,23 +46,49 @@ int main(void) {
 		
 			if (GPIOA->IDR & 0x0001)
 			{
-			//sprintf(buffer_string,welcome_str);
-			 //USART_puts(USART1,"s \r\n");
-				//UARTSend(welcome_str, sizeof(welcome_str));
+			if (CheckTick(delay_1,500))
+			{
+				delay_1 = GetTickCount();
 				USART_puts(USART1, "troi oi 1 2 3 4 5 6 7 8 9 10\n");
 				led12();
 			}
-			Delay(10000);
-
-
-			rev2 = UART_recieve();
-			if (rev2 != '\0')
-			{
-				USART_puts(USART1, rev2);
 			}
-			else led15();
-			rev2 = '\0';
+			if (CheckTick(delay_2,1000))
+			{
+					delay_2 = GetTickCount();
+					//led13();
+			}
+			if (CheckTick(delay_3,5000))
+			{
+				//GPIO_ResetBits(GPIOD, GPIO_Pin_14);
+				delay_3 = GetTickCount();
+				//USART_SendData(USART1, getChar);
+				led14();
+			}
 			
+			if (CheckTick(delay_4,100))
+			{
+				delay_4 = GetTickCount();
+				while(USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET);
+				getChar = USART_ReceiveData(USART1);
+				//printf("%" PRIu16 "\n",getChar);
+				if (getChar != NULL)
+				{
+					usart_send_string("data");
+				}
+				else
+				{
+					usart_send_string("data");
+				}
+				//led15();
+			}
+			if (CheckTick(delay_5,500))
+		{
+			delay_5 = GetTickCount();
+			//reinterpret_cast<char*>(buffer_min)
+
+			//usart_send_string("quan");
+		}
     /* Disable the UART connection */
     //USART_Cmd(USART1, DISABLE);
 }
@@ -70,37 +101,37 @@ int main(void) {
 * @param *pcBuffer buffers to be printed.
 *@param ulCount the buffer's length
 */
-void UARTSend(const unsigned char *pucBuffer, unsigned long ulCount)
-{
-  //
-  // Loop while there are more characters to send.
-  //
-  while(ulCount--)
-  {
-    while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET)
-    {
-    }
-    USART_SendData(USART1, (uint8_t) *pucBuffer++);
-    /* Loop until the end of transmission */
-    
-  }
-}
-void usart_send_string( char* string)
-{
-	while(*string != '\0')
-	{
-		/* e.g. write a character to the USART */
-		
-		USART_SendData(USART1,*string);
-		string++;	
-		
-		
-		/* Loop until the end of transmission */
+//void UARTSend(const unsigned char *pucBuffer, unsigned long ulCount)
+//{
+//  //
+//  // Loop while there are more characters to send.
+//  //
+//  while(ulCount--)
+//  {
+//    while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET)
+//    {
+//    }
+//    USART_SendData(USART1, (uint8_t) *pucBuffer++);
+//    /* Loop until the end of transmission */
+//    
+//  }
+//}
+//void usart_send_string( char* string)
+//{
+//	while(*string != '\0')
+//	{
+//		/* e.g. write a character to the USART */
+//		
+//		USART_SendData(USART1,*string);
+//		string++;	
+//		
+//		
+//		/* Loop until the end of transmission */
 
-		while (USART_GetFlagStatus(USART1, USART_FLAG_TC) == RESET)
-		{}
-	} 	
-}
+//		while (USART_GetFlagStatus(USART1, USART_FLAG_TC) == RESET)
+//		{}
+//	} 	
+//}
 void USART_puts(USART_TypeDef* USARTx,volatile char *s){
 
 while(*s){
@@ -113,11 +144,21 @@ USART_SendData(USARTx, *s);
 int UART_recieve()
 {
 		uint16_t st;
-		
+		static int rx_index = 0;
 		
 		/* Loop until the end of transmission */
-		while (USART_GetFlagStatus(USART1, USART_FLAG_TC) == RESET);
-		st = USART_ReceiveData(USART1);
+		while (USART_GetFlagStatus(USART1, USART_FLAG_TC) == RESET)
+		{
+			/* Read one byte from the receive data register */
+    StringLoop[rx_index++] = USART_ReceiveData(USART1);
+ 
+    if (rx_index >= (sizeof(StringLoop) - 1))
+      rx_index = 0;
+ 
+    /* Clear the UART_IT_RXNE pending interrupt, probably overkill */
+    USART_ClearITPendingBit(USART1, USART_IT_RXNE);
+		}
+		//st = USART_ReceiveData(USART1);
 		
 		return st;
 	} 	

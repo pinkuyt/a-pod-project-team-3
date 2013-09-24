@@ -10,10 +10,13 @@
 #include "stm32f4xx_rcc.h"
 #include "misc.h"
 #include <stdio.h>
+#include "inttypes.h"
 #include "led_init.h"
 #include "led1.h"
 #include "button_user.h"
 #include "button_init.h"
+#include "sysTick.h"
+#include "Usart.h"
 
 
 /* Exported types ------------------------------------------------------------*/
