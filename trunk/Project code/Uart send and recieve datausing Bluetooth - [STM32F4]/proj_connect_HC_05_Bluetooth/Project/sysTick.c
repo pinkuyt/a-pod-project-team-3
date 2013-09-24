@@ -6,8 +6,6 @@ void SysTick_Handler(void)
     TickCnt++;
 	
     TimingDelay_Decrement();
-		
-
 }
 
 void systick_init(void)
@@ -19,13 +17,13 @@ void systick_init(void)
 	}
 }
 
-//void TimingDelay_Decrement(void)
-//{
-//    if (TimingDelay != 0x00)
-//    { 
-//        TimingDelay--;
-//    }
-//}
+void TimingDelay_Decrement(void)
+{
+    if (TimingDelay != 0x00)
+    { 
+        TimingDelay--;
+    }
+}
 
 uint64_t GetTickCount(void)
 {
@@ -56,9 +54,9 @@ uint8_t CheckTick(uint64_t TickBase, uint64_t Time)
     return 0;
 }
 
-//void Delay(__IO uint32_t nTime)
-//{ 
-//  TimingDelay = nTime;
+void Delay(__IO uint32_t nTime)
+{ 
+  TimingDelay = nTime;
 
-//  while(TimingDelay != 0);
-//}
+  while(TimingDelay != 0);
+}

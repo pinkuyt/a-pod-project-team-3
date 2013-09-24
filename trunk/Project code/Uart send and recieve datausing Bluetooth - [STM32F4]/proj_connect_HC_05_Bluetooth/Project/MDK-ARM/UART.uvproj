@@ -480,6 +480,16 @@
               <FileType>1</FileType>
               <FilePath>..\led1.c</FilePath>
             </File>
+            <File>
+              <FileName>Usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>Usart.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Usart.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
