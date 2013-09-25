@@ -11,7 +11,7 @@ volatile char received_string[MAX_STRLEN+1]; // this will hold the recieved stri
 void USART_puts(USART_TypeDef* USARTx,volatile char *s);
 //void usart_send_string(char* string);//
 uint16_t buffer_string[250];
-volatile char StringLoop[] = "The quick brown fox jumps over the lazy dog\r\n";
+//volatile char StringLoop[] = "quan\r\n";
 
 /* Method definition ---------------------------------------------------------*/
 
@@ -23,8 +23,11 @@ int main(void) {
   u8 loop = 1;
 	uint16_t rev;
 	volatile char *rev2;
-	uint16_t getChar;
+	char getChar;
+	char *str;
 	
+	char string[256];
+	uint16_t value;
 	
   
   initPA15();
@@ -66,23 +69,35 @@ int main(void) {
 				led14();
 			}
 			
-			if (CheckTick(delay_4,100))
+			if (CheckTick(delay_4,10))
 			{
 				delay_4 = GetTickCount();
 				while(USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET);
-				getChar = USART_ReceiveData(USART1);
+				//getChar = (char)USART_ReceiveData(USART1);
+				value = USART_ReceiveData(USART1);
+				//Delay(100);
+				//*str = getChar;
 				//printf("%" PRIu16 "\n",getChar);
-				if (getChar != NULL)
+				memset(string,0,sizeof(string[0])*256); // Clear all to 0 so string properly represented
+				sprintf(string,"%c",value);
+				//USART_puts(USART1,string);
+				if (string != NULL)
 				{
-					usart_send_string("data");
+				
+					//USART_SendData(USART1,getChar);
+					//usart_send_char(getChar);
+					//usart_send_string("data");
+					//sprintf();
+					USART_puts(USART1,"data co roi ne\n");
+					
 				}
 				else
 				{
-					usart_send_string("data");
+					usart_send_string("none");
 				}
-				//led15();
+				led15();
 			}
-			if (CheckTick(delay_5,500))
+			if (CheckTick(delay_5,250))
 		{
 			delay_5 = GetTickCount();
 			//reinterpret_cast<char*>(buffer_min)
@@ -141,27 +156,27 @@ USART_SendData(USARTx, *s);
  *s++;
 }
 }
-int UART_recieve()
-{
-		uint16_t st;
-		static int rx_index = 0;
-		
-		/* Loop until the end of transmission */
-		while (USART_GetFlagStatus(USART1, USART_FLAG_TC) == RESET)
-		{
-			/* Read one byte from the receive data register */
-    StringLoop[rx_index++] = USART_ReceiveData(USART1);
- 
-    if (rx_index >= (sizeof(StringLoop) - 1))
-      rx_index = 0;
- 
-    /* Clear the UART_IT_RXNE pending interrupt, probably overkill */
-    USART_ClearITPendingBit(USART1, USART_IT_RXNE);
-		}
-		//st = USART_ReceiveData(USART1);
-		
-		return st;
-	} 	
+//int UART_recieve()
+//{
+//		uint16_t st;
+//		static int rx_index = 0;
+//		
+//		/* Loop until the end of transmission */
+//		while (USART_GetFlagStatus(USART1, USART_FLAG_TC) == RESET)
+//		{
+//			/* Read one byte from the receive data register */
+//    StringLoop[rx_index++] = USART_ReceiveData(USART1);
+// 
+//    if (rx_index >= (sizeof(StringLoop) - 1))
+//      rx_index = 0;
+// 
+//    /* Clear the UART_IT_RXNE pending interrupt, probably overkill */
+//    USART_ClearITPendingBit(USART1, USART_IT_RXNE);
+//		}
+//		//st = USART_ReceiveData(USART1);
+//		
+//		return st;
+//	} 	
 
 
 void setPA15On(){
@@ -291,19 +306,19 @@ void initPA15(){
 * @param  None
 * @retval None
 */
-void TimingDelay_Decrement(void)
-{
-  if (TimingDelay != 0x00)
-  { 
-    TimingDelay--;
-  }
-}
+//void TimingDelay_Decrement(void)
+//{
+//  if (TimingDelay != 0x00)
+//  { 
+//    TimingDelay--;
+//  }
+//}
 
 /**
 *@brief Method used to wait a certain amount of time
 *@param nCount the time you want to wait
 */
-void Delay(__IO uint32_t nCount) 
-{
-  while(nCount--) {}
-}
+//void Delay(__IO uint32_t nCount) 
+//{
+//  while(nCount--) {}
+//}

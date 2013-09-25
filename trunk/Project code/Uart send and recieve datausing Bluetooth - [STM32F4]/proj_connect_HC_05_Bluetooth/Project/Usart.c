@@ -26,6 +26,7 @@ void UART2_CONFIG(uint32_t baudrate)  //(TX:PA2) (RX:PA3)
 	
 	
 	
+	
 	//Connect USART pins to AF
   GPIO_PinAFConfig(GPIOA, GPIO_PinSource2, GPIO_AF_USART2);
 
@@ -54,13 +55,9 @@ void UART2_CONFIG(uint32_t baudrate)  //(TX:PA2) (RX:PA3)
 	
 	/* Enable the USARTx Interrupt */
   NVIC_InitStructure.NVIC_IRQChannel = USART2_IRQn;
-
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-
   NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
-
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-
   NVIC_Init(&NVIC_InitStructure);
 
  
@@ -81,6 +78,24 @@ void usart_send_string(char* string)
 		/* e.g. write a character to the USART */
 		
 		USART_SendData(USART2,*string);
+		string++;	
+		
+		
+		/* Loop until the end of transmission */
+
+		while (USART_GetFlagStatus(USART2, USART_FLAG_TC) == RESET)
+		{}
+	} 	
+}
+
+/* USART send chuoi character*/
+void usart_send_char(char string)
+{
+	while(string != NULL)
+	{
+		/* e.g. write a character to the USART */
+		
+		USART_SendData(USART2,string);
 		string++;	
 		
 		

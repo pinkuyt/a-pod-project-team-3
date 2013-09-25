@@ -210,8 +210,8 @@ I (Z:\Documents\FPT University\LOP CO BAN ARM\PROJECT\proj_connect_HC_05_Bluetoo
 I (Z:\Documents\FPT University\LOP CO BAN ARM\PROJECT\proj_connect_HC_05_Bluetooth\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h)(0x4EAA220A)
 I (Z:\Documents\FPT University\LOP CO BAN ARM\PROJECT\proj_connect_HC_05_Bluetooth\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h)(0x4EAA220A)
 I (Z:\Documents\FPT University\LOP CO BAN ARM\PROJECT\proj_connect_HC_05_Bluetooth\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h)(0x4EAA220A)
-F (..\main.c)(0x5240F221)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I..\ -I..\..\Libraries\CMSIS\STM32F4xx\Include -I..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F4xx-DUSE_STDPERIPH_DRIVER -DSTM32F4XX -o .\out\main.o --omf_browse .\out\main.crf --depend .\out\main.d)
-I (Z:\Documents\FPT University\LOP CO BAN ARM\PROJECT\proj_connect_HC_05_Bluetooth\Project\main.h)(0x5240674A)
+F (..\main.c)(0x524263A7)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I..\ -I..\..\Libraries\CMSIS\STM32F4xx\Include -I..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F4xx-DUSE_STDPERIPH_DRIVER -DSTM32F4XX -o .\out\main.o --omf_browse .\out\main.crf --depend .\out\main.d)
+I (Z:\Documents\FPT University\LOP CO BAN ARM\PROJECT\proj_connect_HC_05_Bluetooth\Project\main.h)(0x5242550E)
 I (Z:\Documents\FPT University\LOP CO BAN ARM\PROJECT\proj_connect_HC_05_Bluetooth\Libraries\CMSIS\STM32F4xx\Include\stm32f4xx.h)(0x4EAA2206)
 I (C:\Keil\ARM\CMSIS\Include\core_cm4.h)(0x51C7C35A)
 I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7C554)
@@ -247,13 +247,15 @@ I (Z:\Documents\FPT University\LOP CO BAN ARM\PROJECT\proj_connect_HC_05_Bluetoo
 I (Z:\Documents\FPT University\LOP CO BAN ARM\PROJECT\proj_connect_HC_05_Bluetooth\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h)(0x4EAA220A)
 I (Z:\Documents\FPT University\LOP CO BAN ARM\PROJECT\proj_connect_HC_05_Bluetooth\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h)(0x4EAA220A)
 I (C:\Keil\ARM\ARMCC\include\stdio.h)(0x51C7C554)
+I (C:\Keil\ARM\RV31\INC\inttypes.h)(0x4F58438C)
 I (Z:\Documents\FPT University\LOP CO BAN ARM\PROJECT\proj_connect_HC_05_Bluetooth\Project\led_init.h)(0x52011531)
 I (Z:\Documents\FPT University\LOP CO BAN ARM\PROJECT\proj_connect_HC_05_Bluetooth\Project\led1.h)(0x52011512)
 I (Z:\Documents\FPT University\LOP CO BAN ARM\PROJECT\proj_connect_HC_05_Bluetooth\Project\button_user.h)(0x52011569)
 I (Z:\Documents\FPT University\LOP CO BAN ARM\PROJECT\proj_connect_HC_05_Bluetooth\Project\button_init.h)(0x52011549)
 I (Z:\Documents\FPT University\LOP CO BAN ARM\PROJECT\proj_connect_HC_05_Bluetooth\Project\sysTick.h)(0x520115F4)
-I (Z:\Documents\FPT University\LOP CO BAN ARM\PROJECT\proj_connect_HC_05_Bluetooth\Project\Usart.h)(0x5240EBB7)
+I (Z:\Documents\FPT University\LOP CO BAN ARM\PROJECT\proj_connect_HC_05_Bluetooth\Project\Usart.h)(0x5241168D)
 I (C:\Keil\ARM\RV31\INC\stdio.h)(0x4F58438C)
+I (C:\Keil\ARM\ARMCC\include\string.h)(0x51C7C554)
 F (..\system_stm32f4xx.c)(0x4EAA2222)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I..\ -I..\..\Libraries\CMSIS\STM32F4xx\Include -I..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F4xx-DUSE_STDPERIPH_DRIVER -DSTM32F4XX -o .\out\system_stm32f4xx.o --omf_browse .\out\system_stm32f4xx.crf --depend .\out\system_stm32f4xx.d)
 I (Z:\Documents\FPT University\LOP CO BAN ARM\PROJECT\proj_connect_HC_05_Bluetooth\Libraries\CMSIS\STM32F4xx\Include\stm32f4xx.h)(0x4EAA2206)
 I (C:\Keil\ARM\CMSIS\Include\core_cm4.h)(0x51C7C35A)
@@ -470,8 +472,8 @@ I (Z:\Documents\FPT University\LOP CO BAN ARM\PROJECT\proj_connect_HC_05_Bluetoo
 I (Z:\Documents\FPT University\LOP CO BAN ARM\PROJECT\proj_connect_HC_05_Bluetooth\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h)(0x4EAA220A)
 I (Z:\Documents\FPT University\LOP CO BAN ARM\PROJECT\proj_connect_HC_05_Bluetooth\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h)(0x4EAA220A)
 I (Z:\Documents\FPT University\LOP CO BAN ARM\PROJECT\proj_connect_HC_05_Bluetooth\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h)(0x4EAA220A)
-F (..\Usart.c)(0x5240EF01)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I..\ -I..\..\Libraries\CMSIS\STM32F4xx\Include -I..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F4xx-DUSE_STDPERIPH_DRIVER -DSTM32F4XX -o .\out\usart.o --omf_browse .\out\usart.crf --depend .\out\usart.d)
-I (Z:\Documents\FPT University\LOP CO BAN ARM\PROJECT\proj_connect_HC_05_Bluetooth\Project\Usart.h)(0x5240EBB7)
+F (..\Usart.c)(0x5241188D)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork -I..\ -I..\..\Libraries\CMSIS\STM32F4xx\Include -I..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F4xx-DUSE_STDPERIPH_DRIVER -DSTM32F4XX -o .\out\usart.o --omf_browse .\out\usart.crf --depend .\out\usart.d)
+I (Z:\Documents\FPT University\LOP CO BAN ARM\PROJECT\proj_connect_HC_05_Bluetooth\Project\Usart.h)(0x5241168D)
 I (Z:\Documents\FPT University\LOP CO BAN ARM\PROJECT\proj_connect_HC_05_Bluetooth\Libraries\CMSIS\STM32F4xx\Include\stm32f4xx.h)(0x4EAA2206)
 I (C:\Keil\ARM\CMSIS\Include\core_cm4.h)(0x51C7C35A)
 I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C7C554)
@@ -507,4 +509,4 @@ I (Z:\Documents\FPT University\LOP CO BAN ARM\PROJECT\proj_connect_HC_05_Bluetoo
 I (Z:\Documents\FPT University\LOP CO BAN ARM\PROJECT\proj_connect_HC_05_Bluetooth\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h)(0x4EAA220A)
 I (Z:\Documents\FPT University\LOP CO BAN ARM\PROJECT\proj_connect_HC_05_Bluetooth\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h)(0x4EAA220A)
 I (C:\Keil\ARM\RV31\INC\stdio.h)(0x4F58438C)
-F (..\Usart.h)(0x5240EBB7)()
+F (..\Usart.h)(0x5241168D)()

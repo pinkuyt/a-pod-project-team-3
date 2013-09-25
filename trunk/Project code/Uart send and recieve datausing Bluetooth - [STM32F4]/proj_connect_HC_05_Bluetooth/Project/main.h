@@ -17,6 +17,7 @@
 #include "button_init.h"
 #include "sysTick.h"
 #include "Usart.h"
+#include <string.h>
 
 
 /* Exported types ------------------------------------------------------------*/
