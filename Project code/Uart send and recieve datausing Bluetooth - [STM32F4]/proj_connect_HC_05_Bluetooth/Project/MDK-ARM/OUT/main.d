@@ -44,3 +44,4 @@
 .\out\main.o: ..\sysTick.h
 .\out\main.o: ..\Usart.h
 .\out\main.o: C:\Keil\ARM\RV31\INC\stdio.h
+.\out\main.o: C:\Keil\ARM\ARMCC\bin\..\include\string.h
