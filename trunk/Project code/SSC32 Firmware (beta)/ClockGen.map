@@ -1,0 +1,49 @@
+RAM Allocation
+Variable                                                          Address   Size
+--------------------------------------------------------------------------------
+Servo                                                             0300h       32
+PW_SPI_B0                                                         0320h       33
+PW_SPI_B1                                                         0341h       33
+PW_SPI_B2                                                         0362h       33
+PW_SPI_B3                                                         0383h       33
+Edges_Ctr                                                         03A4h        1
+Edges_Ptr                                                         03A5h        1
+PW_Mask                                                           03A6h      128
+PW_Time                                                           0426h       64
+PW_Width                                                          0466h       64
+SV_Width                                                          04A6h       64
+Delay_Count                                                       04E6h        1
+rx_buffer0                                                        04E7h      256
+tx_buffer0                                                        05E7h      256
+cmd                                                               06E7h        1
+CMD_Pattern                                                       06E8h        3
+CMD_Count                                                         06EBh        1
+CMD_Channel                                                       06ECh       32
+CMD_Time                                                          070Ch       64
+SP_Steps                                                          074Ch       32
+SP_Dir                                                            076Ch       32
+i                                                                 078Ch        1
+j                                                                 078Dh        1
+channel                                                           078Eh        1
+tmp                                                               078Fh        1
+delay                                                             0790h        1
+ctr                                                               0791h        1
+p                                                                 0792h        2
+
+EEPROM Allocation
+Variable                                                          Address   Size
+--------------------------------------------------------------------------------
+
+Register Allocation
+Variable                                                          Register  Size
+--------------------------------------------------------------------------------
+rx_wr_index0                                                      R3,R4        2
+rx_rd_index0                                                      R5,R6        2
+rx_counter0                                                       R7,R8        2
+rx_buffer_overflow0                                               GPIOR0.0  1bit
+tx_wr_index0                                                      R9,R10       2
+tx_rd_index0                                                      R11,R12      2
+tx_counter0                                                       R13,R14      2
+b_exec                                                            GPIOR0.1  1bit
+b_move                                                            GPIOR0.2  1bit
+b_step                                                            GPIOR0.3  1bit
