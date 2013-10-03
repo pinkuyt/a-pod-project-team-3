@@ -1,0 +1,22 @@
+c:\users\cuong\documents\visual studio 2012\Projects\Hexapod_Test\Hexapod_Test\bin\Debug\Hexapod_Test.exe
+c:\users\cuong\documents\visual studio 2012\Projects\Hexapod_Test\Hexapod_Test\bin\Debug\Hexapod_Test.pdb
+c:\users\cuong\documents\visual studio 2012\Projects\Hexapod_Test\Hexapod_Test\obj\Debug\Hexapod_Test.csprojResolveAssemblyReference.cache
+c:\users\cuong\documents\visual studio 2012\Projects\Hexapod_Test\Hexapod_Test\obj\Debug\Hexapod_Test.Form1.resources
+c:\users\cuong\documents\visual studio 2012\Projects\Hexapod_Test\Hexapod_Test\obj\Debug\Hexapod_Test.Properties.Resources.resources
+c:\users\cuong\documents\visual studio 2012\Projects\Hexapod_Test\Hexapod_Test\obj\Debug\Hexapod_Test.csproj.GenerateResource.Cache
+c:\users\cuong\documents\visual studio 2012\Projects\Hexapod_Test\Hexapod_Test\obj\Debug\Hexapod_Test.exe
+c:\users\cuong\documents\visual studio 2012\Projects\Hexapod_Test\Hexapod_Test\obj\Debug\Hexapod_Test.pdb
+C:\Users\Cuong\documents\visual studio 2012\Projects\Hexapod_Test\Hexapod_Test\bin\Debug\Hexapod.dll
+C:\Users\Cuong\documents\visual studio 2012\Projects\Hexapod_Test\Hexapod_Test\bin\Debug\Hexapod.pdb
+E:\[@] Capstone Project\C#\Hexapod_Test\Hexapod_Test\obj\Debug\Hexapod_Test.exe
+E:\[@] Capstone Project\C#\Hexapod_Test\Hexapod_Test\obj\Debug\Hexapod_Test.pdb
+E:\[@] Capstone Project\C#\Hexapod_Test - NewFrame\Hexapod_Test\obj\Debug\Hexapod_Test.exe
+E:\[@] Capstone Project\C#\Hexapod_Test - NewFrame\Hexapod_Test\obj\Debug\Hexapod_Test.pdb
+E:\[@] Capstone Project\C#\Hexapod_Test - NewFrame\Hexapod_Test\bin\Debug\Hexapod_Test.exe
+E:\[@] Capstone Project\C#\Hexapod_Test - NewFrame\Hexapod_Test\bin\Debug\Hexapod_Test.pdb
+E:\[@] Capstone Project\C#\Hexapod_Test - NewFrame\Hexapod_Test\bin\Debug\Hexapod.dll
+E:\[@] Capstone Project\C#\Hexapod_Test - NewFrame\Hexapod_Test\bin\Debug\Hexapod.pdb
+E:\[@] Capstone Project\C#\Hexapod_Test - NewFrame\Hexapod_Test\obj\Debug\Hexapod_Test.csprojResolveAssemblyReference.cache
+E:\[@] Capstone Project\C#\Hexapod_Test - NewFrame\Hexapod_Test\obj\Debug\Hexapod_Test.Form1.resources
+E:\[@] Capstone Project\C#\Hexapod_Test - NewFrame\Hexapod_Test\obj\Debug\Hexapod_Test.Properties.Resources.resources
+E:\[@] Capstone Project\C#\Hexapod_Test - NewFrame\Hexapod_Test\obj\Debug\Hexapod_Test.csproj.GenerateResource.Cache

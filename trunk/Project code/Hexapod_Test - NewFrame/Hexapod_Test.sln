@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexapod_Test", "Hexapod_Test\Hexapod_Test.csproj", "{D834B3D8-CEE0-4735-8252-01C3809D7B53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hexapod", "Hexapod\Hexapod.csproj", "{1A4BB47A-9747-4291-B716-370F29086DCD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D834B3D8-CEE0-4735-8252-01C3809D7B53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D834B3D8-CEE0-4735-8252-01C3809D7B53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D834B3D8-CEE0-4735-8252-01C3809D7B53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D834B3D8-CEE0-4735-8252-01C3809D7B53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A4BB47A-9747-4291-B716-370F29086DCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A4BB47A-9747-4291-B716-370F29086DCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A4BB47A-9747-4291-B716-370F29086DCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A4BB47A-9747-4291-B716-370F29086DCD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
