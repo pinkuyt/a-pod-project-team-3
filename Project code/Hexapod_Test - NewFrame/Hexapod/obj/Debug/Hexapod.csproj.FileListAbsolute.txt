@@ -1,0 +1,10 @@
+C:\Users\Cuong\documents\visual studio 2012\Projects\Hexapod_Test\Hexapod\bin\Debug\Hexapod.dll
+C:\Users\Cuong\documents\visual studio 2012\Projects\Hexapod_Test\Hexapod\bin\Debug\Hexapod.pdb
+C:\Users\Cuong\documents\visual studio 2012\Projects\Hexapod_Test\Hexapod\obj\Debug\Hexapod.dll
+C:\Users\Cuong\documents\visual studio 2012\Projects\Hexapod_Test\Hexapod\obj\Debug\Hexapod.pdb
+C:\Users\Cuong\documents\visual studio 2012\Projects\Hexapod_Test\Hexapod\obj\Debug\Hexapod.csprojResolveAssemblyReference.cache
+E:\[@] Capstone Project\C#\Hexapod_Test - NewFrame\Hexapod\bin\Debug\Hexapod.dll
+E:\[@] Capstone Project\C#\Hexapod_Test - NewFrame\Hexapod\bin\Debug\Hexapod.pdb
+E:\[@] Capstone Project\C#\Hexapod_Test - NewFrame\Hexapod\obj\Debug\Hexapod.csprojResolveAssemblyReference.cache
+E:\[@] Capstone Project\C#\Hexapod_Test - NewFrame\Hexapod\obj\Debug\Hexapod.dll
+E:\[@] Capstone Project\C#\Hexapod_Test - NewFrame\Hexapod\obj\Debug\Hexapod.pdb
