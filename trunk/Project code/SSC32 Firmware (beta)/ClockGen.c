@@ -156,20 +156,79 @@ interrupt [TIM0_COMPA] void timer0_compa_isr(void)
 // Timer 1 output compare A interrupt service routine
 interrupt [TIM1_COMPA] void timer1_compa_isr(void)
 {
-int i =0;
 /* A03 */
 // Output edge data
 SPDR= PW_SPI_B0[Edges_Ctr]; //while(!(SPSR>>7));
-i++;i++;i++;i++;i++;i++;i++;i++;i++;i++;
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
 PORTB.1 = 1;PORTB.1 = 0;// pulse bank 0  
 SPDR= PW_SPI_B1[Edges_Ctr];  //while(!(SPSR>>7));
-i++;i++;i++;i++;i++;i++;i++;i++;i++;i++;
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
 PORTB.2 = 1;PORTB.2 = 0;// pulse bank 1   
 SPDR= PW_SPI_B2[Edges_Ctr];  //while(!(SPSR>>7));
-i++;i++;i++;i++;i++;i++;i++;i++;i++;i++;
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
 PORTD.6 = 1;PORTD.6 = 0;// pulse bank 2   
 SPDR= PW_SPI_B3[Edges_Ctr];  //while(!(SPSR>>7));
-i++;i++;i++;i++;i++;i++;i++;i++;i++;i++;
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
 PORTD.7 = 1;PORTD.7 = 0;// pulse bank 3
 /* A15 */
 
@@ -184,20 +243,79 @@ TCNT1L=0x00;
 // Timer 1 output compare B interrupt service routine
 interrupt [TIM1_COMPB] void timer1_compb_isr(void)
 {
-int i =0;
 /* AD1 */
 // Output edge data
 SPDR= PW_SPI_B0[Edges_Ptr]; //while(!(SPSR>>7));
-i++;i++;i++;i++;i++;i++;i++;i++;i++;i++;
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
 PORTB.1 = 1;PORTB.1 = 0;// pulse bank 0  
 SPDR= PW_SPI_B1[Edges_Ptr];  //while(!(SPSR>>7));
-i++;i++;i++;i++;i++;i++;i++;i++;i++;i++;
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
 PORTB.2 = 1;PORTB.2 = 0;// pulse bank 1   
 SPDR= PW_SPI_B2[Edges_Ptr];  //while(!(SPSR>>7));
-i++;i++;i++;i++;i++;i++;i++;i++;i++;i++;
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
 PORTD.6 = 1;PORTD.6 = 0;// pulse bank 2   
 SPDR= PW_SPI_B3[Edges_Ptr];  //while(!(SPSR>>7));
-i++;i++;i++;i++;i++;i++;i++;i++;i++;i++;
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
 PORTD.7 = 1;PORTD.7 = 0;// pulse bank 3
 /* AEA */
 // update pointer
@@ -210,7 +328,7 @@ if (Edges_Ptr == Edges_Ctr)
 // set next edge
 OCR1BH = PW_Time[Edges_Ptr]>>8;
 OCR1BL = PW_Time[Edges_Ptr]&0xFF;
-/*Take 105 timer clocks*/
+
 }
 
 //*********************************************************************
@@ -242,14 +360,17 @@ unsigned int  CMD_Time[32];
 unsigned char SP_Steps[32];
 // moving direction of each command
 unsigned char SP_Dir[32];
+// step adjustment
 unsigned char SP_Interval[32];
 
 unsigned char i,j;
 unsigned char channel,tmp;
-
+unsigned int adc[1] = {0};
 void main(void)
 {
 // Declare your local variables here
+
+
 CMD_Count = 0;
 b_move = 0;
 b_step = 0;
@@ -271,6 +392,26 @@ while (1)
             // process command
             switch (cmd)
             {
+                case 'V':
+                    cmd = getchar();
+                    switch (cmd)
+                    {
+                        case 'A':
+                            adc[0] = read_adc(0);
+                            break;
+                        case 'B':            
+                            adc[0] = read_adc(1);
+                            break;
+                        case 'C':     
+                            adc[0] = read_adc(2);  
+                            break;
+                        case 'D':      
+                            adc[0] = read_adc(3); 
+                            break;
+                    }
+                    putchar(adc[0]>>8);
+                    putchar(adc[0]&0xFF);
+                    break;
                 case 'S':
                     /* on(1)/off(0) command  */
                     cmd = getchar();
@@ -342,29 +483,33 @@ while (1)
             for (i=0;i<CMD_Count;i++)
             {
                 channel = CMD_Channel[i];
-                // backward
+                // decrease
                 if (SV_Width[channel] > CMD_Time[i])
                 {
-                    SP_Steps[i] = (SV_Width[channel] - CMD_Time[i])/50;
+                    SP_Steps[i] = (SV_Width[channel] - CMD_Time[i])/25;
                     SP_Dir[i] = 0;
                 }
-                else //forward: (SV_Width[channel] < CMD_Time[i])
+                else //increase: (SV_Width[channel] < CMD_Time[i])
                 {   
-                    SP_Steps[i] = (CMD_Time[i] - SV_Width[channel])/50;
+                    SP_Steps[i] = (CMD_Time[i] - SV_Width[channel])/25;
                     SP_Dir[i] = 1;
                 }
             }
             tmp = Max(SP_Steps,CMD_Count);
+            for (i=0;i<CMD_Count;i++)
+            {
+                SP_Interval[i] = tmp/SP_Steps[i];
+            }
             // step execution
             for (i=0;i<tmp;i++)
             {
                 for (j=0;j<CMD_Count;j++)
                 {
-                    if (SP_Steps[j]>0)
+                    if (( (i%SP_Interval[j]) == 0) && (SP_Steps[j]>0))
                     {
                         SP_Steps[j]--;
                         channel = CMD_Channel[j];
-                        SV_Width[channel] +=  SP_Dir[j]*100 -50;
+                        SV_Width[channel] +=  ((SP_Dir[j])?25:-25) ;
                         PW_Set(channel,SV_Width[channel],j);
                     }
                 }
@@ -374,7 +519,7 @@ while (1)
                 PW_Update_SPI();
                 b_exec = 0;
                 
-                Delay_10ms(5);
+                Delay_10ms(3);
             }
             // reset command counter
             CMD_Count = 0;

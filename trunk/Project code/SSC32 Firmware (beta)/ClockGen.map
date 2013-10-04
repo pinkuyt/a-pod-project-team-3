@@ -22,13 +22,15 @@ CMD_Channel                                                       06ECh       32
 CMD_Time                                                          070Ch       64
 SP_Steps                                                          074Ch       32
 SP_Dir                                                            076Ch       32
-i                                                                 078Ch        1
-j                                                                 078Dh        1
-channel                                                           078Eh        1
-tmp                                                               078Fh        1
-delay                                                             0790h        1
-ctr                                                               0791h        1
-p                                                                 0792h        2
+SP_Interval                                                       078Ch       32
+i                                                                 07ACh        1
+j                                                                 07ADh        1
+channel                                                           07AEh        1
+tmp                                                               07AFh        1
+adc                                                               07B0h        2
+delay                                                             07B2h        1
+ctr                                                               07B3h        1
+p                                                                 07B4h        2
 
 EEPROM Allocation
 Variable                                                          Address   Size

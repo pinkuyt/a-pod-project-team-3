@@ -64,6 +64,8 @@ void DebugLong(long var);
 void DebugInt(int var);
 void DebugChar(char var);
 
+unsigned int read_adc(unsigned char adc_input);
+
 extern unsigned const char Servo[32];
 
 extern unsigned char PW_SPI_B0[33];
@@ -116,7 +118,7 @@ unsigned int PW_Time[32];
 unsigned int PW_Width[32];
 
 unsigned int SV_Width[32];
-unsigned char delay = 29;
+unsigned char delay = 22;
 unsigned char ctr;
 
 void PW_Init()

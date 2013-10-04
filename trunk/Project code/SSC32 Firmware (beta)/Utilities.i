@@ -64,6 +64,8 @@ void DebugLong(long var);
 void DebugInt(int var);
 void DebugChar(char var);
 
+unsigned int read_adc(unsigned char adc_input);
+
 extern unsigned char Delay_Count;
 
 char Max(char* arr,char length);

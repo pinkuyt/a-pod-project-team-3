@@ -53,6 +53,7 @@
 #define BANK3_RCK PORTD.7
 
 
+#define ADC_VREF_TYPE 0x00
 //*********************************************************************
 // Prototypes
 //*********************************************************************
@@ -62,3 +63,6 @@ void SetBaud(char PD);
 void DebugLong(long var);
 void DebugInt(int var);
 void DebugChar(char var);
+
+// Read the AD conversion result
+unsigned int read_adc(unsigned char adc_input);
