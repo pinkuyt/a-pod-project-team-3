@@ -29,7 +29,7 @@ unsigned int PW_Time[32];
 unsigned int PW_Width[32];
 // array contain pulse width value in ascending order (us) : servo index
 unsigned int SV_Width[32];
-unsigned char delay = 29;
+unsigned char delay = 22;
 unsigned char ctr;
 
 //*********************************************************************

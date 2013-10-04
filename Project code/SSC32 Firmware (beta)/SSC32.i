@@ -57,12 +57,21 @@ sfrb SREG=0x3f;
 	#endif
 #endasm
 
+#pragma used+
+
+void delay_us(unsigned int n);
+void delay_ms(unsigned int n);
+
+#pragma used-
+
 void SSC32_Init();
 void SetBaud(char PD);
 
 void DebugLong(long var);
 void DebugInt(int var);
 void DebugChar(char var);
+
+unsigned int read_adc(unsigned char adc_input);
 
 void SSC32_Init()
 {
@@ -128,6 +137,10 @@ EIMSK=0x00;
 ACSR=0x80;
 (*(unsigned char *) 0x7b)=0x00;
 
+(*(unsigned char *) 0x7e)=0x0F;
+(*(unsigned char *) 0x7c)=0x00 & 0xff;
+(*(unsigned char *) 0x7a)=0x87;
+
 SPCR=0x50;
 SPSR=0x01;
 
@@ -161,6 +174,19 @@ case 3:
 (*(unsigned char *) 0xc4)=0x7F;
 break;
 }   
+}
+
+unsigned int read_adc(unsigned char adc_input)
+{
+(*(unsigned char *) 0x7c)=adc_input | (0x00 & 0xff);
+
+delay_us(10);
+
+(*(unsigned char *) 0x7a)|=0x40;
+
+while (((*(unsigned char *) 0x7a) & 0x10)==0);
+(*(unsigned char *) 0x7a)|=0x10;
+return (*(unsigned int *) 0x78) ;
 }
 
 void DebugLong(long var)

@@ -1,4 +1,5 @@
-#include <mega328p.h>
+#include <mega328p.h>  
+#include <delay.h>
 #include "SSC32.h"
 
 void SSC32_Init()
@@ -122,6 +123,16 @@ UBRR0L=0x5F;
 ACSR=0x80;
 ADCSRB=0x00;
 
+// ADC initialization
+// ADC Clock frequency: 115.200 kHz
+// ADC Voltage Reference: AREF pin
+// ADC Auto Trigger Source: None
+// Digital input buffers on ADC0: Off, ADC1: Off, ADC2: Off, ADC3: Off
+// ADC4: On, ADC5: On
+DIDR0=0x0F;
+ADMUX=ADC_VREF_TYPE & 0xff;
+ADCSRA=0x87;
+
 // SPI initialization
 // SPI Type: Master
 // SPI Clock Rate: 2*3686.400 kHz
@@ -163,6 +174,19 @@ void SetBaud(char PD)
             UBRR0L=0x7F;
             break;
     }   
+}
+
+unsigned int read_adc(unsigned char adc_input)
+{
+ADMUX=adc_input | (ADC_VREF_TYPE & 0xff);
+// Delay needed for the stabilization of the ADC input voltage
+delay_us(10);
+// Start the AD conversion
+ADCSRA|=0x40;
+// Wait for the AD conversion to complete
+while ((ADCSRA & 0x10)==0);
+ADCSRA|=0x10;
+return ADCW;
 }
 
 void DebugLong(long var)

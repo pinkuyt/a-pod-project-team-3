@@ -71,6 +71,8 @@ void DebugLong(long var);
 void DebugInt(int var);
 void DebugChar(char var);
 
+unsigned int read_adc(unsigned char adc_input);
+
 extern unsigned const char Servo[32];
 
 extern unsigned char PW_SPI_B0[33];
@@ -209,19 +211,78 @@ TCNT0=0x00;
 
 interrupt [12] void timer1_compa_isr(void)
 {
-int i =0;
 
 SPDR= PW_SPI_B0[Edges_Ctr]; 
-i++;i++;i++;i++;i++;i++;i++;i++;i++;i++;
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
 PORTB.1 = 1;PORTB.1 = 0;
 SPDR= PW_SPI_B1[Edges_Ctr];  
-i++;i++;i++;i++;i++;i++;i++;i++;i++;i++;
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
 PORTB.2 = 1;PORTB.2 = 0;
 SPDR= PW_SPI_B2[Edges_Ctr];  
-i++;i++;i++;i++;i++;i++;i++;i++;i++;i++;
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
 PORTD.6 = 1;PORTD.6 = 0;
 SPDR= PW_SPI_B3[Edges_Ctr];  
-i++;i++;i++;i++;i++;i++;i++;i++;i++;i++;
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
 PORTD.7 = 1;PORTD.7 = 0;
 
 b_exec = 0;
@@ -233,19 +294,78 @@ b_exec = 0;
 
 interrupt [13] void timer1_compb_isr(void)
 {
-int i =0;
 
 SPDR= PW_SPI_B0[Edges_Ptr]; 
-i++;i++;i++;i++;i++;i++;i++;i++;i++;i++;
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
 PORTB.1 = 1;PORTB.1 = 0;
 SPDR= PW_SPI_B1[Edges_Ptr];  
-i++;i++;i++;i++;i++;i++;i++;i++;i++;i++;
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
 PORTB.2 = 1;PORTB.2 = 0;
 SPDR= PW_SPI_B2[Edges_Ptr];  
-i++;i++;i++;i++;i++;i++;i++;i++;i++;i++;
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
 PORTD.6 = 1;PORTD.6 = 0;
 SPDR= PW_SPI_B3[Edges_Ptr];  
-i++;i++;i++;i++;i++;i++;i++;i++;i++;i++;
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
+#asm("nop")
 PORTD.7 = 1;PORTD.7 = 0;
 
 Edges_Ptr ++;
@@ -280,11 +400,12 @@ unsigned int  CMD_Time[32];
 unsigned char SP_Steps[32];
 
 unsigned char SP_Dir[32];
+
 unsigned char SP_Interval[32];
 
 unsigned char i,j;
 unsigned char channel,tmp;
-
+unsigned int adc[1] = {0};
 void main(void)
 {
 
@@ -309,6 +430,26 @@ cmd = getchar();
 
 switch (cmd)
 {
+case 'V':
+cmd = getchar();
+switch (cmd)
+{
+case 'A':
+adc[0] = read_adc(0);
+break;
+case 'B':            
+adc[0] = read_adc(1);
+break;
+case 'C':     
+adc[0] = read_adc(2);  
+break;
+case 'D':      
+adc[0] = read_adc(3); 
+break;
+}
+putchar(adc[0]>>8);
+putchar(adc[0]&0xFF);
+break;
 case 'S':
 
 cmd = getchar();
@@ -381,26 +522,30 @@ channel = CMD_Channel[i];
 
 if (SV_Width[channel] > CMD_Time[i])
 {
-SP_Steps[i] = (SV_Width[channel] - CMD_Time[i])/50;
+SP_Steps[i] = (SV_Width[channel] - CMD_Time[i])/25;
 SP_Dir[i] = 0;
 }
 else 
 {   
-SP_Steps[i] = (CMD_Time[i] - SV_Width[channel])/50;
+SP_Steps[i] = (CMD_Time[i] - SV_Width[channel])/25;
 SP_Dir[i] = 1;
 }
 }
 tmp = Max(SP_Steps,CMD_Count);
+for (i=0;i<CMD_Count;i++)
+{
+SP_Interval[i] = tmp/SP_Steps[i];
+}
 
 for (i=0;i<tmp;i++)
 {
 for (j=0;j<CMD_Count;j++)
 {
-if (SP_Steps[j]>0)
+if (( (i%SP_Interval[j]) == 0) && (SP_Steps[j]>0))
 {
 SP_Steps[j]--;
 channel = CMD_Channel[j];
-SV_Width[channel] +=  SP_Dir[j]*100 -50;
+SV_Width[channel] +=  ((SP_Dir[j])?25:-25) ;
 PW_Set(channel,SV_Width[channel],j);
 }
 }
@@ -409,7 +554,7 @@ while(!b_exec);
 PW_Update_SPI();
 b_exec = 0;
 
-Delay_10ms(5);
+Delay_10ms(3);
 }
 
 CMD_Count = 0;
