@@ -1,0 +1,17 @@
+C:\Users\macbook\Desktop\Demo CC++\WpfGamepaddState\WpfGamepaddState\bin\Debug\WpfGamepaddState.exe
+C:\Users\macbook\Desktop\Demo CC++\WpfGamepaddState\WpfGamepaddState\bin\Debug\WpfGamepaddState.pdb
+C:\Users\macbook\Desktop\Demo CC++\WpfGamepaddState\WpfGamepaddState\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\macbook\Desktop\Demo CC++\WpfGamepaddState\WpfGamepaddState\obj\x86\Debug\MainWindow.baml
+C:\Users\macbook\Desktop\Demo CC++\WpfGamepaddState\WpfGamepaddState\obj\x86\Debug\MainWindow.g.cs
+C:\Users\macbook\Desktop\Demo CC++\WpfGamepaddState\WpfGamepaddState\obj\x86\Debug\App.g.cs
+C:\Users\macbook\Desktop\Demo CC++\WpfGamepaddState\WpfGamepaddState\obj\x86\Debug\WpfGamepaddState_MarkupCompile.cache
+C:\Users\macbook\Desktop\Demo CC++\WpfGamepaddState\WpfGamepaddState\obj\x86\Debug\WpfGamepaddState.g.resources
+C:\Users\macbook\Desktop\Demo CC++\WpfGamepaddState\WpfGamepaddState\obj\x86\Debug\WpfGamepaddState.Properties.Resources.resources
+C:\Users\macbook\Desktop\Demo CC++\WpfGamepaddState\WpfGamepaddState\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\macbook\Desktop\Demo CC++\WpfGamepaddState\WpfGamepaddState\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\macbook\Desktop\Demo CC++\WpfGamepaddState\WpfGamepaddState\obj\x86\Debug\WpfGamepaddState.exe
+C:\Users\macbook\Desktop\Demo CC++\WpfGamepaddState\WpfGamepaddState\obj\x86\Debug\WpfGamepaddState.pdb
+C:\Users\macbook\Desktop\Demo CC++\WpfGamepaddState\WpfGamepaddState\bin\Debug\SharpDX.dll
+C:\Users\macbook\Desktop\Demo CC++\WpfGamepaddState\WpfGamepaddState\bin\Debug\SharpDX.XInput.dll
+C:\Users\macbook\Desktop\Demo CC++\WpfGamepaddState\WpfGamepaddState\bin\Debug\SharpDX.xml
+C:\Users\macbook\Desktop\Demo CC++\WpfGamepaddState\WpfGamepaddState\bin\Debug\SharpDX.XInput.xml

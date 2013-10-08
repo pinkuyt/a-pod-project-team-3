@@ -1,0 +1,41 @@
+﻿<Window x:Class="WpfGamepaddState.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="725" Width="1338">
+    <Grid Height="737" Width="1357">
+        <GroupBox Header="Controller" Height="193" HorizontalAlignment="Left" Margin="891,430,0,0" Name="groupBox1" VerticalAlignment="Top" Width="426">
+            <Grid Height="167" Width="422">
+                <Image Source="L1_on.ico" Margin="25,3,0,118" Visibility="Visible" HorizontalAlignment="Left" Width="46"></Image>
+                <Image Source="btn_start_on.ico" Margin="178,106,207,27" Visibility="Visible"></Image>
+                <Image Source="btn_select_on.ico" Margin="178,67,207,67" Visibility="Visible"></Image>
+                <Image Source="btn_circle_on.ico" Margin="355,80,21,41" Visibility="Visible"></Image>
+                <Image Source="btn_square_on.ico" Margin="251,80,125,41" Visibility="Visible"></Image>
+                <Image Source="btn_cross_on.ico" Margin="303,106,73,15" Visibility="Visible"></Image>
+                <Image Source="btn_triangle_on.ico" Margin="303,54,73,67" Visibility="Visible"></Image>
+                <Image Source="R1_on.ico" Margin="272,3,104,118" Visibility="Visible"></Image>
+                <Image Source="R2_on.ico" Margin="0,3,42,118" Visibility="Visible" HorizontalAlignment="Right" Width="46"></Image>
+                <Image Source="nav_right_on.ico" Margin="88,80,288,41" Visibility="Visible"></Image>
+                <Image Source="nav_left_on.ico" Margin="25,80,351,41" Visibility="Visible"></Image>
+                <Image Source="nav_down_on.ico" Margin="57,106,319,15" Visibility="Visible"></Image>
+                <Image Source="nav_up_on.ico" Margin="57,54,319,67" Visibility="Visible"></Image>
+                <Image Source="L2_on.ico" Margin="88,3,288,118" Visibility="Visible"></Image>
+
+                <Image Source="L1.ico" Margin="25,3,0,118" Visibility="Visible" HorizontalAlignment="Left" Width="46" Name="btn_L1"></Image>
+                <Image Source="btn_start.ico" Margin="178,106,207,27" Visibility="Visible" Name="btn_start"></Image>
+                <Image Source="btn_select.ico" Margin="178,67,207,67" Visibility="Visible" Name="btn_select"></Image>
+                <Image Source="btn_circle.ico" Margin="355,80,21,41" Visibility="Visible" Name="btn_circle"></Image>
+                <Image Source="btn_square.ico" Margin="251,80,125,41" Visibility="Visible" Name="btn_square"></Image>
+                <Image Source="btn_cross.ico" Margin="303,106,73,15" Visibility="Visible" Name="btn_cross"></Image>
+                <Image Source="btn_triangle.ico" Margin="303,54,73,67" Visibility="Visible" Name="btn_triangle"></Image>
+                <Image Source="R1.ico" Margin="272,3,104,118" Visibility="Visible" Name="btn_R1"></Image>
+                <Image Source="R2.ico" Margin="0,3,42,118" Visibility="Visible" HorizontalAlignment="Right" Width="46" Name="btn_R2"></Image>
+                <Image Source="nav_right.ico" Margin="88,80,288,41" Visibility="Visible" Name="btn_right"></Image>
+                <Image Source="nav_left.ico" Margin="25,80,351,41" Visibility="Visible" Name="btn_left"></Image>
+                <Image Source="nav_down.ico" Margin="57,106,319,15" Visibility="Visible" Name="btn_down"></Image>
+                <Image Source="nav_up.ico" Margin="57,54,319,67" Visibility="Visible" Name="btn_up"></Image>
+                <Image Source="L2.ico" Margin="88,3,288,118" Visibility="Visible" Name="btn_L2"></Image>
+            </Grid>
+        </GroupBox>
+        <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="585,271,0,0" Name="lblStatus" VerticalAlignment="Top" Width="306" />
+    </Grid>
+</Window>
