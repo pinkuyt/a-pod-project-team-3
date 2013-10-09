@@ -1,0 +1,21 @@
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\A-Pod System Controll\A-Pod System Controll\bin\Debug\A-Pod System Controll.exe.config
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\A-Pod System Controll\A-Pod System Controll\bin\Debug\A-Pod System Controll.exe
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\A-Pod System Controll\A-Pod System Controll\bin\Debug\A-Pod System Controll.pdb
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\A-Pod System Controll\A-Pod System Controll\obj\Debug\A-Pod System Controll.csprojResolveAssemblyReference.cache
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\A-Pod System Controll\A-Pod System Controll\obj\Debug\MainWindow.baml
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\A-Pod System Controll\A-Pod System Controll\obj\Debug\MainWindow.g.cs
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\A-Pod System Controll\A-Pod System Controll\obj\Debug\App.g.cs
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\A-Pod System Controll\A-Pod System Controll\obj\Debug\A-Pod System Controll_MarkupCompile.cache
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\A-Pod System Controll\A-Pod System Controll\obj\Debug\A-Pod System Controll.g.resources
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\A-Pod System Controll\A-Pod System Controll\obj\Debug\A_Pod_System_Controll.Properties.Resources.resources
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\A-Pod System Controll\A-Pod System Controll\obj\Debug\A-Pod System Controll.csproj.GenerateResource.Cache
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\A-Pod System Controll\A-Pod System Controll\obj\Debug\A-Pod System Controll.exe
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\A-Pod System Controll\A-Pod System Controll\obj\Debug\A-Pod System Controll.pdb
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\A-Pod System Controll\A-Pod System Controll\bin\Debug\SharpDX.dll
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\A-Pod System Controll\A-Pod System Controll\bin\Debug\SharpDX.XInput.dll
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\A-Pod System Controll\A-Pod System Controll\bin\Debug\SharpDX.xml
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\A-Pod System Controll\A-Pod System Controll\bin\Debug\SharpDX.XInput.xml
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\A-Pod System Controll\A-Pod System Controll\obj\Debug\Bluetooth_Window.baml
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\A-Pod System Controll\A-Pod System Controll\obj\Debug\Bluetooth_Window.g.cs
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\A-Pod System Controll\A-Pod System Controll\bin\Debug\InTheHand.Net.Personal.dll
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\A-Pod System Controll\A-Pod System Controll\bin\Debug\InTheHand.Net.Personal.xml
