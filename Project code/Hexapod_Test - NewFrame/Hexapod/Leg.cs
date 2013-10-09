@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Hexapod
 {
-    class Leg
+    public class Leg
     {
         /// <summary>
         /// Static Fields
@@ -19,7 +19,7 @@ namespace Hexapod
         /// <summary>
         /// Weigh number for leg's side: left (-1), right (1)
         /// </summary>
-        public int Side;
+        private int Side { get; set; }
 
         /// <summary>
         /// Horizontal Servo for this leg
@@ -158,6 +158,26 @@ namespace Hexapod
             return cmd;
         }
 
+        /// <summary>
+        /// Synchronize current position with harware
+        /// </summary>
+        /// <returns>Command String</returns>
+        public String FixPosition()
+        {
+            // Generate command String
+            String cmd = "#" + Horizontal.Number + "P" + Horizontal.Position + " " +
+                         "#" + UpperVertical.Number + "P" + UpperVertical.Position + " " +
+                         "#" + LowerVertical.Number + "P" + LowerVertical.Position + " ";
+            return cmd;
+        }
+
+        /// <summary>
+        /// Synchronize position with harware with specific position
+        /// </summary>
+        /// <param name="hServo"></param>
+        /// <param name="upperVServo"></param>
+        /// <param name="lowerVServo"></param>
+        /// <returns>Command String</returns>
         public String FixPosition(int hServo, int upperVServo, int lowerVServo)
         {
             Horizontal.Position = hServo;

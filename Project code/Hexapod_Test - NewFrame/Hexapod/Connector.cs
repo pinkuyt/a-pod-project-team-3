@@ -120,7 +120,7 @@ namespace Hexapod
         }
 
         /// <summary>
-        /// Send command to hexapod
+        /// Send non-movement command to hexapod
         /// </summary>
         /// <param name="cmd">Movement command</param>
         public int SendCommand(byte[] cmd)
@@ -134,22 +134,44 @@ namespace Hexapod
 
             return 1;
         }
+
         /// <summary>
-        /// Query movement Status
+        ///  Reading response from APOD
         /// </summary>
+        /// <param name="num">Number of responses expected</param>
         /// <returns></returns>
-        public char ReadResponse()
+        public char[] ReadResponse(int num)
         {
-            char response;
+            char[] responses = new char[num];
             try
             {
-                response = (char) Port.ReadByte();
+                Port.Read(responses, 0, num);
             }
             catch (TimeoutException)
             {
-                response = '-';
+                return null;
             }
-            return response;
+            return responses;
+        }
+
+        public int Read(byte[] cmd)
+        {
+            Port.ReadExisting();
+            byte[] val = {0, 0};
+            Port.Write(cmd, 0, cmd.Length);
+            System.Threading.Thread.Sleep(50);
+            Port.Read(val, 0, 2);
+            int value = (((int) val[0]) << 8)
+                        + val[1];
+            return value;
+        }
+
+        /// <summary>
+        /// Clear junk responses from buffer
+        /// </summary>
+        public void ClearResponse()
+        {
+            Port.ReadExisting();
         }
     }
 }
