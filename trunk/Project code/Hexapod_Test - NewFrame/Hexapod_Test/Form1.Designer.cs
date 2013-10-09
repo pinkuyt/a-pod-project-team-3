@@ -32,6 +32,13 @@
             this.txtCMD = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.txtCMD3 = new System.Windows.Forms.TextBox();
+            this.button8 = new System.Windows.Forms.Button();
+            this.txtCMD2 = new System.Windows.Forms.TextBox();
+            this.button7 = new System.Windows.Forms.Button();
+            this.txtADC = new System.Windows.Forms.TextBox();
+            this.cbADC = new System.Windows.Forms.ComboBox();
+            this.button6 = new System.Windows.Forms.Button();
             this.chkSlow = new System.Windows.Forms.CheckBox();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
@@ -85,6 +92,10 @@
             this.btnApodInit = new System.Windows.Forms.Button();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabMotion = new System.Windows.Forms.TabPage();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.btnHigher = new System.Windows.Forms.Button();
             this.btnLeanBackward = new System.Windows.Forms.Button();
             this.btnForward = new System.Windows.Forms.Button();
@@ -120,6 +131,16 @@
             this.btnTripodABackward = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.btnLoose = new System.Windows.Forms.Button();
+            this.btnGrip = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.btnHeadRotateRight = new System.Windows.Forms.Button();
+            this.btnHeadRotateLeft = new System.Windows.Forms.Button();
+            this.btnHeadTurnRight = new System.Windows.Forms.Button();
+            this.btnHeadTurnLeft = new System.Windows.Forms.Button();
+            this.btnHeadDown = new System.Windows.Forms.Button();
+            this.btnHeadUp = new System.Windows.Forms.Button();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.btnStrafe6 = new System.Windows.Forms.Button();
             this.btnStrafe5 = new System.Windows.Forms.Button();
@@ -130,10 +151,7 @@
             this.btnStrafe0 = new System.Windows.Forms.Button();
             this.btnStrafe7 = new System.Windows.Forms.Button();
             this.btnStrafeInit = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.chkAuto = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -144,14 +162,15 @@
             this.tabControl2.SuspendLayout();
             this.tabMotion.SuspendLayout();
             this.tabTripods.SuspendLayout();
+            this.tabPage7.SuspendLayout();
             this.tabPage6.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(8, 163);
+            this.button1.Location = new System.Drawing.Point(436, 6);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(84, 31);
+            this.button1.Size = new System.Drawing.Size(75, 24);
             this.button1.TabIndex = 0;
             this.button1.Text = "Send";
             this.button1.UseVisualStyleBackColor = true;
@@ -159,11 +178,10 @@
             // 
             // txtCMD
             // 
-            this.txtCMD.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtCMD.Location = new System.Drawing.Point(3, 3);
             this.txtCMD.Multiline = true;
             this.txtCMD.Name = "txtCMD";
-            this.txtCMD.Size = new System.Drawing.Size(511, 154);
+            this.txtCMD.Size = new System.Drawing.Size(427, 35);
             this.txtCMD.TabIndex = 1;
             // 
             // tabControl1
@@ -183,6 +201,13 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.txtCMD3);
+            this.tabPage1.Controls.Add(this.button8);
+            this.tabPage1.Controls.Add(this.txtCMD2);
+            this.tabPage1.Controls.Add(this.button7);
+            this.tabPage1.Controls.Add(this.txtADC);
+            this.tabPage1.Controls.Add(this.cbADC);
+            this.tabPage1.Controls.Add(this.button6);
             this.tabPage1.Controls.Add(this.chkSlow);
             this.tabPage1.Controls.Add(this.btnStop);
             this.tabPage1.Controls.Add(this.btnStart);
@@ -196,10 +221,71 @@
             this.tabPage1.Text = "Direct";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // txtCMD3
+            // 
+            this.txtCMD3.Location = new System.Drawing.Point(3, 85);
+            this.txtCMD3.Multiline = true;
+            this.txtCMD3.Name = "txtCMD3";
+            this.txtCMD3.Size = new System.Drawing.Size(427, 35);
+            this.txtCMD3.TabIndex = 28;
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(436, 88);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(75, 24);
+            this.button8.TabIndex = 27;
+            this.button8.Text = "Send";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // txtCMD2
+            // 
+            this.txtCMD2.Location = new System.Drawing.Point(3, 44);
+            this.txtCMD2.Multiline = true;
+            this.txtCMD2.Name = "txtCMD2";
+            this.txtCMD2.Size = new System.Drawing.Size(427, 35);
+            this.txtCMD2.TabIndex = 26;
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(436, 47);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(75, 24);
+            this.button7.TabIndex = 25;
+            this.button7.Text = "Send";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // txtADC
+            // 
+            this.txtADC.Location = new System.Drawing.Point(216, 213);
+            this.txtADC.Name = "txtADC";
+            this.txtADC.Size = new System.Drawing.Size(100, 20);
+            this.txtADC.TabIndex = 24;
+            // 
+            // cbADC
+            // 
+            this.cbADC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbADC.Location = new System.Drawing.Point(8, 213);
+            this.cbADC.Name = "cbADC";
+            this.cbADC.Size = new System.Drawing.Size(121, 21);
+            this.cbADC.TabIndex = 23;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(135, 211);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 22;
+            this.button6.Text = "Read";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
             // chkSlow
             // 
             this.chkSlow.AutoSize = true;
-            this.chkSlow.Location = new System.Drawing.Point(98, 171);
+            this.chkSlow.Location = new System.Drawing.Point(289, 175);
             this.chkSlow.Name = "chkSlow";
             this.chkSlow.Size = new System.Drawing.Size(49, 17);
             this.chkSlow.TabIndex = 21;
@@ -748,6 +834,7 @@
             // 
             this.tabControl2.Controls.Add(this.tabMotion);
             this.tabControl2.Controls.Add(this.tabTripods);
+            this.tabControl2.Controls.Add(this.tabPage7);
             this.tabControl2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tabControl2.Location = new System.Drawing.Point(3, 41);
             this.tabControl2.Name = "tabControl2";
@@ -780,6 +867,46 @@
             this.tabMotion.TabIndex = 0;
             this.tabMotion.Text = "Move";
             this.tabMotion.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(422, 110);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 24;
+            this.button5.Text = "button5";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(341, 110);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 23;
+            this.button4.Text = "button4";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(378, 81);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 22;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(378, 52);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 21;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // btnHigher
             // 
@@ -839,6 +966,7 @@
             this.btnStrafeLeft.TabIndex = 10;
             this.btnStrafeLeft.Text = "Strafe Left";
             this.btnStrafeLeft.UseVisualStyleBackColor = true;
+            this.btnStrafeLeft.Click += new System.EventHandler(this.btnStrafeLeft_Click);
             // 
             // btnLeanLeft
             // 
@@ -1149,6 +1277,115 @@
             this.label8.TabIndex = 5;
             this.label8.Text = "Tripod A:";
             // 
+            // tabPage7
+            // 
+            this.tabPage7.Controls.Add(this.chkAuto);
+            this.tabPage7.Controls.Add(this.btnLoose);
+            this.tabPage7.Controls.Add(this.btnGrip);
+            this.tabPage7.Controls.Add(this.label9);
+            this.tabPage7.Controls.Add(this.btnHeadRotateRight);
+            this.tabPage7.Controls.Add(this.btnHeadRotateLeft);
+            this.tabPage7.Controls.Add(this.btnHeadTurnRight);
+            this.tabPage7.Controls.Add(this.btnHeadTurnLeft);
+            this.tabPage7.Controls.Add(this.btnHeadDown);
+            this.tabPage7.Controls.Add(this.btnHeadUp);
+            this.tabPage7.Location = new System.Drawing.Point(4, 22);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(503, 239);
+            this.tabPage7.TabIndex = 2;
+            this.tabPage7.Text = "Head";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // btnLoose
+            // 
+            this.btnLoose.Location = new System.Drawing.Point(388, 95);
+            this.btnLoose.Name = "btnLoose";
+            this.btnLoose.Size = new System.Drawing.Size(75, 23);
+            this.btnLoose.TabIndex = 8;
+            this.btnLoose.Text = "Loose";
+            this.btnLoose.UseVisualStyleBackColor = true;
+            this.btnLoose.Click += new System.EventHandler(this.btnLoose_Click);
+            // 
+            // btnGrip
+            // 
+            this.btnGrip.Location = new System.Drawing.Point(388, 66);
+            this.btnGrip.Name = "btnGrip";
+            this.btnGrip.Size = new System.Drawing.Size(75, 23);
+            this.btnGrip.TabIndex = 7;
+            this.btnGrip.Text = "Grip";
+            this.btnGrip.UseVisualStyleBackColor = true;
+            this.btnGrip.Click += new System.EventHandler(this.btnGrip_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(127, 128);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(46, 13);
+            this.label9.TabIndex = 6;
+            this.label9.Text = "Balance";
+            // 
+            // btnHeadRotateRight
+            // 
+            this.btnHeadRotateRight.Location = new System.Drawing.Point(190, 123);
+            this.btnHeadRotateRight.Name = "btnHeadRotateRight";
+            this.btnHeadRotateRight.Size = new System.Drawing.Size(75, 23);
+            this.btnHeadRotateRight.TabIndex = 5;
+            this.btnHeadRotateRight.Text = "Right";
+            this.btnHeadRotateRight.UseVisualStyleBackColor = true;
+            this.btnHeadRotateRight.Click += new System.EventHandler(this.btnHeadRotateRight_Click);
+            // 
+            // btnHeadRotateLeft
+            // 
+            this.btnHeadRotateLeft.Location = new System.Drawing.Point(28, 123);
+            this.btnHeadRotateLeft.Name = "btnHeadRotateLeft";
+            this.btnHeadRotateLeft.Size = new System.Drawing.Size(75, 23);
+            this.btnHeadRotateLeft.TabIndex = 4;
+            this.btnHeadRotateLeft.Text = "Left";
+            this.btnHeadRotateLeft.UseVisualStyleBackColor = true;
+            this.btnHeadRotateLeft.Click += new System.EventHandler(this.btnHeadRotateLeft_Click);
+            // 
+            // btnHeadTurnRight
+            // 
+            this.btnHeadTurnRight.Location = new System.Drawing.Point(190, 62);
+            this.btnHeadTurnRight.Name = "btnHeadTurnRight";
+            this.btnHeadTurnRight.Size = new System.Drawing.Size(75, 23);
+            this.btnHeadTurnRight.TabIndex = 3;
+            this.btnHeadTurnRight.Text = "Right";
+            this.btnHeadTurnRight.UseVisualStyleBackColor = true;
+            this.btnHeadTurnRight.Click += new System.EventHandler(this.btnHeadTurnRight_Click);
+            // 
+            // btnHeadTurnLeft
+            // 
+            this.btnHeadTurnLeft.Location = new System.Drawing.Point(28, 62);
+            this.btnHeadTurnLeft.Name = "btnHeadTurnLeft";
+            this.btnHeadTurnLeft.Size = new System.Drawing.Size(75, 23);
+            this.btnHeadTurnLeft.TabIndex = 2;
+            this.btnHeadTurnLeft.Text = "Left";
+            this.btnHeadTurnLeft.UseVisualStyleBackColor = true;
+            this.btnHeadTurnLeft.Click += new System.EventHandler(this.btnHeadTurnLeft_Click);
+            // 
+            // btnHeadDown
+            // 
+            this.btnHeadDown.Location = new System.Drawing.Point(109, 62);
+            this.btnHeadDown.Name = "btnHeadDown";
+            this.btnHeadDown.Size = new System.Drawing.Size(75, 23);
+            this.btnHeadDown.TabIndex = 1;
+            this.btnHeadDown.Text = "Down";
+            this.btnHeadDown.UseVisualStyleBackColor = true;
+            this.btnHeadDown.Click += new System.EventHandler(this.btnHeadDown_Click);
+            // 
+            // btnHeadUp
+            // 
+            this.btnHeadUp.Location = new System.Drawing.Point(109, 33);
+            this.btnHeadUp.Name = "btnHeadUp";
+            this.btnHeadUp.Size = new System.Drawing.Size(75, 23);
+            this.btnHeadUp.TabIndex = 0;
+            this.btnHeadUp.Text = "Up";
+            this.btnHeadUp.UseVisualStyleBackColor = true;
+            this.btnHeadUp.Click += new System.EventHandler(this.btnHeadUp_Click);
+            // 
             // tabPage6
             // 
             this.tabPage6.Controls.Add(this.btnStrafe6);
@@ -1258,45 +1495,15 @@
             this.btnStrafeInit.UseVisualStyleBackColor = true;
             this.btnStrafeInit.Click += new System.EventHandler(this.StrafeButton_Click);
             // 
-            // button2
+            // chkAuto
             // 
-            this.button2.Location = new System.Drawing.Point(378, 52);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 21;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(378, 81);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 22;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(341, 110);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 23;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(422, 110);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 24;
-            this.button5.Text = "button5";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.chkAuto.AutoSize = true;
+            this.chkAuto.Location = new System.Drawing.Point(388, 43);
+            this.chkAuto.Name = "chkAuto";
+            this.chkAuto.Size = new System.Drawing.Size(48, 17);
+            this.chkAuto.TabIndex = 9;
+            this.chkAuto.Text = "Auto";
+            this.chkAuto.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -1321,6 +1528,8 @@
             this.tabMotion.ResumeLayout(false);
             this.tabTripods.ResumeLayout(false);
             this.tabTripods.PerformLayout();
+            this.tabPage7.ResumeLayout(false);
+            this.tabPage7.PerformLayout();
             this.tabPage6.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -1434,6 +1643,24 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.ComboBox cbADC;
+        private System.Windows.Forms.TextBox txtADC;
+        private System.Windows.Forms.TextBox txtCMD3;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.TextBox txtCMD2;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btnHeadRotateRight;
+        private System.Windows.Forms.Button btnHeadRotateLeft;
+        private System.Windows.Forms.Button btnHeadTurnRight;
+        private System.Windows.Forms.Button btnHeadTurnLeft;
+        private System.Windows.Forms.Button btnHeadDown;
+        private System.Windows.Forms.Button btnHeadUp;
+        private System.Windows.Forms.Button btnLoose;
+        private System.Windows.Forms.Button btnGrip;
+        private System.Windows.Forms.CheckBox chkAuto;
     }
 }
 

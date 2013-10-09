@@ -35,6 +35,11 @@ namespace Hexapod_Test
             Bot = new APod(port);
             //Bot.Reset();
 
+            cbADC.Items.Add('A');
+            cbADC.Items.Add('B');
+            cbADC.Items.Add('C');
+            cbADC.Items.Add('D');
+            cbADC.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -98,7 +103,8 @@ namespace Hexapod_Test
                 binaryCommand.Add((byte)(pos & 0xFF));
             }
 
-            binaryCommand.Add(0x22);
+            binaryCommand.Add((byte)'T');
+            binaryCommand.Add(1);
             port.Write(binaryCommand.ToArray(), 0, binaryCommand.Count);
 
             return 1;
@@ -131,6 +137,56 @@ namespace Hexapod_Test
             port.Write(binaryCommand.ToArray(), 0, binaryCommand.Count);
         }
 
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            String cmd = txtCMD2.Text;
+            byte servo;
+            int pos;
+
+            var pattern = cmd.Trim().Split('#', 'P');
+            var binaryCommand = new List<byte>();
+
+            for (int i = 0; i < pattern.Length / 2; i++)
+            {
+                servo = byte.Parse(pattern[2 * i + 1]);
+                pos = int.Parse(pattern[2 * i + 2]);
+
+                binaryCommand.Add((byte)'#');
+                binaryCommand.Add(servo);
+                binaryCommand.Add((byte)(pos >> 8));
+                binaryCommand.Add((byte)(pos & 0xFF));
+            }
+            //binaryCommand.Add(0x21);
+            binaryCommand.Add((byte)'T');
+            binaryCommand.Add((byte)(chkSlow.Checked ? 1 : 0));
+            port.Write(binaryCommand.ToArray(), 0, binaryCommand.Count);
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            String cmd = txtCMD3.Text;
+            byte servo;
+            int pos;
+
+            var pattern = cmd.Trim().Split('#', 'P');
+            var binaryCommand = new List<byte>();
+
+            for (int i = 0; i < pattern.Length / 2; i++)
+            {
+                servo = byte.Parse(pattern[2 * i + 1]);
+                pos = int.Parse(pattern[2 * i + 2]);
+
+                binaryCommand.Add((byte)'#');
+                binaryCommand.Add(servo);
+                binaryCommand.Add((byte)(pos >> 8));
+                binaryCommand.Add((byte)(pos & 0xFF));
+            }
+            //binaryCommand.Add(0x21);
+            binaryCommand.Add((byte)'T');
+            binaryCommand.Add((byte)(chkSlow.Checked ? 1 : 0));
+            port.Write(binaryCommand.ToArray(), 0, binaryCommand.Count);
+        }
 
         private void btnStart_Click(object sender, EventArgs e)
         {
@@ -383,6 +439,66 @@ namespace Hexapod_Test
             Bot.Rotate(100, Direction.BACKWARD, 200);
         }
 
+        private void btnStrafeLeft_Click(object sender, EventArgs e)
+        {
+            Bot.StrafeLeft(200, 200, 2, 300);
+        }
+
+        private void btnHeadUp_Click(object sender, EventArgs e)
+        {
+            Bot.HeadTurn(100, Direction.UP, 200);
+        }
+
+        private void btnHeadDown_Click(object sender, EventArgs e)
+        {
+            Bot.HeadTurn(100, Direction.DOWN, 200);
+        }
+
+        private void btnHeadTurnLeft_Click(object sender, EventArgs e)
+        {
+            Bot.HeadTurn(100, Direction.LEFT, 200);
+        }
+
+        private void btnHeadTurnRight_Click(object sender, EventArgs e)
+        {
+            Bot.HeadTurn(100, Direction.RIGHT, 200);
+        }
+
+        private void btnHeadRotateLeft_Click(object sender, EventArgs e)
+        {
+            Bot.HeadRotate(100, Direction.LEFT, 200);
+        }
+
+        private void btnHeadRotateRight_Click(object sender, EventArgs e)
+        {
+            Bot.HeadRotate(100, Direction.RIGHT, 200);
+        }
+
+
+        private void btnGrip_Click(object sender, EventArgs e)
+        {
+            if (chkAuto.Checked)
+            {
+                Bot.Grip();
+            }
+            else
+            {
+                Bot.Grip(20,20);
+            }
+        }
+
+        private void btnLoose_Click(object sender, EventArgs e)
+        {
+            if (chkAuto.Checked)
+            {
+                Bot.Loose();
+            }
+            else
+            {
+                Bot.Loose(20, 20);
+            }
+        }
+
         private void TripodsButton_Click(object sender, EventArgs e)
         {
             Button button = (Button) sender;
@@ -479,34 +595,125 @@ namespace Hexapod_Test
                 MessageBox.Show(ex.Message);
             }
         }
-
-
+        
         private void StrafeButton_Click(object sender, EventArgs e)
         {
             String name = ((Button) sender).Text;
+            String cmd = "";
             switch (name)
             {
-                case "Init":
-                    // all legs at low position
+                case "Init": // low, left || mid, right
+                    cmd = // A
+                        Bot.LeftFront.FixPosition(1500, 1400, 1400) +
+                        Bot.RightCenter.FixPosition(1500, 1600, 1600) +
+                        Bot.LeftRear.FixPosition(1500, 1400, 1400) +
+                        // B
+                        Bot.RightFront.FixPosition(1500, 2000, 2000) +
+                        Bot.LeftCenter.FixPosition(1500, 1000, 1000) +
+                        Bot.RightRear.FixPosition(1500, 2000, 2000);
                     break;
-                case "Step 0":
+                case "Step 0": // low, center || high, center
+                     cmd = // A
+                        Bot.LeftFront.FixPosition(1500, 1400, 1400) +
+                        Bot.RightCenter.FixPosition(1500, 1600, 1600) +
+                        Bot.LeftRear.FixPosition(1500, 1400, 1400) +
+                        // B
+                        Bot.RightFront.FixPosition(1500, 2000, 2000) +
+                        Bot.LeftCenter.FixPosition(1500, 1000, 1000) +
+                        Bot.RightRear.FixPosition(1500, 2000, 2000);
                     break;
-                case "Step 1":
+                case "Step 1": // low right || mid left
+                    cmd = // A
+                        Bot.LeftFront.FixPosition(1420, 1440, 1280) +
+                        Bot.RightCenter.FixPosition(1500, 1560, 1400) +
+                        Bot.LeftRear.FixPosition(1620, 1440, 1280) +
+                        // B
+                        Bot.RightFront.FixPosition(1580, 1760, 1720) +
+                        Bot.LeftCenter.FixPosition(1500, 1240, 1600) +
+                        Bot.RightRear.FixPosition(1380, 1760, 1720);
                     break;
-                case "Step 2":
+                case "Step 2": // low right || low left
+                    cmd = // A
+                        Bot.LeftFront.FixPosition(1420, 1440, 1280) +
+                        Bot.RightCenter.FixPosition(1500, 1560, 1400) +
+                        Bot.LeftRear.FixPosition(1620, 1440, 1280) +
+                        // B
+                        Bot.RightFront.FixPosition(1580, 1560, 1720) +
+                        Bot.LeftCenter.FixPosition(1500, 1440, 1600) +
+                        Bot.RightRear.FixPosition(1380, 1560, 1720);
                     break;
-                case "Step 3":
+                case "Step 3": // mid right || low left
+                    cmd = // A
+                        Bot.LeftFront.FixPosition(1420, 1240, 1280) +
+                        Bot.RightCenter.FixPosition(1500, 1760, 1400) +
+                        Bot.LeftRear.FixPosition(1620, 1240, 1280) +
+                        // B
+                        Bot.RightFront.FixPosition(1580, 1560, 1720) +
+                        Bot.LeftCenter.FixPosition(1500, 1440, 1600) +
+                        Bot.RightRear.FixPosition(1380, 1560, 1720);
                     break;
-                case "Step 4":
+                case "Step 4": // high center || low center
+                    cmd = // A
+                        Bot.LeftFront.FixPosition(1500, 1000, 1000) +
+                        Bot.RightCenter.FixPosition(1500, 2000, 2000) +
+                        Bot.LeftRear.FixPosition(1500, 1000, 1000) +
+                        // B
+                        Bot.RightFront.FixPosition(1500, 1600, 1600) +
+                        Bot.LeftCenter.FixPosition(1500, 1400, 1400) +
+                        Bot.RightRear.FixPosition(1500, 1600, 1600);
                     break;
-                case "Step 5":
+                case "Step 5": // mid left || low right
+                    cmd = // A
+                        Bot.LeftFront.FixPosition(1620, 1240, 1600) +
+                        Bot.RightCenter.FixPosition(1500, 1760, 1720) +
+                        Bot.LeftRear.FixPosition(1420, 1240, 1600) +
+                        // B
+                        Bot.RightFront.FixPosition(1380, 1560, 1400) +
+                        Bot.LeftCenter.FixPosition(1500, 1440, 1280) +
+                        Bot.RightRear.FixPosition(1580, 1560, 1400);
                     break;
-                case "Step 6":
+                case "Step 6": // low left || low right
+                    cmd = // A
+                        Bot.LeftFront.FixPosition(1620, 1440, 1600) +
+                        Bot.RightCenter.FixPosition(1500, 1560, 1720) +
+                        Bot.LeftRear.FixPosition(1420, 1440, 1600) +
+                        // B
+                        Bot.RightFront.FixPosition(1380, 1560, 1400) +
+                        Bot.LeftCenter.FixPosition(1500, 1440, 1280) +
+                        Bot.RightRear.FixPosition(1580, 1560, 1400);
                     break;
-                case "Step 7":
+                case "Step 7": // low left || mid right
+                    cmd = // A
+                        Bot.LeftFront.FixPosition(1620, 1440, 1600) +
+                        Bot.RightCenter.FixPosition(1500, 1560, 1720) +
+                        Bot.LeftRear.FixPosition(1420, 1440, 1600) +
+                        // B
+                        Bot.RightFront.FixPosition(1380, 1760, 1400) +
+                        Bot.LeftCenter.FixPosition(1500, 1240, 1280) +
+                        Bot.RightRear.FixPosition(1580, 1760, 1400);
                     break;
             }
+            SendCommand(cmd, 200);
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            port.ReadExisting();
+            char channel = cbADC.Text[0];
+            byte[] val = { (byte)'V', (byte)channel };
+            port.Write(val, 0, 2);
+            try
+            {
+                System.Threading.Thread.Sleep(10);
+                port.Read(val, 0, 2);
+                txtADC.Text = (((int) val[0]) << 8) + val[1] + "";
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("Time out");
+            }
+        }
+
 
         
 
