@@ -1,0 +1,54 @@
+﻿<Window x:Class="A_Pod_System_Controll.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="800" Width="1280" MaxHeight="800" MaxWidth="1280" MinHeight="800" MinWidth="1280" Background="Black">
+    <Grid>
+        <GroupBox Margin="28,488,1022,71" Background="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+            <Grid HorizontalAlignment="Left" Margin="0,10,-2,-12" Width="212">
+                <Image  Source="L1_on.ico" HorizontalAlignment="Left" Height="31" Margin="10,10,0,0" VerticalAlignment="Top" Width="55"/>
+                <Image  Source="L2_on.ico" Height="31" Margin="147,10,10,0" VerticalAlignment="Top"/>
+                <Image  Source="nav_right_on.ico" HorizontalAlignment="Left" Height="31" Margin="117,97,0,0" VerticalAlignment="Top" Width="31" RenderTransformOrigin="1.5,0.565"/>
+                <Image  Source="nav_left_on.ico" HorizontalAlignment="Left" Height="32" Margin="53,96,0,0" VerticalAlignment="Top" Width="34"/>
+                <Image  Source="nav_up_on.ico" HorizontalAlignment="Left" Height="32" Margin="87,67,0,0" VerticalAlignment="Top" Width="30"/>
+                <Image Source="nav_down_on.ico" HorizontalAlignment="Left" Height="31" Margin="87,128,0,0" VerticalAlignment="Top" Width="30"/>
+
+                <Image Name="L1" Source="L1.ico" HorizontalAlignment="Left" Height="31" Margin="10,10,0,0" VerticalAlignment="Top" Width="55"/>
+                <Image Name="L2" Source="L2.ico" Height="31" Margin="147,10,10,0" VerticalAlignment="Top"/>
+                <Image Name="btn_right" Source="nav_right.ico" HorizontalAlignment="Left" Height="31" Margin="117,97,0,0" VerticalAlignment="Top" Width="31" RenderTransformOrigin="1.5,0.565"/>
+                <Image Name="btn_left" Source="nav_left.ico" HorizontalAlignment="Left" Height="32" Margin="53,96,0,0" VerticalAlignment="Top" Width="34"/>
+                <Image Name="btn_up" Source="nav_up.ico" HorizontalAlignment="Left" Height="32" Margin="87,67,0,0" VerticalAlignment="Top" Width="30"/>
+                <Image Name="btn_down" Source="nav_down.ico" HorizontalAlignment="Left" Height="31" Margin="87,128,0,0" VerticalAlignment="Top" Width="30"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Margin="1022,488,28,71" Background="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+            <Grid HorizontalAlignment="Left" Height="190" Margin="0,10,-2,-12" VerticalAlignment="Top" Width="212">
+                <Image Source="R1_on.ico" HorizontalAlignment="Left" Height="31" Margin="10,10,0,0" VerticalAlignment="Top" Width="55"/>
+                <Image Source="R2_on.ico" Height="31" Margin="147,10,10,0" VerticalAlignment="Top" RenderTransformOrigin="0.67,0.538"/>
+                <Image Source="btn_triangle_on.ico" HorizontalAlignment="Left" Height="48" Margin="81,40,0,0" VerticalAlignment="Top" Width="50"/>
+                <Image Source="btn_square_on.ico" HorizontalAlignment="Left" Height="48" Margin="31,82,0,0" VerticalAlignment="Top" Width="50"/>
+                <Image Source="btn_cross_on.ico" HorizontalAlignment="Left" Height="48" Margin="81,124,0,0" VerticalAlignment="Top" Width="50"/>
+                <Image Source="btn_circle_on.ico" HorizontalAlignment="Left" Height="48" Margin="131,82,0,0" VerticalAlignment="Top" Width="48"/>
+
+                <Image Name="R1" Source="R1.ico" HorizontalAlignment="Left" Height="31" Margin="10,10,0,0" VerticalAlignment="Top" Width="55"/>
+                <Image Name="R2" Source="R2.ico" Height="31" Margin="147,10,10,0" VerticalAlignment="Top" RenderTransformOrigin="0.67,0.538"/>
+                <Image Name="btn_triangle" Source="btn_triangle.ico" HorizontalAlignment="Left" Height="48" Margin="81,40,0,0" VerticalAlignment="Top" Width="50"/>
+                <Image Name="btn_square" Source="btn_square.ico" HorizontalAlignment="Left" Height="48" Margin="31,82,0,0" VerticalAlignment="Top" Width="50"/>
+                <Image Name="btn_cross" Source="btn_cross.ico" HorizontalAlignment="Left" Height="48" Margin="81,124,0,0" VerticalAlignment="Top" Width="50"/>
+                <Image Name="btn_circle" Source="btn_circle.ico" HorizontalAlignment="Left" Height="48" Margin="131,82,0,0" VerticalAlignment="Top" Width="48"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox  HorizontalAlignment="Left" Margin="452,676,0,23" Width="377" Background="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+            <Grid HorizontalAlignment="Left" Height="48" VerticalAlignment="Top" Width="367" Margin="0,0,-2,0">
+                <Image Source="btn_select_on.ico" HorizontalAlignment="Left" Height="28" Margin="41,10,0,0" VerticalAlignment="Top" Width="48"/>
+                <Image Source="btn_start_on.ico" Margin="278,10,41,10"/>
+                <Image Source="Idle_status.png" HorizontalAlignment="Left" Height="16" Margin="163,22,0,0" VerticalAlignment="Top" Width="67"/>
+                <Image Name="working_status" Source="Working_status.png" HorizontalAlignment="Left" Height="16" Margin="163,22,0,0" VerticalAlignment="Top" Width="67"/>
+
+                <Image Name="btn_select" Source="btn_select.ico" HorizontalAlignment="Left" Height="28" Margin="41,10,0,0" VerticalAlignment="Top" Width="48"/>
+                <Image Name="btn_start" Source="btn_start.ico" Margin="278,10,41,10"/>
+
+            </Grid>
+        </GroupBox>
+        <Button x:Name="btn_Bluetooth" Content="Bluetooth Connect" HorizontalAlignment="Left" Margin="1082,726,0,0" VerticalAlignment="Top" Width="144" Click="btn_Bluetooth_Click"/>
+    </Grid>
+</Window>
