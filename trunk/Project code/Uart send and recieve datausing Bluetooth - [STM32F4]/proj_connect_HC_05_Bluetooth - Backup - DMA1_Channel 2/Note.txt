@@ -1,0 +1,2 @@
+Using USart1 but DMA1-channel 2.(Instead DMA2)
+.Lost data when receive from another device.
