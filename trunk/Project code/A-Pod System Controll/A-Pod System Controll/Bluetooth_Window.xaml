@@ -23,7 +23,7 @@
         <TextBox x:Name="txt_LastSeen" HorizontalAlignment="Left" Height="23" Margin="147,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179"/>
         <TextBox x:Name="txt_LastUsed" HorizontalAlignment="Left" Height="23" Margin="416,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="161"/>
         <Image Source="Bluetooth icon.png" HorizontalAlignment="Left" Height="112" Margin="413,10,0,0" VerticalAlignment="Top" Width="100"/>
-        <Button x:Name="btn_send_file" Content="SEND" HorizontalAlignment="Left" Margin="502,143,0,0" VerticalAlignment="Top" Width="75" Height="61" IsEnabled="False" Click="btn_send_file_Click"/>
+        <Button x:Name="btn_send_file" Content="SEND" HorizontalAlignment="Left" Margin="502,143,0,0" VerticalAlignment="Top" Width="75" Height="61" Click="btn_send_file_Click"/>
         <Button x:Name="btn_connect" Content="Connect" HorizontalAlignment="Left" Margin="402,184,0,0" VerticalAlignment="Top" Width="75" Click="btn_connect_Click"/>
     </Grid>
 </Window>

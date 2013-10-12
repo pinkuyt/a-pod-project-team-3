@@ -24,12 +24,17 @@ namespace A_Pod_System_Controll
     public partial class MainWindow : Window
     {
         DispatcherTimer timer = new DispatcherTimer();
+        private Bluetooth_Init BT_Controll;
+        private Boolean PortisOpen;
+
         public MainWindow()
         {
             InitializeComponent();
+            BT_Controll = new Bluetooth_Init();
             timer.Tick += new EventHandler(timerCounter_Tick);
             timer.Interval = new TimeSpan(0, 0, 1 / 10);
             timer.Start();
+            
         }
 
         private void timerCounter_Tick(object sender, EventArgs e)
@@ -45,6 +50,12 @@ namespace A_Pod_System_Controll
                 ShowDPad(pad);
                 ShowJoyAxis(pad);
             }
+        }
+      
+        public Boolean Open
+        {
+            get { return PortisOpen; }
+            set { PortisOpen = value; }
         }
 
         private void ShowJoyAxis(Gamepad pad)
@@ -93,15 +104,21 @@ namespace A_Pod_System_Controll
             if ((pad.Buttons & GamepadButtonFlags.DPadUp) != 0)
             {
                 btn_up.Visibility = Visibility.Collapsed;// hide
+                if (Open)
+                {
+                    BT_Controll.writeData_SerialPort(ControlConstant.DECREASE_GRIPPER_TORGUE);
+                }
             }
             else if ((pad.Buttons & GamepadButtonFlags.DPadUp) == 0)
             {
                 btn_up.Visibility = Visibility.Visible;// visible
+
             }
 
             if ((pad.Buttons & GamepadButtonFlags.DPadDown) != 0)
             {
                 btn_down.Visibility = Visibility.Collapsed;// hide
+                BT_Controll.writeData_SerialPort(ControlConstant.DECREASE_GRIPPER_TORGUE);
             }
             else if ((pad.Buttons & GamepadButtonFlags.DPadDown) == 0)
             {
@@ -226,8 +243,8 @@ namespace A_Pod_System_Controll
 
         private void btn_Bluetooth_Click(object sender, RoutedEventArgs e)
         {
-            Bluetooth_Window BTWin = new Bluetooth_Window();
-            BTWin.Show();
+            Bluetooth_Control btControl = new Bluetooth_Control();
+            btControl.Show();
         }
     }
 }

@@ -15,6 +15,7 @@ using System.ComponentModel;
 using System.Threading;
 using InTheHand.Net;
 using InTheHand.Net.Sockets;
+using System.IO.Ports;//
 
 namespace A_Pod_System_Controll
 {
@@ -24,7 +25,8 @@ namespace A_Pod_System_Controll
     public partial class Bluetooth_Window : Window
     {
         BackgroundWorker bg;
-        private BluetoothClient bluetoothClient;
+        //private BluetoothClient bluetoothClient;
+        int Selected;
         //BackgroundWorker bg_send;
         public Bluetooth_Window()
         {
@@ -86,13 +88,55 @@ namespace A_Pod_System_Controll
             }
         }
 
-        public string FilePath { get; set; }
+        //public string FilePath { get; set; }
 
        
 
         private void btn_send_file_Click(object sender, RoutedEventArgs e)
         {
-            
+            byte[] Command = Encoding.ASCII.GetBytes("It works");//{0x00,0x01,0x88};
+
+            SerialPort BlueToothConnection = new SerialPort();
+            BlueToothConnection.BaudRate = (9600);
+
+            BlueToothConnection.PortName = "COM3";
+            BlueToothConnection.Open();
+            if (BlueToothConnection.IsOpen)
+            {
+
+                //BlueToothConnection.ErrorReceived += new SerialErrorReceivedEventHandler(BlueToothConnection_ErrorReceived);
+
+                //// Declare a 2 bytes vector to store the message length header
+                //Byte[] MessageLength = { 0x00, 0x00 };
+
+                ////set the LSB to the length of the message
+                //MessageLength[0] = (byte)Command.Length;
+
+
+                ////send the 2 bytes header
+                //BlueToothConnection.Write(MessageLength, 0, MessageLength.Length);
+
+                //// send the message itself
+
+                //System.Threading.Thread.Sleep(2000);
+                //BlueToothConnection.Write(Command, 0, Command.Length);
+
+                //Messages(5, ""); //This is the last thing that prints before it just waits for response.
+
+                //int length = BlueToothConnection.ReadByte();
+                //Messages(6, "");
+                //// retrieve the reply data
+                //for (int i = 0; i < length; i++)
+                //{
+                //    Messages(7, (BlueToothConnection.ReadByte().ToString()));
+                //}
+            }
+
+        }
+
+        private void BlueToothConnection_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
+        {
+            MessageBox.Show("Connection problem occurred! ");
         }
 
         private void btn_browse_Click(object sender, RoutedEventArgs e)
@@ -103,6 +147,34 @@ namespace A_Pod_System_Controll
         private void btn_connect_Click(object sender, RoutedEventArgs e)
         {
 
+            if (this.device_list.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select a device.");
+                return;
+            }
+            //Selected = this.device_list.SelectedIndex;
+            else
+            {
+                bool equal = string.Equals(txt_devicename.Text, "HC-05");
+                if (equal == true)
+                {
+                    //SerialPort BlueToothConnection = new SerialPort();
+                    //BlueToothConnection.BaudRate = (9600);
+
+                    //BlueToothConnection.PortName = "COM4";
+                    //BlueToothConnection.Open();
+                    //MessageBox.Show("HC-05 connected!");
+                    //this.Close();
+
+                }
+                else
+                {
+                    MessageBox.Show("Does not allow other devices connected!");
+                }
+            }
+          
+            //this.thrSend = new Thread(new ThreadStart(sendfile));
+            //this.thrSend.Start();
         }
     }
 }
