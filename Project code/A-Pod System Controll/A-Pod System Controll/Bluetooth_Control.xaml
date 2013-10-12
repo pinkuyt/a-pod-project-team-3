@@ -1,0 +1,33 @@
+﻿<Window x:Class="A_Pod_System_Controll.Bluetooth_Control"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:data="clr-namespace:A_Pod_System_Controll"
+        
+        Title="Bluetooth_Control" Height="225" Width="300">
+    <Grid Height="199" VerticalAlignment="Top">
+        <StackPanel HorizontalAlignment="Left" Height="179" Margin="0,10,0,0" VerticalAlignment="Top" Width="272">
+            <!--<StackPanel.DataContext>
+                <data:BlutoothViewSource/>
+            </StackPanel.DataContext>-->
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Port Com:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <ComboBox x:Name="cmb_Port" VerticalAlignment="Top" HorizontalAlignment="Left" Width="120" ItemsSource="{Binding Ports}" SelectedIndex="0">
+                    <ComboBox.DataContext>
+                        <data:BlutoothViewSource/>
+                    </ComboBox.DataContext>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Baudrate:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <ComboBox x:Name="cmb_Baudrate" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Baudrates}">
+                    <ComboBox.DataContext>
+                        <data:BlutoothViewSource/>
+                    </ComboBox.DataContext>
+                </ComboBox>
+            </StackPanel>
+            
+            <Button x:Name="btn_Connect_Bluetooth" Content="Connect" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Height="35" Click="btn_Connect_Bluetooth_Click"/>
+        </StackPanel>
+
+    </Grid>
+</Window>

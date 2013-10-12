@@ -63,7 +63,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="APod_control.cs" />
+    <Compile Include="Bluetooth_Control.xaml.cs">
+      <DependentUpon>Bluetooth_Control.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Bluetooth_Init.cs" />
+    <Compile Include="BlutoothViewSource.cs" />
+    <Compile Include="ControlConstant.cs" />
+    <Compile Include="ControlHelper.cs" />
     <Compile Include="SendModule.cs" />
+    <Page Include="Bluetooth_Control.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Bluetooth_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -103,6 +115,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -162,6 +175,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Bluetooth icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
+    <Folder Include="ViewsModel\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -19,3 +19,7 @@ Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\A-Pod System Controll\
 Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\A-Pod System Controll\A-Pod System Controll\obj\Debug\Bluetooth_Window.g.cs
 Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\A-Pod System Controll\A-Pod System Controll\bin\Debug\InTheHand.Net.Personal.dll
 Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\A-Pod System Controll\A-Pod System Controll\bin\Debug\InTheHand.Net.Personal.xml
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\A-Pod System Controll\A-Pod System Controll\obj\Debug\Bluetooth_Control.baml
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\A-Pod System Controll\A-Pod System Controll\obj\Debug\Bluetooth_Control.g.cs
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\A-Pod System Controll\A-Pod System Controll\obj\Debug\GeneratedInternalTypeHelper.g.cs
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\A-Pod System Controll\A-Pod System Controll\obj\Debug\A-Pod System Controll_MarkupCompile.lref
