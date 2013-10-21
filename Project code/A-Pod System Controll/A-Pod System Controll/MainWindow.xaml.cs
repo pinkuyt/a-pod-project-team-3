@@ -106,7 +106,7 @@ namespace A_Pod_System_Controll
                 btn_up.Visibility = Visibility.Collapsed;// hide
                 if (Open)
                 {
-                    BT_Controll.writeData_SerialPort(ControlConstant.DECREASE_GRIPPER_TORGUE);
+                    //BT_Controll.writeData_SerialPort(ControlConstant.DECREASE_GRIPPER_TORGUE);
                 }
             }
             else if ((pad.Buttons & GamepadButtonFlags.DPadUp) == 0)
@@ -118,7 +118,7 @@ namespace A_Pod_System_Controll
             if ((pad.Buttons & GamepadButtonFlags.DPadDown) != 0)
             {
                 btn_down.Visibility = Visibility.Collapsed;// hide
-                BT_Controll.writeData_SerialPort(ControlConstant.DECREASE_GRIPPER_TORGUE);
+                //BT_Controll.writeData_SerialPort(ControlConstant.DECREASE_GRIPPER_TORGUE);
             }
             else if ((pad.Buttons & GamepadButtonFlags.DPadDown) == 0)
             {
@@ -185,6 +185,8 @@ namespace A_Pod_System_Controll
             if ((pad.Buttons & GamepadButtonFlags.Back) != 0)
             {
                 btn_select.Visibility = Visibility.Collapsed;// hide
+                BT_Controll.writeData_SerialPort(ControlConstant.DECREASE_GRIPPER_TORGUE);
+                //System.Threading.Thread.Sleep(200);
             }
             else if ((pad.Buttons & GamepadButtonFlags.Back) == 0)
             {
@@ -194,6 +196,8 @@ namespace A_Pod_System_Controll
             if ((pad.Buttons & GamepadButtonFlags.Start) != 0)
             {
                 btn_start.Visibility = Visibility.Collapsed;// hide
+                BT_Controll.writeData_SerialPort(ControlConstant.CLOSE_MANDIBLES);
+                //System.Threading.Thread.Sleep(200);
             }
             else if ((pad.Buttons & GamepadButtonFlags.Start) == 0)
             {
