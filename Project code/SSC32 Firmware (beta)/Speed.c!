@@ -1,6 +1,0 @@
-VERSION:1 SOURCE_TIMESTAMP:43336038
-NODE:I LEVEL:0 LINE:1 "C:\cvavr2\inc\mega328p.h"
-NODE:I LEVEL:0 LINE:2 "E:\[@] Capstone Project\AVR\ClockGen\SSC32.h"
-NODE:I LEVEL:0 LINE:3 "E:\[@] Capstone Project\AVR\ClockGen\Speed.h"
-NODE:V LEVEL:0 LINE:9 "SP_Steps -> RAM:????"
-NODE:V LEVEL:0 LINE:11 "SP_Dir -> RAM:????"
