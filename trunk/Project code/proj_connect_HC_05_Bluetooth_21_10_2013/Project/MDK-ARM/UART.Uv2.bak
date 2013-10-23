@@ -1,0 +1,113 @@
+### uVision2 Project, (C) Keil Software
+### Do not modify !
+
+Target (UART), 0x0004 // Tools: 'ARM-ADS'
+
+Group (MDK_ARM)
+Group (STM32F4_StdPeriph)
+Group (STM32F4_Discovery)
+Group (User)
+
+File 1,2,<..\..\Libraries\CMSIS\STM32F4xx\Source\Templates\arm\startup_stm32f4xx.s><startup_stm32f4xx.s>
+File 2,1,<..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\misc.c><misc.c>
+File 2,1,<..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.c><stm32f4xx_gpio.c>
+File 2,1,<..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.c><stm32f4xx_usart.c>
+File 2,1,<..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.c><stm32f4xx_syscfg.c>
+File 2,1,<..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.c><stm32f4xx_rcc.c>
+File 2,1,<..\..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.c><stm32f4xx_exti.c>
+File 4,1,<..\main.c><main.c>
+File 4,1,<..\system_stm32f4xx.c><system_stm32f4xx.c>
+File 4,1,<..\sysTick.c><sysTick.c>
+File 4,5,<..\sysTick.h><sysTick.h>
+
+
+Options 1,0,0  // Target 'UART'
+ Device (STM32F407VG)
+ Vendor (STMicroelectronics)
+ Cpu (IRAM(0x20000000-0x2001FFFF) IRAM2(0x10000000-0x1000FFFF) IROM(0x8000000-0x80FFFFF) CLOCK(25000000) CPUTYPE("Cortex-M4") FPU2)
+ FlashUt ()
+ StupF ("Startup\ST\STM32F4xx\startup_stm32f4xx.s" ("STM32F4xx Startup Code"))
+ FlashDR (UL2CM3(-O207 -S0 -C0 -FO7 -FD20000000 -FC800 -FN1 -FF0STM32F4xx_1024 -FS08000000 -FL0100000))
+ DevID (6103)
+ Rgf (stm32f4xx.h)
+ Mem ()
+ C ()
+ A ()
+ RL ()
+ OH ()
+ DBC_IFX ()
+ DBC_CMS ()
+ DBC_AMS ()
+ DBC_LMS ()
+ UseEnv=0
+ EnvBin ()
+ EnvInc ()
+ EnvLib ()
+ EnvReg (ST\STM32F4xx\)
+ OrgReg (ST\STM32F4xx\)
+ TgStat=16
+ OutDir (.\OUT\)
+ OutName (UART)
+ GenApp=1
+ GenLib=0
+ GenHex=1
+ Debug=1
+ Browse=1
+ LstDir (.\OUT\)
+ HexSel=1
+ MG32K=0
+ TGMORE=0
+ RunUsr 0 0 <>
+ RunUsr 1 0 <>
+ BrunUsr 0 0 <>
+ BrunUsr 1 0 <>
+ CrunUsr 0 0 <>
+ CrunUsr 1 0 <>
+ SVCSID <>
+ GLFLAGS=1790
+ ADSFLGA { 243,31,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }
+ ACPUTYP ("Cortex-M4")
+ RVDEV ()
+ ADSTFLGA { 0,140,16,146,99,0,0,66,0,0,0,0,0,0,0,0,0,0,0,0 }
+ OCMADSOCM { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }
+ OCMADSIRAM { 0,0,0,0,32,0,0,2,0 }
+ OCMADSIROM { 1,0,0,0,8,0,0,16,0 }
+ OCMADSXRAM { 0,0,0,0,0,0,0,0,0 }
+ OCR_RVCT { 1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,8,0,0,16,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,32,0,0,2,0,0,0,0,0,16,0,0,1,0 }
+ RV_STAVEC ()
+ ADSCCFLG { 5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }
+ ADSCMISC ()
+ ADSCDEFN (USE_STDPERIPH_DRIVER, STM32F4XX)
+ ADSCUDEF ()
+ ADSCINCD (..\;..\..\Libraries\CMSIS\STM32F4xx\Include;..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc)
+ ADSASFLG { 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }
+ ADSAMISC ()
+ ADSADEFN ()
+ ADSAUDEF ()
+ ADSAINCD ()
+ PropFld { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }
+ IncBld=1
+ AlwaysBuild=0
+ GenAsm=0
+ AsmAsm=0
+ PublicsOnly=0
+ StopCode=3
+ CustArgs ()
+ LibMods ()
+ ADSLDFG { 17,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }
+ ADSLDTA (0x08000000)
+ ADSLDDA (0x20000000)
+ ADSLDSC ()
+ ADSLDIB ()
+ ADSLDIC ()
+ ADSLDMC ()
+ ADSLDIF ()
+ ADSLDDW ()
+  OPTDL (SARMCM3.DLL)(-MPU -REMAP)(DCM.DLL)(-pCM4)(SARMCM3.DLL)(-MPU)(TCM.DLL)(-pCM4)
+  OPTDBG 311294,13,()()()()()()()()()() (STLink\ST-LINKIII-KEIL_SWO.dll)()()()
+ FLASH1 { 9,0,0,0,1,0,0,0,7,16,0,0,0,0,0,0,0,0,0,0 }
+ FLASH2 (STLink\ST-LINKIII-KEIL_SWO.dll)
+ FLASH3 ("" ())
+ FLASH4 ()
+EndOpt
+
