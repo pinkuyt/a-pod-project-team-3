@@ -5,6 +5,7 @@
         xmlns:System="clr-namespace:System;assembly=mscorlib"
         xmlns:Keypad="clr-namespace:Keypad;assembly=Keypad" xmlns:local="clr-namespace:APOD_Controller"
         xmlns:sequences="clr-namespace:APOD_Controller.Sequences"
+        xmlns:aforge="clr-namespace:AForge.Controls;assembly=AForge.Controls"
         x:Class="APOD_Controller.MainWindow"
         Title="APOD Controller" Height="700" Width="1366"  ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow">
@@ -44,10 +45,9 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="200"/>
                         </Grid.ColumnDefinitions>
-
-                        <Image Grid.Row="0" Source="images/video 1.png" Grid.Column="1"/>
-
-                        <Border Grid.Row="1" Grid.Column="0" CornerRadius="30" Background="Gainsboro"
+                        
+                        <!--Navigation area-->
+                        <Border Name="pnlNavigation" Grid.Row="1" Grid.Column="0" CornerRadius="30" Background="Gainsboro"
                                 BorderThickness="5" BorderBrush="{StaticResource BorderBrushNormal}">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -81,7 +81,8 @@
                                     Grid.Row="0" Grid.Column="3" Height="30" Width="50"  />
                             </Grid>
                         </Border>
-                        <Border Grid.Row="1" Grid.Column="2" CornerRadius="30" Background="Gainsboro"
+                        <!--Action area-->
+                        <Border Name="pnlAction" Grid.Row="1" Grid.Column="2" CornerRadius="30" Background="Gainsboro"
                                 BorderThickness="5" BorderBrush="{StaticResource BorderBrushNormal}">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -117,16 +118,21 @@
 
                             </Grid>
                         </Border>
-
-                        <Border BorderBrush="{StaticResource BorderBrushNormal}" BorderThickness="5" Grid.Column="1" 
+                        <!---->
+                        <Border Name="pnlFunction" BorderBrush="{StaticResource BorderBrushNormal}" BorderThickness="5" Grid.Column="1" 
                                 Background="Gainsboro"
-                                HorizontalAlignment="Left" Height="60" Margin="397,10,0,0" Grid.Row="1" VerticalAlignment="Top" 
+                                HorizontalAlignment="Left" Height="60" Margin="366,39,0,0" Grid.Row="1" VerticalAlignment="Top" 
                                 Width="220" CornerRadius="30">
                             <Grid>
                                 <Keypad:Key x:Name="actSelect" Type="Select" Height="30" Width="50" Margin="118,10,30,10" />
-                                <Keypad:Key x:Name="actStart" Type="Start" Height="30" Width="50" Margin="30,10,118,10" />
+                                <Keypad:Key x:Name="actStart" Type="Start" Height="30" Width="50" Margin="30,10,118,10" MouseUp="actStart_MouseUp" />
                             </Grid>
                         </Border>
+                        
+                        <WindowsFormsHost x:Name="hostCam" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" 
+                                          Height="353" Width="914" Margin="10,10,0,0" VerticalAlignment="Top" >
+                            <aforge:VideoSourcePlayer x:Name="viewCam"   Margin="0,0,0,0" />
+                        </WindowsFormsHost>
 
                     </Grid>
                 </DockPanel>
