@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Linq;
 using System.Xml;
+using AForge.Video;
 using APOD_Controller.Sequences;
 
 namespace APOD_Controller
@@ -33,7 +34,12 @@ namespace APOD_Controller
         /// <summary>
         /// List of preloaded Presets
         /// </summary>
-        private List<Preset> Presets; 
+        private List<Preset> Presets;
+
+        /// <summary>
+        /// Camera IP for video stream
+        /// </summary>
+        private const String CamIP = "http://192.168.1.3:80/mjpg/video.mjpg";
 
         /// <summary>
         /// Default constructor
@@ -47,7 +53,9 @@ namespace APOD_Controller
             tblSequences.ItemsSource = States;
         }
 
-        // User define method
+        /**
+         * User define method
+         */
         #region Suport/Multipurposes Methods
         /// <summary>
         /// Load existing Presets
@@ -138,9 +146,82 @@ namespace APOD_Controller
             return states;
         }
 
+        /// <summary>
+        /// Open video source
+        /// </summary>
+        /// <param name="source">View source</param>
+        private void OpenVideoSource(IVideoSource source)
+        {
+            // set busy cursor
+            this.Cursor = Cursors.Wait;
+
+            // stop current video source
+            CloseCurrentVideoSource();
+
+            // start new video source
+            viewCam.VideoSource = source;
+            viewCam.Start();
+
+            // reset cursor
+            this.Cursor = Cursors.Arrow;
+        }
+
+        /// <summary>
+        /// Close video source if it is running
+        /// </summary>
+        private void CloseCurrentVideoSource()
+        {
+            if (viewCam.VideoSource != null)
+            {
+                viewCam.SignalToStop();
+
+                // wait ~ 3 seconds
+                for (int i = 0; i < 30; i++)
+                {
+                    if (!viewCam.IsRunning)
+                        break;
+                    System.Threading.Thread.Sleep(100);
+                }
+
+                if (viewCam.IsRunning)
+                {
+                    viewCam.Stop();
+                }
+
+                viewCam.VideoSource = null;
+            }
+        }
         #endregion
-        
-        #region Sequence Display Manipulation
+
+        /**
+         * Live control execution
+         */
+        #region Live control
+
+        /// <summary>
+        /// Start streamming video
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void actStart_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (viewCam.VideoSource == null)
+            {
+                // get new source from IP
+                MJPEGStream source = new MJPEGStream(CamIP);
+                OpenVideoSource(source);
+            }
+            else
+            {
+                CloseCurrentVideoSource();
+            }
+        }
+        #endregion
+
+        /**
+         * Sequences control execution
+         */
+        #region Sequence Display
         /// <summary>
         /// Add a new state to current sequence
         /// </summary>
@@ -290,10 +371,11 @@ namespace APOD_Controller
             {
                 e.Handled = true;
             }
-        } 
-        #endregion
+        }
 
-        // Preset control execution
+        /**
+         * Preset control execution
+         */
         #region Preset Manipulation
         /// <summary>
         /// Enable uses of Presets
@@ -349,9 +431,14 @@ namespace APOD_Controller
             }
         }
         #endregion
-        
-        // Menu, Help, About, Tabs, Status...
-        #region General Manipulation
+
+        #endregion
+
+        /**
+         * Menu, Help, About, Tabs, Status...
+         */
+        #region General
+
         // Menu command execution
         #region Menu Control
         /// <summary>
@@ -417,7 +504,6 @@ namespace APOD_Controller
         }
         
         #endregion
-
 
     }
 }

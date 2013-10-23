@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="50" d:DesignWidth="50" MouseDown="UserControl_MouseDown" MouseUp="UserControl_MouseUp">
+             d:DesignHeight="50" d:DesignWidth="50" MouseDown="UserControl_MouseDown" MouseUp="UserControl_MouseUp" MouseLeave="UserControl_MouseLeave">
     <Grid>
         <Image Name="ImgOn" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="50" />
         <Image Name="ImgOff" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="50" />

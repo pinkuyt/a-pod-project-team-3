@@ -26,3 +26,13 @@ E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\bin\Debug\Keypad.pdb
 E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\obj\Debug\APOD Controller_MarkupCompile.lref
 E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\bin\Debug\APOD.CustomControls.dll
 E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\bin\Debug\APOD.CustomControls.pdb
+E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\bin\Debug\AForge.Controls.dll
+E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\bin\Debug\AForge.Video.dll
+E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\bin\Debug\AForge.dll
+E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\bin\Debug\AForge.Imaging.dll
+E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\bin\Debug\AForge.Math.dll
+E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\bin\Debug\AForge.Controls.xml
+E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\bin\Debug\AForge.Video.xml
+E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\bin\Debug\AForge.xml
+E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\bin\Debug\AForge.Imaging.xml
+E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\bin\Debug\AForge.Math.xml
