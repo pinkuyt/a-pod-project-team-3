@@ -24,8 +24,6 @@ E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\obj\Debug\styles\Res
 E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\bin\Debug\Keypad.dll
 E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\bin\Debug\Keypad.pdb
 E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\obj\Debug\APOD Controller_MarkupCompile.lref
-E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\bin\Debug\APOD.CustomControls.dll
-E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\bin\Debug\APOD.CustomControls.pdb
 E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\bin\Debug\AForge.Controls.dll
 E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\bin\Debug\AForge.Video.dll
 E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\bin\Debug\AForge.dll
@@ -36,3 +34,9 @@ E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\bin\Debug\AForge.Vid
 E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\bin\Debug\AForge.xml
 E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\bin\Debug\AForge.Imaging.xml
 E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\bin\Debug\AForge.Math.xml
+E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\bin\Debug\AForge.Video.DirectShow.dll
+E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\bin\Debug\AForge.Vision.dll
+E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\bin\Debug\AForge.Video.DirectShow.xml
+E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\bin\Debug\AForge.Vision.xml
+E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\obj\Debug\Object Tracking\ObjectExtractorDialog.baml
+E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\obj\Debug\Object Tracking\ObjectExtractorDialog.g.cs

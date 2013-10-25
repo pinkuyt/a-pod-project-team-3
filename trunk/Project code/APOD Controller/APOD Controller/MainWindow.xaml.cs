@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,11 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 using System.Xml;
 using AForge.Video;
+using AForge.Video.DirectShow;
+using AForge.Vision.Motion;
+using APOD_Controller.Object_Tracking;
 using APOD_Controller.Sequences;
+using Brush = System.Windows.Media.Brush;
 
 namespace APOD_Controller
 {
@@ -39,7 +44,7 @@ namespace APOD_Controller
         /// <summary>
         /// Camera IP for video stream
         /// </summary>
-        private const String CamIP = "http://192.168.1.3:80/mjpg/video.mjpg";
+        private const String CamIP = "http://192.168.2.3:80/mjpg/video.mjpg";
 
         /// <summary>
         /// Default constructor
@@ -207,9 +212,13 @@ namespace APOD_Controller
         {
             if (viewCam.VideoSource == null)
             {
+                VideoCaptureDevice webcam = new VideoCaptureDevice("@device:pnp:\\\\?\\usb#vid_0c45&pid_6481&mi_00#7&2e61ff31&0&0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\\global");
                 // get new source from IP
                 MJPEGStream source = new MJPEGStream(CamIP);
-                OpenVideoSource(source);
+                source.Login = "admin";
+                source.Password = "1234";
+
+                OpenVideoSource(webcam);
             }
             else
             {
@@ -438,7 +447,6 @@ namespace APOD_Controller
          * Menu, Help, About, Tabs, Status...
          */
         #region General
-
         // Menu command execution
         #region Menu Control
         /// <summary>
@@ -504,6 +512,73 @@ namespace APOD_Controller
         }
         
         #endregion
+
+        /// <summary>
+        /// Clean up shit!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            // close serial port
+            // close connected devices
+            CloseCurrentVideoSource();
+        }
+
+        private void rdModeNormal_Checked(object sender, RoutedEventArgs e)
+        {
+            txtStatusValue.Text = "Normal";
+            pnlNavigation.BorderBrush = (Brush)FindResource("BorderBrushNormal");
+            pnlAction.BorderBrush = (Brush)FindResource("BorderBrushNormal");
+            pnlFunction.BorderBrush = (Brush)FindResource("BorderBrushNormal");
+        }
+
+        private void rdModeKeypad_Checked(object sender, RoutedEventArgs e)
+        {
+            txtStatusValue.Text = "Keypad";
+            pnlNavigation.BorderBrush = (Brush) FindResource("BorderBrushSelected");
+            pnlAction.BorderBrush = (Brush)FindResource("BorderBrushSelected");
+            pnlFunction.BorderBrush = (Brush)FindResource("BorderBrushSelected");
+        }
+
+        private void rdModeObjTracking_Checked(object sender, RoutedEventArgs e)
+        {
+            if (viewCam.IsRunning)
+            {
+                txtStatusValue.Text = "Object Tracking";
+                Bitmap capture = viewCam.GetCurrentVideoFrame();
+                ObjectExtractorDialog extractor = new ObjectExtractorDialog(capture);
+                extractor.Owner = this;
+                extractor.ShowDialog();
+
+                Bitmap img = ObjectExtractorDialog.Value;
+
+                using (img)
+                {
+                    BitmapSource bitmapSource = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
+                        img.GetHbitmap(),
+                        IntPtr.Zero,
+                        Int32Rect.Empty,
+                        BitmapSizeOptions.FromEmptyOptions());
+
+                    imgTrackingObject.Source = bitmapSource;
+                }
+                pnlTrackingObject.IsEnabled = true;
+                pnlTrackingObject.IsExpanded = true;
+            }
+            else
+            {
+                MessageBox.Show("No video device added.");
+                rdModeNormal.IsChecked = true;
+            }
+        }
+
+        private void rdModeObjTracking_Unchecked(object sender, RoutedEventArgs e)
+        {
+            pnlTrackingObject.IsEnabled = false;
+            pnlTrackingObject.IsExpanded = false;
+        }
+
 
     }
 }

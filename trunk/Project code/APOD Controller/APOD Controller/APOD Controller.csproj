@@ -39,9 +39,21 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\AForge.NET\Framework\Release\AForge.Controls.dll</HintPath>
     </Reference>
+    <Reference Include="AForge.Imaging, Version=2.2.5.0, Culture=neutral, PublicKeyToken=ba8ddea9676ca48b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\AForge.NET\Framework\Release\AForge.Imaging.dll</HintPath>
+    </Reference>
     <Reference Include="AForge.Video, Version=2.2.5.0, Culture=neutral, PublicKeyToken=cbfb6e07d173c401, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\AForge.NET\Framework\Release\AForge.Video.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Video.DirectShow, Version=2.2.5.0, Culture=neutral, PublicKeyToken=61ea4348d43881b7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\AForge.NET\Framework\Release\AForge.Video.DirectShow.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Vision, Version=2.2.5.0, Culture=neutral, PublicKeyToken=b612fa915eefaa06, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\AForge.NET\Framework\Release\AForge.Vision.dll</HintPath>
     </Reference>
     <Reference Include="MahApps.Metro">
       <HintPath>Library\MahApps.Metro.dll</HintPath>
@@ -94,6 +106,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Object Tracking\ObjectExtractorDialog.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>ObjectExtractorDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Sequences\MoveItem.cs" />
     <Compile Include="Sequences\MoveItemsCollection.cs" />
     <Compile Include="Sequences\Preset.cs" />
@@ -109,6 +125,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Object Tracking\ObjectExtractorDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="styles\MetroWindowResources.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -146,10 +166,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\APOD.CustomControls\APOD.CustomControls.csproj">
-      <Project>{36544228-b533-498e-980d-f1ffb11ad42d}</Project>
-      <Name>APOD.CustomControls</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Keypad\APOD.UserControls.csproj">
       <Project>{c58f0f0c-cbb2-4b0e-a0a0-bc337f2fd9c7}</Project>
       <Name>APOD.UserControls</Name>
@@ -171,6 +187,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="library\images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

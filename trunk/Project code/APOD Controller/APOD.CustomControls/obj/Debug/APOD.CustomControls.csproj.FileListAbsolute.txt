@@ -9,3 +9,4 @@ E:\[@] Capstone Project\WPF\APOD Controller\APOD.CustomControls\obj\Debug\APOD.C
 E:\[@] Capstone Project\WPF\APOD Controller\APOD.CustomControls\obj\Debug\APOD.CustomControls.csproj.GenerateResource.Cache
 E:\[@] Capstone Project\WPF\APOD Controller\APOD.CustomControls\obj\Debug\APOD.CustomControls.dll
 E:\[@] Capstone Project\WPF\APOD Controller\APOD.CustomControls\obj\Debug\APOD.CustomControls.pdb
+E:\[@] Capstone Project\WPF\APOD Controller\APOD.CustomControls\obj\Debug\APOD.CustomControls.csprojResolveAssemblyReference.cache
