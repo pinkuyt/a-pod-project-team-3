@@ -476,6 +476,56 @@
               <FileType>5</FileType>
               <FilePath>..\A_Pod_Command.h</FilePath>
             </File>
+            <File>
+              <FileName>led_init.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\led_init.c</FilePath>
+            </File>
+            <File>
+              <FileName>led_init.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\led_init.h</FilePath>
+            </File>
+            <File>
+              <FileName>led1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\led1.c</FilePath>
+            </File>
+            <File>
+              <FileName>led1.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\led1.h</FilePath>
+            </File>
+            <File>
+              <FileName>Usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>Usart.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Usart.h</FilePath>
+            </File>
+            <File>
+              <FileName>Usart_Bluetooth.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Usart_Bluetooth.c</FilePath>
+            </File>
+            <File>
+              <FileName>Usart_Bluetooth.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Usart_Bluetooth.h</FilePath>
+            </File>
+            <File>
+              <FileName>checkCommand.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\checkCommand.c</FilePath>
+            </File>
+            <File>
+              <FileName>checkCommand.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\checkCommand.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

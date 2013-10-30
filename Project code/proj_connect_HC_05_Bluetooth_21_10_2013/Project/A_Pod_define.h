@@ -56,3 +56,5 @@
 #define SHARP_SIGN 						35		//# sign
 #define EXECUTION_TIME 				84		// execution time T
 #define START_PAUSE						83   	// START or PAUSE S
+
+// servos

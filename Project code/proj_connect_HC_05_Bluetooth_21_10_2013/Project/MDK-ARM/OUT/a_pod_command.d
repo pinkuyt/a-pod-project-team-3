@@ -38,5 +38,7 @@
 .\out\a_pod_command.o: ..\A_Pod_define.h
 .\out\a_pod_command.o: ..\Usart.h
 .\out\a_pod_command.o: C:\Keil\ARM\RV31\INC\stdio.h
-.\out\a_pod_command.o: C:\Keil\ARM\ARMCC\bin\..\include\stdio.h
+.\out\a_pod_command.o: ..\Usart_Bluetooth.h
 .\out\a_pod_command.o: C:\Keil\ARM\ARMCC\bin\..\include\string.h
+.\out\a_pod_command.o: C:\Keil\ARM\ARMCC\bin\..\include\stdio.h
+.\out\a_pod_command.o: ..\checkCommand.h

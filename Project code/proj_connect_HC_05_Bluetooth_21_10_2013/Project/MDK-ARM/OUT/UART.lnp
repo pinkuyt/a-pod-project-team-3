@@ -10,6 +10,11 @@
 ".\out\main.o"
 ".\out\system_stm32f4xx.o"
 ".\out\a_pod_command.o"
+".\out\led_init.o"
+".\out\led1.o"
+".\out\usart.o"
+".\out\usart_bluetooth.o"
+".\out\checkcommand.o"
 --library_type=microlib --strict --scatter ".\OUT\UART.sct"
 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

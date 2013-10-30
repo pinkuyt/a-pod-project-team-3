@@ -4,39 +4,133 @@
 <h1>µVision Build Log</h1>
 <h2>Project:</h2>
 Z:\Documents\FPT University\LOP CO BAN ARM\PROJECT\proj_connect_HC_05_Bluetooth_21_10_2013\Project\MDK-ARM\UART.uvproj
-Project File Date:  10/21/2013
+Project File Date:  10/30/2013
 
 <h2>Output:</h2>
 Build target 'UART'
-compiling main.c...
-..\sysTick.h(19): warning:  #1-D: last line of file ends without a newline
-        
+compiling A_Pod_Command.c...
 ..\Usart.h(13): warning:  #1-D: last line of file ends without a newline
   void USART2_IRQHandler(void);
-..\usart.h(13): warning:  #1-D: last line of file ends without a newline
-  void USART2_IRQHandler(void);
-..\DMA_USART.h(5): warning:  #1-D: last line of file ends without a newline
-  void DMA2_Stream5_IRQHandler(void);
-..\Usart.h(13): warning:  #1-D: last line of file ends without a newline
-  void USART2_IRQHandler(void);
-..\main.h(36): warning:  #1295-D: Deprecated declaration initPA15 - give arg types
+..\Usart_Bluetooth.h(11): warning:  #1295-D: Deprecated declaration initPA15 - give arg types
   void initPA15();
-..\main.h(37): warning:  #1295-D: Deprecated declaration setPA15On - give arg types
+..\Usart_Bluetooth.h(12): warning:  #1295-D: Deprecated declaration setPA15On - give arg types
   void setPA15On();
-..\main.h(38): warning:  #1295-D: Deprecated declaration togglePA15 - give arg types
+..\Usart_Bluetooth.h(13): warning:  #1295-D: Deprecated declaration togglePA15 - give arg types
   void togglePA15();
-..\main.c(36): warning:  #550-D: variable "compare" was set but never used
-        int compare;
-..\main.c: 9 warnings, 0 errors
+..\Usart_Bluetooth.h(19): warning:  #1-D: last line of file ends without a newline
+  void USART_puts(USART_TypeDef* USARTx,volatile char *s);
+..\checkCommand.h(7): warning:  #1-D: last line of file ends without a newline
+  void mergeCmd(char *desCommand,const char *srcCommand);
+..\A_Pod_Command.c(160): warning:  #177-D: variable "Htemp" was declared but never referenced
+        uint16_t Htemp,Ltemp;
+..\A_Pod_Command.c(160): warning:  #177-D: variable "Ltemp" was declared but never referenced
+        uint16_t Htemp,Ltemp;
+..\A_Pod_Command.c: 8 warnings, 0 errors
 linking...
-Program Size: Code=4836 RO-data=424 RW-data=44 ZI-data=1028  
+Program Size: Code=6016 RO-data=424 RW-data=88 ZI-data=1024  
+FromELF: creating hex file...
+".\OUT\UART.axf" - 0 Error(s), 8 Warning(s).
+a=424 RW-data=88 ZI-data=1024  
 FromELF: creating hex file...
 ".\OUT\UART.axf" - 0 Error(s), 9 Warning(s).
 Load "Z:\\Documents\\FPT University\\LOP CO BAN ARM\\PROJECT\\proj_connect_HC_05_Bluetooth_21_10_2013\\Project\\MDK-ARM\\OUT\\UART.axf" 
 Erase Done.
 Programming Done.
 Verify OK.
-ooth_21_10_2013\\Project\\MDK-ARM\\OUT\\UART.axf" 
+Command.c(185): warning:  #177-D: variable "Htemp" was declared but never referenced
+        uint16_t Htemp,Ltemp;
+..\A_Pod_Command.c(185): warning:  #177-D: variable "Ltemp" was declared but never referenced
+        uint16_t Htemp,Ltemp;
+..\A_Pod_Command.c: 9 warnings, 6 errors
+compiling Usart_Bluetooth.c...
+..\Usart_Bluetooth.h(11): warning:  #1295-D: Deprecated declaration initPA15 - give arg types
+  void initPA15();
+..\Usart_Bluetooth.h(12): warning:  #1295-D: Deprecated declaration setPA15On - give arg types
+  void setPA15On();
+..\Usart_Bluetooth.h(13): warning:  #1295-D: Deprecated declaration togglePA15 - give arg types
+  void togglePA15();
+..\Usart_Bluetooth.h(19): warning:  #1-D: last line of file ends without a newline
+  void USART_puts(USART_TypeDef* USARTx,volatile char *s);
+..\Usart.h(13): warning:  #1-D: last line of file ends without a newline
+  void USART2_IRQHandler(void);
+..\Usart_Bluetooth.h(11): warning:  #1295-D: Deprecated declaration initPA15 - give arg types
+  void initPA15();
+..\Usart_Bluetooth.h(12): warning:  #1295-D: Deprecated declaration setPA15On - give arg types
+  void setPA15On();
+..\Usart_Bluetooth.h(13): warning:  #1295-D: Deprecated declaration togglePA15 - give arg types
+  void togglePA15();
+..\Usart_Bluetooth.h(19): warning:  #1-D: last line of file ends without a newline
+  void USART_puts(USART_TypeDef* USARTx,volatile char *s);
+..\checkCommand.h(7): warning:  #1-D: last line of file ends without a newline
+  void mergeCmd(char *desCommand,const char *srcCommand);
+..\Usart.h(13): warning:  #1-D: last line of file ends without a newline
+  void USART2_IRQHandler(void);
+..\Usart_Bluetooth.c(13): warning:  #550-D: variable "choice" was set but never used
+        uint16_t choice;
+..\Usart_Bluetooth.c(15): warning:  #177-D: variable "compare" was declared but never referenced
+        int compare;
+..\Usart_Bluetooth.c(157): warning:  #1-D: last line of file ends without a newline
+  }
+..\Usart_Bluetooth.c: 14 warnings, 0 errors
+".\OUT\UART.axf" - 6 Error(s), 23 Warning(s).
+Target not created
+nt16_t choice;
+..\Usart_Bluetooth.c(15): warning:  #177-D: variable "compare" was declared but never referenced
+        int compare;
+..\Usart_Bluetooth.c(157): warning:  #1-D: last line of file ends without a newline
+  }
+..\Usart_Bluetooth.c: 15 warnings, 0 errors
+linking...
+Program Size: Code=6308 RO-data=424 RW-data=44 ZI-data=1028  
+FromELF: creating hex file...
+".\OUT\UART.axf" - 0 Error(s), 31 Warning(s).
+Load "Z:\\Documents\\FPT University\\LOP CO BAN ARM\\PROJECT\\proj_connect_HC_05_Bluetooth_21_10_2013\\Project\\MDK-ARM\\OUT\\UART.axf" 
 Erase Done.
 Programming Done.
 Verify OK.
+ar cmd[100] = "";
+..\A_Pod_Command.c(120): error:  #20: identifier "tAh" is undefined
+        tAh.left_Front[0]               = 0x23;
+..\A_Pod_Command.c(123): error:  #20: identifier "tAv" is undefined
+        tAv.left_Front_1[0]     = 0x23;
+..\A_Pod_Command.c(135): error:  #20: identifier "tBh" is undefined
+        assignStruct(tAh,tAv,tBh,tBv,man,neck);
+..\A_Pod_Command.c(135): error:  #20: identifier "tBv" is undefined
+        assignStruct(tAh,tAv,tBh,tBv,man,neck);
+..\A_Pod_Command.c(135): error:  #20: identifier "man" is undefined
+        assignStruct(tAh,tAv,tBh,tBv,man,neck);
+..\A_Pod_Command.c(135): error:  #20: identifier "neck" is undefined
+        assignStruct(tAh,tAv,tBh,tBv,man,neck);
+..\A_Pod_Command.c: 11 warnings, 30 errors
+compiling Usart_Bluetooth.c...
+..\Usart_Bluetooth.h(11): warning:  #1295-D: Deprecated declaration initPA15 - give arg types
+  void initPA15();
+..\Usart_Bluetooth.h(12): warning:  #1295-D: Deprecated declaration setPA15On - give arg types
+  void setPA15On();
+..\Usart_Bluetooth.h(13): warning:  #1295-D: Deprecated declaration togglePA15 - give arg types
+  void togglePA15();
+..\Usart_Bluetooth.h(19): warning:  #1-D: last line of file ends without a newline
+  void USART_puts(USART_TypeDef* USARTx,volatile char *s);
+..\Usart.h(13): warning:  #1-D: last line of file ends without a newline
+  void USART2_IRQHandler(void);
+..\Usart_Bluetooth.h(11): warning:  #1295-D: Deprecated declaration initPA15 - give arg types
+  void initPA15();
+..\Usart_Bluetooth.h(12): warning:  #1295-D: Deprecated declaration setPA15On - give arg types
+  void setPA15On();
+..\Usart_Bluetooth.h(13): warning:  #1295-D: Deprecated declaration togglePA15 - give arg types
+  void togglePA15();
+..\Usart_Bluetooth.h(19): warning:  #1-D: last line of file ends without a newline
+  void USART_puts(USART_TypeDef* USARTx,volatile char *s);
+..\checkCommand.h(7): warning:  #1-D: last line of file ends without a newline
+  void mergeCmd(char *desCommand,const char *srcCommand);
+..\Usart.h(13): warning:  #1-D: last line of file ends without a newline
+  void USART2_IRQHandler(void);
+..\Usart_Bluetooth.c(13): warning:  #550-D: variable "choice" was set but never used
+        uint16_t choice;
+..\Usart_Bluetooth.c(15): warning:  #177-D: variable "compare" was declared but never referenced
+        int compare;
+..\Usart_Bluetooth.c(157): warning:  #1-D: last line of file ends without a newline
+  }
+..\Usart_Bluetooth.c: 14 warnings, 0 errors
+".\OUT\UART.axf" - 30 Error(s), 25 Warning(s).
+Target not created
