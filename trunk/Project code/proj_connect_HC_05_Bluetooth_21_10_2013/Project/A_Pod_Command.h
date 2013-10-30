@@ -2,151 +2,23 @@
 #include "stm32f4xx_usart.h"
 #include "A_Pod_define.h"
 #include "Usart.h"
+#include "Usart_Bluetooth.h"
+#include "checkCommand.h"
 #include <stdio.h>
 #include <string.h>
 
+//char P1200[] = {0x04, 0xB0};
+//char P1300[] = {0x05, 0x14};
+//char P1500[] = {0x05, 0xDC};
+//char P1700[] = {0x06, 0xA4};
+//char P1800[] = {0x07, 0x08};	
+
+//char T[] = {0x54,1};
+
 //Command
-struct APod_start
-{
-	uint8_t S;
-	uint8_t one;
-};
-struct Apod_stop
-{
-	uint8_t S;
-	uint8_t zero;
-};
-struct Execute_T
-{
-	uint8_t T;
-};
-struct PulseSign_P
-{
-	uint8_t P;
-};
-
-
-//Pulse
-struct Pusle_1200
-{
-	uint8_t P_h;
-	uint8_t P_l;
-};
-struct Pusle_1300
-{
-	uint8_t P_h;
-	uint8_t P_l;
-};
-struct Pusle_1500
-{
-	uint8_t P_h;
-	uint8_t P_l;
-};
-struct Pusle_1700
-{
-	uint8_t P_h;
-	uint8_t P_l;
-};
-struct Pusle_1800
-{
-	uint8_t P_h;
-	uint8_t P_l;
-};
-
-//left horizontal
-struct Leg_left_1_1
-{
-	uint8_t Sharp;
-	uint8_t servo;
-};
-struct Leg_left_2_1
-{
-	uint8_t Sharp;
-	uint8_t servo;
-};
-struct Leg_left_3_1
-{
-	uint8_t Sharp;
-	uint8_t servo;
-};
-struct Leg_right_1_1
-{
-	uint8_t Sharp;
-	uint8_t servo;
-};
-struct Leg_right_2_1
-{
-	uint8_t Sharp;
-	uint8_t servo;
-};
-struct Leg_right_3_1
-{
-	uint8_t Sharp;
-	uint8_t servo;
-};
-//leg 1 vertical
-struct Leg_left_1_2
-{
-	uint8_t Sharp;
-	uint8_t servo;
-};
-struct Leg_left_2_2
-{
-	uint8_t Sharp;
-	uint8_t servo;
-};
-struct Leg_left_3_2
-{
-	uint8_t Sharp;
-	uint8_t servo;
-};
-struct Leg_right_1_2
-{
-	uint8_t Sharp;
-	uint8_t servo;
-};
-struct Leg_right_2_2
-{
-	uint8_t Sharp;
-	uint8_t servo;
-};
-struct Leg_right_3_2
-{
-	uint8_t Sharp;
-	uint8_t servo;
-};
-//leg 2 vertical
-struct Leg_left_1_3
-{
-	uint8_t Sharp;
-	uint8_t servo;
-};
-struct Leg_left_2_3
-{
-	uint8_t Sharp;
-	uint8_t servo;
-};
-struct Leg_left_3_3
-{
-	uint8_t Sharp;
-	uint8_t servo;
-};
-struct Leg_right_1_3
-{
-	uint8_t Sharp;
-	uint8_t servo;
-};
-struct Leg_right_2_3
-{
-	uint8_t Sharp;
-	uint8_t servo;
-};
-struct Leg_right_3_3
-{
-	uint8_t Sharp;
-	uint8_t servo;
-};
-
-
 void cmd_start(void);
 void cmd_stop(void);
+void initStart(void);
+void test(void);
+void test1(void);
+
