@@ -37,3 +37,9 @@
 .\out\checkcommand.o: ..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\out\checkcommand.o: C:\Keil\ARM\ARMCC\bin\..\include\stdio.h
 .\out\checkcommand.o: C:\Keil\ARM\ARMCC\bin\..\include\string.h
+.\out\checkcommand.o: ..\A_Pod_Command.h
+.\out\checkcommand.o: ..\A_Pod_define.h
+.\out\checkcommand.o: ..\Usart.h
+.\out\checkcommand.o: C:\Keil\ARM\RV31\INC\stdio.h
+.\out\checkcommand.o: ..\Usart_Bluetooth.h
+.\out\checkcommand.o: ..\checkCommand.h

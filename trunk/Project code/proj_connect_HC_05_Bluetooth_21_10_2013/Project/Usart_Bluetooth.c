@@ -1,6 +1,7 @@
 #include "Usart_Bluetooth.h"
 #include "A_Pod_Command.h"
 #include "Usart.h"
+#include "testCmd.h"
 uint16_t i;
 uint8_t checkStart = 0;
 /**
@@ -9,15 +10,24 @@ uint8_t checkStart = 0;
   * @retval None
   */
 void USART1_IRQHandler(void)
-{	char string [256];
+{	char stringc[256];
+	char string [50];
+	char string1 [50];
+	char string2 [50];
+	char string3 [50];
+	char string4 [50];
+	char string5 [50];
+	char string6 [50];
+	char string7 [50];
+	char string8 [50];
 	uint16_t choice;
-	
+	char T[] = {0x54,1};//
 	int compare;
     if ((USART1->SR & USART_FLAG_RXNE) != (u16)RESET)
 	{
 		i = USART_ReceiveData(USART1);
-		memset(string,0,sizeof(string[0])*256); // Clear all to 0 so string properly represented
-		sprintf(string,"%c",i);
+		memset(stringc,0,sizeof(stringc[0])*256); // Clear all to 0 so string properly represented
+		sprintf(stringc,"%c",i);
 		choice = i;
 		switch (i)
 		{
@@ -25,11 +35,13 @@ void USART1_IRQHandler(void)
 			{
 				cmd_start();
 				initStart();
+				
 				checkStart = 1;
 				break;
 			}
 			case 0x32:
 			{
+				initStop();
 				cmd_stop();
 				checkStart = 0;
 				break;
@@ -38,18 +50,114 @@ void USART1_IRQHandler(void)
 			{
 				if (checkStart == 1)
 				{
-				test();
+
+//				tripodA_vertical_Low(string,0x5DC,0x12C);
+//				tripodA_Horizontal_Front(string,0x5DC,0x12C);
+//				tripodB_vertical_Mid(string,0x5DC,0x12C);
+//				tripodB_Horizontal_Rear(string,0x5DC,0x12C);
+//				mergeCmd(string,T);
+//				USART_puts(USART2,string);
+
+				test_A_low();
 				}
 				break;
 			}
+			
 			case 0x34:
 			{
 				if (checkStart == 1)
 				{
-				test1();
+				test_A_front();
 				}
 				break;
 			}
+			
+			case 0x35:
+			{
+				if (checkStart == 1)
+				{
+				test_A_low();
+				test_A_front();
+				test_B_Mid();
+				test_B_Rear();
+				}
+				break;
+			}
+			case 0x36:
+			{
+				if (checkStart == 1)
+				{
+				test_A_low();
+				test_A_Center();
+				test_B_high();
+				test_B_Center();
+				Delay(500);
+				}
+				break;
+			}
+			case 0x37:
+			{
+				if (checkStart == 1)
+				{
+				
+				test_A_low();
+				test_A_Rear();
+				test_B_Mid();
+				test_B_front();
+
+//				test_A_low();
+//				test_A_front();
+//				test_B_Mid();
+//				test_B_Rear();
+				
+				}
+				break;
+			}
+			case 0x38:
+			{
+				if (checkStart == 1)
+				{
+				test_A_low();
+				test_A_Rear();
+				test_B_low();
+				test_B_front();
+				}
+				break;
+			}
+			case 0x39:
+			{
+				if (checkStart == 1)
+				{
+				test_A_Mid();
+				test_A_Rear();
+				test_B_low();
+				test_B_front();
+				}
+				break;
+			}
+			case 0x40:
+			{
+				if (checkStart == 1)
+				{
+				test_A_Mid();
+				test_A_front();
+				test_B_low();
+				test_B_Rear();
+				}
+				break;
+			}
+			case 0x41:
+			{
+				if (checkStart == 1)
+				{
+				test_A_low();
+				test_A_front();
+				test_B_low();
+				test_B_Rear();
+				}
+				break;
+			}
+			
 			default: break;	
 		}
 	}
@@ -155,3 +263,9 @@ void NVIC_Configuration(void)
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
   NVIC_Init(&NVIC_InitStructure);
 }
+void Delay(__IO uint32_t nTime)
+	{
+		while(nTime--)
+		{
+		}
+	}
