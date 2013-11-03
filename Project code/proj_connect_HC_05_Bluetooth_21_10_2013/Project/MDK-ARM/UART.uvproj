@@ -526,6 +526,26 @@
               <FileType>5</FileType>
               <FilePath>..\checkCommand.h</FilePath>
             </File>
+            <File>
+              <FileName>testCmd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\testCmd.c</FilePath>
+            </File>
+            <File>
+              <FileName>testCmd.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\testCmd.h</FilePath>
+            </File>
+            <File>
+              <FileName>APOD.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\APOD.c</FilePath>
+            </File>
+            <File>
+              <FileName>APOD.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\APOD.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

@@ -44,3 +44,5 @@
 .\out\usart_bluetooth.o: ..\Usart_Bluetooth.h
 .\out\usart_bluetooth.o: ..\checkCommand.h
 .\out\usart_bluetooth.o: ..\Usart.h
+.\out\usart_bluetooth.o: ..\testCmd.h
+.\out\usart_bluetooth.o: ..\Usart_Bluetooth.h
