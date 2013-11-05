@@ -1,7 +1,0 @@
-<Moves>
-  <Move Name="Forward" Interval="1" />
-  <Move Name="Forward" Interval="3" />
-  <Move Name="Forward" Interval="5" />
-  <Move Name="Forward" Interval="123" />
-  <Move Name="Forward" Interval="333" />
-</Moves>
