@@ -1,6 +1,0 @@
-<Moves>
-  <Move Name="Backward" Interval="123123" />
-  <Move Name="Forward" Interval="34" />
-  <Move Name="Forward" Interval="123" />
-  <Move Name="Forward" Interval="123" />
-</Moves>
