@@ -7,16 +7,24 @@ const char LEFT_FRONT = 3;
 const char LEFT_CENTER = 4;
 const char LEFT_REAR = 5;
 
+const char	MANDIBLE_LEFT = 0;
+const char	MANDIBLE_RIGHT = 1;
+
+const char NECK_ROTATE = 0;
+const char NECK_HORIZONTAL = 1;
+const char NECK_VERTICAL = 2;
+
 // ----------------------------------------
 // Position value of 32 servo
 // ----------------------------------------
 unsigned int Servos[32] = 
 {
 1500,1500,1500,1500,1500,1500,1500,1500,
-1500,1500,1500,1500,1500,1500,1500,1500,
+1500,1500,1500,1500,1500,1700,1500,1500,
 1500,1500,1500,1500,1500,1500,1500,1500,
 1500,1500,1500,1500,1500,1500,1500,1500
 };
+
 
 // ----------------------------------------
 // Leg's servo number mapping.
@@ -29,6 +37,53 @@ unsigned int LeftFront[3] = {16,17,18};
 unsigned int LeftCenter[3] = {20,21,22};	
 unsigned int LeftRear[3] = {24,25,26};		
 
+// ----------------------------------------
+// Head servo number mapping.
+// {RotateNeck servo, Verical Neck servo, Horizontal Neck servo, Mandible}
+// ----------------------------------------
+
+unsigned int Neck[3] = {13,14,15};		
+unsigned int Mandible[2] = {3,19};
+
+//-----------------------------------------
+//	checkstep in command
+//-----------------------------------------
+
+// ----------------------------------------
+// Mandible control
+// ----------------------------------------
+void MANDIBLE(char mandible, int interval)
+{
+	switch(mandible)
+	{
+		case 0: //MANDIBLE_LEFT
+			Servos[Mandible[0]] += interval;
+			break;
+		case 1: //MANDIBLE_RIGHT
+			Servos[Mandible[1]] -= interval;
+			break;
+	}
+}
+
+// ----------------------------------------
+// Neck control
+// ----------------------------------------
+void Neck_Rotate(int interval)
+{
+	Servos[Neck[0]] += interval;
+}
+
+void Neck_Horizontal(int interval)
+{
+	Servos[Neck[1]] += interval;
+}
+
+void Neck_Vertical(int interval)
+{
+	Servos[Neck[2]] += interval;
+}
+
+	char isStop = 1;
 // ----------------------------------------
 // Legs control
 // ----------------------------------------
@@ -113,6 +168,9 @@ void LEG_Backward(char leg, int interval)
 {
 	LEG_Forward(leg,-interval);
 }
+
+
+
 void LEG_Reset(char leg)
 {
 	switch(leg)
@@ -255,13 +313,13 @@ void Tripod_B_Right(int interval)
 // ----------------------------------------
 // APOD Control
 // ----------------------------------------
-void APOD_Forward(int loop)
+void APOD_Forward(int loop, int intervalVertical, int intervalHorizontal, int delay)
 {
 	char length ;
-	char cmd[100];
+	char cmd[74];
 	
 	char i = 0;
-	// --------------------------------
+		// --------------------------------
 	// States	|	Tripod A	  | Tripod B
 	// Init		|	Mid,Center	| Mid,Center
 	// --------------------------------
@@ -271,141 +329,897 @@ void APOD_Forward(int loop)
 	// --------------------------------
 	
 	/* TODO: Delay 500 ms */
-	
+	Delay(delay);
 	// Tripod A :  Mid to Low
-	Tripod_A_Drop(100);
+	Tripod_A_Drop(intervalVertical);
 	// Tripod B : Mid to High
-	Tripod_B_Lift(100);
-	
+	Tripod_B_Lift(intervalVertical);
+
 	/* TODO: Send Command */
+	GenerateCommand_Legs(cmd);
+	sendUSART(USART2,cmd,sizeof(cmd));
 	
 	for (i=0;i<loop;i++) 
 	{
+
 		// --------------------------------
 		// 1			|	Low,Rear		| Mid,Front
 		// --------------------------------
 		
 			/* TODO: Delay 500 ms */
-			
+			Delay(delay);
 			// Tripod A: Center to Rear
-			Tripod_A_Backward(100);
+			Tripod_A_Backward(intervalHorizontal);
 			// Tripod B: Center to Front
-			Tripod_B_Forward(100);
+			Tripod_B_Forward(intervalHorizontal);
 			// Tripod B: High to Mid
-			Tripod_B_Drop(100);
-			
+			Tripod_B_Drop(intervalVertical);
+
 			/* TODO: Send Command */
-			
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+
+
 		// --------------------------------
 		// 2			|	Low,Rear		| Low,Front
 		// --------------------------------
-		
+
 			/* TODO: Delay 500 ms */
-			
+			Delay(delay);
 			// Tripod B: Mid to Low
-			Tripod_B_Drop(100);
+			Tripod_B_Drop(intervalVertical);
 			
 			/* TODO: Send Command */
-			
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+
 		// --------------------------------
 		// 3			|	Mid,Rear		| Low,Front
 		// --------------------------------
 			
 			/* TODO: Delay 500 ms */
-			
+			Delay(delay);
 			// Tripod A:  Low to Mid
-			Tripod_A_Lift(100);
+			Tripod_A_Lift(intervalVertical);
 			
 			/* TODO: Send Command */
-			
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+
 		// --------------------------------
 		// 4			|	High,Center	| Low,Center
 		// --------------------------------
 			
 			/* TODO: Delay 500 ms */
-			
+			Delay(delay);
 			// Tripod A: Mid to High
-			Tripod_A_Lift(100);
+			Tripod_A_Lift(intervalVertical);
 			// Tripod A: Rear to Center
-			Tripod_A_Forward(100);
+			Tripod_A_Forward(intervalHorizontal);
 			// Tripod B: Front to Center
-			Tripod_B_Backward(100);
+			Tripod_B_Backward(intervalHorizontal);
 			
 			/* TODO: Send Command */
-			
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+
 		// --------------------------------
 		// 5			|	Mid,Front		| Low,Rear
 		// --------------------------------
 		
 			/* TODO: Delay 500 ms */
-			
+			Delay(delay);
 			// Tripod A: High to Mid
-			Tripod_A_Drop(100);
+			Tripod_A_Drop(intervalVertical);
 			// Tripod A: Center to Front
-			Tripod_A_Forward(100);
+			Tripod_A_Forward(intervalHorizontal);
 			// Tripod B: Center to Rear
-			Tripod_B_Backward(100);
+			Tripod_B_Backward(intervalHorizontal);
 			
 			/* TODO: Send Command */
-			
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+
 		// --------------------------------
 		// 6			|	Low,Front		| Low,Rear
 		// --------------------------------
 			
 			/* TODO: Delay 500 ms */
-			
+			Delay(delay);
 			// Tripod A: Mid to Low
-			Tripod_A_Drop(100);
+			Tripod_A_Drop(intervalVertical);
 			
 			/* TODO: Send Command */
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
 			
 		// --------------------------------
 		// 7			|	Low,Front		| Mid,Rear
 		// --------------------------------
 		
 			/* TODO: Delay 500 ms */
-			
+			Delay(delay);
 			// Tripod B: Low to Mid
-			Tripod_B_Lift(100);
+			Tripod_B_Lift(intervalVertical);
 			
 			/* TODO: Send Command */
-			
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+
 		// --------------------------------
 		// 0			|	Low,Center	| High,Center
 		// --------------------------------
 		
 			/* TODO: Delay 500 ms */
-			
+				Delay(delay);
 			// Tripod A: Front to Center
-			Tripod_A_Backward(100);
+			Tripod_A_Backward(intervalHorizontal);
 			// Tripod B: Rear to Center
-			Tripod_B_Forward(100);
+			Tripod_B_Forward(intervalHorizontal);
 			// Tripod B: Mid to High
-			Tripod_B_Lift(100);
+			Tripod_B_Lift(intervalVertical);
 			
 			/* TODO: Send Command */
-	}
-	
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+		}
 	// --------------------------------
 	// End		|	Mid,Center	| Mid,Center
 	// --------------------------------
-	
+
 			/* TODO: Delay 500 ms */
-			
+			Delay(delay);
 			// Tripod A: Low to Mid
-			Tripod_A_Lift(100);
+			Tripod_A_Lift(intervalVertical);
 			// Tripod B: High to Mid
-			Tripod_B_Drop(100);
+			Tripod_B_Drop(intervalVertical);
 			
 			/* TODO: Send Command */
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
 }
 
+void APOD_Backward(int loop, int intervalVertical, int intervalHorizontal, int delay)
+{
+	char length ;
+	char cmd[74];
+	
+	char i = 0;
+		// --------------------------------
+	// States	|	Tripod A	  | Tripod B
+	// Init		|	Mid,Center	| Mid,Center
+	// --------------------------------
+	
+	// --------------------------------
+	// 0			|	Low,Center	| High,Center
+	// --------------------------------
+	
+	/* TODO: Delay 500 ms */
+	Delay(delay);
+	// Tripod A :  Mid to Low
+	Tripod_A_Drop(intervalVertical);
+	// Tripod B : Mid to High
+	Tripod_B_Lift(intervalVertical);
+
+	/* TODO: Send Command */
+	GenerateCommand_Legs(cmd);
+	sendUSART(USART2,cmd,sizeof(cmd));
+	
+	for (i=0;i<loop;i++) 
+	{
+
+		// --------------------------------
+		// 1			|	Low,Front		| Mid,Rear
+		// --------------------------------
+		
+			/* TODO: Delay 500 ms */
+			Delay(delay);
+			// Tripod A: Center to Rear
+			Tripod_A_Forward(intervalHorizontal);
+			// Tripod B: Center to Front
+			Tripod_B_Backward(intervalHorizontal);
+			// Tripod B: High to Mid
+			Tripod_B_Drop(intervalVertical);
+
+			/* TODO: Send Command */
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
 
 
+		// --------------------------------
+		// 2			|	Low,Front		| Low,Rear
+		// --------------------------------
+
+			/* TODO: Delay 500 ms */
+			Delay(delay);
+			// Tripod B: Mid to Low
+			Tripod_B_Drop(intervalVertical);
+			
+			/* TODO: Send Command */
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+
+		// --------------------------------
+		// 3			|	Mid,Front		| Low,Rear
+		// --------------------------------
+			
+			/* TODO: Delay 500 ms */
+			Delay(delay);
+			// Tripod A:  Low to Mid
+			Tripod_A_Lift(intervalVertical);
+			
+			/* TODO: Send Command */
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+
+		// --------------------------------
+		// 4			|	High,Center	| Low,Center
+		// --------------------------------
+			
+			/* TODO: Delay 500 ms */
+			Delay(delay);
+			// Tripod A: Mid to High
+			Tripod_A_Lift(intervalVertical);
+			// Tripod A: Rear to Center
+			Tripod_A_Backward(intervalHorizontal);
+			// Tripod B: Front to Center
+			Tripod_B_Forward(intervalHorizontal);
+			
+			/* TODO: Send Command */
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+
+		// --------------------------------
+		// 5			|	Mid,Rear		| Low,Front
+		// --------------------------------
+		
+			/* TODO: Delay 500 ms */
+			Delay(delay);
+			// Tripod A: High to Mid
+			Tripod_A_Drop(intervalVertical);
+			// Tripod A: Center to Front
+			Tripod_A_Backward(intervalHorizontal);
+			// Tripod B: Center to Rear
+			Tripod_B_Forward(intervalHorizontal);
+			
+			/* TODO: Send Command */
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+
+		// --------------------------------
+		// 6			|	Low,Rear		| Low,Front
+		// --------------------------------
+			
+			/* TODO: Delay 500 ms */
+			Delay(delay);
+			// Tripod A: Mid to Low
+			Tripod_A_Drop(intervalVertical);
+			
+			/* TODO: Send Command */
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+			
+		// --------------------------------
+		// 7			|	Low,Rear		| Mid,Front
+		// --------------------------------
+		
+			/* TODO: Delay 500 ms */
+			Delay(delay);
+			// Tripod B: Low to Mid
+			Tripod_B_Lift(intervalVertical);
+			
+			/* TODO: Send Command */
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+
+		// --------------------------------
+		// 0			|	Low,Center	| High,Center
+		// --------------------------------
+		
+			/* TODO: Delay 500 ms */
+				Delay(delay);
+			// Tripod A: Front to Center
+			Tripod_A_Forward(intervalHorizontal);
+			// Tripod B: Rear to Center
+			Tripod_B_Backward(intervalHorizontal);
+			// Tripod B: Mid to High
+			Tripod_B_Lift(intervalVertical);
+			
+			/* TODO: Send Command */
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+		}
+	// --------------------------------
+	// End		|	Mid,Center	| Mid,Center
+	// --------------------------------
+
+			/* TODO: Delay 500 ms */
+			Delay(delay);
+			// Tripod A: Low to Mid
+			Tripod_A_Lift(intervalVertical);
+			// Tripod B: High to Mid
+			Tripod_B_Drop(intervalVertical);
+			
+			/* TODO: Send Command */
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+}
+void APOD_TurnLeft(int loop, int intervalVertical, int intervalHorizontal, int delay)
+{
+	
+	char cmd[74];
+	
+	char i = 0;
+		// --------------------------------
+	// States	|	Tripod A	  | Tripod B
+	// Init		|	Mid,Center	| Mid,Center
+	// --------------------------------
+	
+	// --------------------------------
+	// 0			|	Low,Center	| High,Center
+	// --------------------------------
+	
+	/* TODO: Delay 500 ms */
+	Delay(delay);
+	// Tripod A :  Mid to Low
+	Tripod_A_Drop(intervalVertical);
+	// Tripod B : Mid to High
+	Tripod_B_Lift(intervalVertical);
+
+	/* TODO: Send Command */
+	GenerateCommand_Legs(cmd);
+	sendUSART(USART2,cmd,sizeof(cmd));
+	
+	for (i=0;i<loop;i++) 
+	{
+
+		// --------------------------------
+		// 1			|	Low,Right	| Mid,Left
+		// --------------------------------
+		
+			/* TODO: Delay 500 ms */
+			Delay(delay);
+			// Tripod A: Center to Rear
+			Tripod_A_Right(intervalHorizontal);
+			// Tripod B: Center to Front
+			Tripod_B_Left(intervalHorizontal);
+			// Tripod B: High to Mid
+			Tripod_B_Drop(intervalVertical);
+
+			/* TODO: Send Command */
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+
+
+		// --------------------------------
+		// 2			|	Low,Right		| Low,Left
+		// --------------------------------
+
+			/* TODO: Delay 500 ms */
+			Delay(delay);
+			// Tripod B: Mid to Low
+			Tripod_B_Drop(intervalVertical);
+			
+			/* TODO: Send Command */
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+
+		// --------------------------------
+		// 3			|	Mid,Right		| Low,Left
+		// --------------------------------
+			
+			/* TODO: Delay 500 ms */
+			Delay(delay);
+			// Tripod A:  Low to Mid
+			Tripod_A_Lift(intervalVertical);
+			
+			/* TODO: Send Command */
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+
+		// --------------------------------
+		// 4			|	High,Center	| Low,Center
+		// --------------------------------
+			
+			/* TODO: Delay 500 ms */
+			Delay(delay);
+			// Tripod A: Mid to High
+			Tripod_A_Lift(intervalVertical);
+			// Tripod A: Rear to Center
+			Tripod_A_Left(intervalHorizontal);
+			// Tripod B: Front to Center
+			Tripod_B_Right(intervalHorizontal);
+			
+			/* TODO: Send Command */
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+
+		// --------------------------------
+		// 5			|	Mid,Left		| Low,Right
+		// --------------------------------
+		
+			/* TODO: Delay 500 ms */
+			Delay(delay);
+			// Tripod A: High to Mid
+			Tripod_A_Drop(intervalVertical);
+			// Tripod A: Center to Front
+			Tripod_A_Left(intervalHorizontal);
+			// Tripod B: Center to Rear
+			Tripod_B_Right(intervalHorizontal);
+			
+			/* TODO: Send Command */
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+
+		// --------------------------------
+		// 6			|	Low,Left		| Low,Right
+		// --------------------------------
+			
+			/* TODO: Delay 500 ms */
+			Delay(delay);
+			// Tripod A: Mid to Low
+			Tripod_A_Drop(intervalVertical);
+			
+			/* TODO: Send Command */
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+			
+		// --------------------------------
+		// 7			|	Low,Left		| Mid,Right
+		// --------------------------------
+		
+			/* TODO: Delay 500 ms */
+			Delay(delay);
+			// Tripod B: Low to Mid
+			Tripod_B_Lift(intervalVertical);
+			
+			/* TODO: Send Command */
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+
+		// --------------------------------
+		// 0			|	Low,Center	| High,Center
+		// --------------------------------
+		
+			/* TODO: Delay 500 ms */
+				Delay(delay);
+			// Tripod A: Front to Center
+			Tripod_A_Right(intervalHorizontal);
+			// Tripod B: Rear to Center
+			Tripod_B_Left(intervalHorizontal);
+			// Tripod B: Mid to High
+			Tripod_B_Lift(intervalVertical);
+			
+			/* TODO: Send Command */
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+		}
+	// --------------------------------
+	// End		|	Mid,Center	| Mid,Center
+	// --------------------------------
+
+			/* TODO: Delay 500 ms */
+			Delay(delay);
+			// Tripod A: Low to Mid
+			Tripod_A_Lift(intervalVertical);
+			// Tripod B: High to Mid
+			Tripod_B_Drop(intervalVertical);
+			
+			/* TODO: Send Command */
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+}
+void APOD_TurnRight(int loop, int intervalVertical, int intervalHorizontal, int delay)
+{
+	char cmd[74];
+	
+	char i = 0;
+		// --------------------------------
+	// States	|	Tripod A	  | Tripod B
+	// Init		|	Mid,Center	| Mid,Center
+	// --------------------------------
+	
+	// --------------------------------
+	// 0			|	Low,Center	| High,Center
+	// --------------------------------
+	
+	/* TODO: Delay 500 ms */
+	Delay(delay);
+	// Tripod A :  Mid to Low
+	Tripod_A_Drop(intervalVertical);
+	// Tripod B : Mid to High
+	Tripod_B_Lift(intervalVertical);
+
+	/* TODO: Send Command */
+	GenerateCommand_Legs(cmd);
+	sendUSART(USART2,cmd,sizeof(cmd));
+	
+	for (i=0;i<loop;i++) 
+	{
+
+		// --------------------------------
+		// 1			|	Low,Left	| Mid,Right
+		// --------------------------------
+		
+			/* TODO: Delay 500 ms */
+			Delay(delay);
+			// Tripod A: Center to Rear
+			Tripod_A_Left(intervalHorizontal);
+			// Tripod B: Center to Front
+			Tripod_B_Right(intervalHorizontal);
+			// Tripod B: High to Mid
+			Tripod_B_Drop(intervalVertical);
+
+			/* TODO: Send Command */
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+
+
+		// --------------------------------
+		// 2			|	Low,Left		| Low,Right
+		// --------------------------------
+
+			/* TODO: Delay 500 ms */
+			Delay(delay);
+			// Tripod B: Mid to Low
+			Tripod_B_Drop(intervalVertical);
+			
+			/* TODO: Send Command */
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+
+		// --------------------------------
+		// 3			|	Mid,Left		| Low,Right
+		// --------------------------------
+			
+			/* TODO: Delay 500 ms */
+			Delay(delay);
+			// Tripod A:  Low to Mid
+			Tripod_A_Lift(intervalVertical);
+			
+			/* TODO: Send Command */
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+
+		// --------------------------------
+		// 4			|	High,Center	| Low,Center
+		// --------------------------------
+			
+			/* TODO: Delay 500 ms */
+			Delay(delay);
+			// Tripod A: Mid to High
+			Tripod_A_Lift(intervalVertical);
+			// Tripod A: Rear to Center
+			Tripod_A_Right(intervalHorizontal);
+			// Tripod B: Front to Center
+			Tripod_B_Left(intervalHorizontal);
+			
+			/* TODO: Send Command */
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+
+		// --------------------------------
+		// 5			|	Mid,Right		| Low,Left
+		// --------------------------------
+		
+			/* TODO: Delay 500 ms */
+			Delay(delay);
+			// Tripod A: High to Mid
+			Tripod_A_Drop(intervalVertical);
+			// Tripod A: Center to Front
+			Tripod_A_Right(intervalHorizontal);
+			// Tripod B: Center to Rear
+			Tripod_B_Left(intervalHorizontal);
+			
+			/* TODO: Send Command */
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+
+		// --------------------------------
+		// 6			|	Low,Right		| Low,Left
+		// --------------------------------
+			
+			/* TODO: Delay 500 ms */
+			Delay(delay);
+			// Tripod A: Mid to Low
+			Tripod_A_Drop(intervalVertical);
+			
+			/* TODO: Send Command */
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+			
+		// --------------------------------
+		// 7			|	Low,Right		| Mid,Left
+		// --------------------------------
+		
+			/* TODO: Delay 500 ms */
+			Delay(delay);
+			// Tripod B: Low to Mid
+			Tripod_B_Lift(intervalVertical);
+			
+			/* TODO: Send Command */
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+
+		// --------------------------------
+		// 0			|	Low,Center	| High,Center
+		// --------------------------------
+		
+			/* TODO: Delay 500 ms */
+				Delay(delay);
+			// Tripod A: Front to Center
+			Tripod_A_Left(intervalHorizontal);
+			// Tripod B: Rear to Center
+			Tripod_B_Right(intervalHorizontal);
+			// Tripod B: Mid to High
+			Tripod_B_Lift(intervalVertical);
+			
+			/* TODO: Send Command */
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+		}
+	// --------------------------------
+	// End		|	Mid,Center	| Mid,Center
+	// --------------------------------
+
+			/* TODO: Delay 500 ms */
+			Delay(delay);
+			// Tripod A: Low to Mid
+			Tripod_A_Lift(intervalVertical);
+			// Tripod B: High to Mid
+			Tripod_B_Drop(intervalVertical);
+			
+			/* TODO: Send Command */
+			GenerateCommand_Legs(cmd);
+			sendUSART(USART2,cmd,sizeof(cmd));
+}
+void APOD_WaveTail(int loop, int interval)
+{}
+void APOD_waitingforOrder(int stype)
+{}
+void Apod_Squeeze_Left(int interval)
+{
+	char cmd[74];
+	
+	LEG_Drop(LEFT_FRONT,interval);
+	LEG_Drop(LEFT_CENTER,interval);
+	LEG_Drop(LEFT_REAR,interval);
+	
+	LEG_Lift(RIGHT_FRONT,interval);
+	LEG_Lift(RIGHT_CENTER,interval);
+	LEG_Lift(RIGHT_REAR,interval);
+	
+	LEG_Stand(LEFT_FRONT);
+	LEG_Stand(LEFT_CENTER);
+	LEG_Stand(LEFT_REAR);
+	
+	LEG_Stand(RIGHT_FRONT);
+	LEG_Stand(RIGHT_CENTER);
+	LEG_Stand(RIGHT_REAR);
+	
+	GenerateCommand_Legs(cmd);
+	sendUSART(USART2,cmd,sizeof(cmd));
+}
+
+void Apod_Squeeze_Right(int interval)
+{
+	Apod_Squeeze_Left(-interval);
+}
+
+void Apod_lift(int interval)
+{
+	char cmd[74];
+	if (Servos[5] < 2100) // 1500 + (100* 6 times)
+	{
+	Tripod_A_Lift(interval);
+	Tripod_B_Lift(interval);
+	GenerateCommand_Legs(cmd);
+	sendUSART(USART2,cmd,sizeof(cmd));
+	}
+	else 
+	{}
+	
+}
+
+void Apod_Drop(int interval)
+{
+	char cmd[74];
+	if (Servos[5] > 1000)  // 1500 - (100*5 times)
+	{
+	Tripod_A_Drop(interval);
+	Tripod_B_Drop(interval);
+	
+	GenerateCommand_Legs(cmd);
+	sendUSART(USART2,cmd,sizeof(cmd));
+	}
+}
+
+void Apod_Balance()
+{
+	char cmd[74];
+	int i;
+	
+	for (i=0; i<32; i++)
+	{
+		Servos[i] = 1500;
+	}
+	
+	GenerateCommand_Legs(cmd);
+	sendUSART(USART2,cmd,sizeof(cmd));
+}
+
+void Apod_towardtheFront(int interval)
+{
+	char cmd[74];
+	int haflInterval;
+	haflInterval = interval/2;
+	if (Servos[1] > 900)
+	{
+	LEG_Lift(RIGHT_REAR, interval);
+	LEG_Lift(LEFT_REAR, interval);
+	LEG_Lift(RIGHT_CENTER, haflInterval);
+	LEG_Lift(LEFT_CENTER, haflInterval);
+	LEG_Lift(RIGHT_FRONT, -interval);
+	LEG_Lift(LEFT_FRONT, -interval);
+	
+	LEG_Stand(RIGHT_REAR);
+	LEG_Stand(LEFT_REAR);
+	LEG_Stand(RIGHT_CENTER);
+	LEG_Stand(LEFT_CENTER);
+	LEG_Stand(RIGHT_FRONT);
+	LEG_Stand(LEFT_FRONT);
+	
+	GenerateCommand_Legs(cmd);
+	sendUSART(USART2,cmd,sizeof(cmd));
+	}
+}
+
+void Apod_towardtheBack(int interval)
+{
+	char cmd[74];
+	int haflInterval;
+	haflInterval = interval/2;
+	if (Servos[1] < 2000)
+	{
+	LEG_Lift(RIGHT_REAR, -interval);
+	LEG_Lift(LEFT_REAR, -interval);
+	LEG_Lift(RIGHT_CENTER, haflInterval);
+	LEG_Lift(LEFT_CENTER, haflInterval);
+	LEG_Lift(RIGHT_FRONT, interval);
+	LEG_Lift(LEFT_FRONT, interval);
+	
+	LEG_Stand(RIGHT_REAR);
+	LEG_Stand(LEFT_REAR);
+	LEG_Stand(RIGHT_CENTER);
+	LEG_Stand(LEFT_CENTER);
+	LEG_Stand(RIGHT_FRONT);
+	LEG_Stand(LEFT_FRONT);
+	
+	GenerateCommand_Legs(cmd);
+	sendUSART(USART2,cmd,sizeof(cmd));
+	}
+}
+
+void APod_Neck_Rotate_Left (int interval)
+{
+	char cmd[130];
+	if (Servos[13] < 2000)
+	{
+	Neck_Rotate(interval);
+	
+	GenerateCommand_All(cmd);
+	sendUSART(USART2,cmd,sizeof(cmd));
+	}
+}
+
+void Apod_Neck_Rotate_Right(int interval)
+{
+	char cmd[130];
+	if (Servos[13] > 1000)
+	{
+	Neck_Rotate(-interval);
+	
+	GenerateCommand_All(cmd);
+	sendUSART(USART2,cmd,sizeof(cmd));
+	}
+}
+
+void Apod_Head_Down(int interval)
+{
+	char cmd[130];
+	if (Servos[29] < 2000)
+	{
+	Neck_Vertical(interval);
+	
+	GenerateCommand_All(cmd);
+	sendUSART(USART2,cmd,sizeof(cmd));
+	}
+}
+
+void Apod_Head_Up(int interval)
+{
+	char cmd[130];
+	if (Servos[29] > 1000)
+	{
+		Neck_Vertical(-interval);
+	
+	GenerateCommand_All(cmd);
+	sendUSART(USART2,cmd,sizeof(cmd));
+	}
+}
+
+void Apod_Head_Left(int interval)
+{
+	char cmd[130];
+	if (Servos[13] < 2100)
+	{
+	Neck_Horizontal(interval);
+	
+	GenerateCommand_All(cmd);
+	sendUSART(USART2,cmd,sizeof(cmd));
+	}
+}
+
+void Apod_Head_Right(int interval)
+{
+	char cmd[130];
+	if (Servos[13] > 1100)
+	{
+	Neck_Horizontal(-interval);
+	
+	GenerateCommand_All(cmd);
+	sendUSART(USART2,cmd,sizeof(cmd));
+	}
+}
+
+void Apod_Mandible_Nip(int interval)
+{
+	char cmd[130];
+	uint16_t i;
+	//readADC();
+	//i = USART_ReceiveData(USART2);
+	if (Servos[19] > 1300 )
+	{
+	MANDIBLE(MANDIBLE_LEFT,interval);
+	MANDIBLE(MANDIBLE_RIGHT,interval);
+	
+	GenerateCommand_All(cmd);
+	sendUSART(USART2,cmd,sizeof(cmd));
+	}
+	else {}
+	//USART_SendData(USART1,i);
+}
+
+void Apod_Mandible_Release(int interval)
+{	
+	//Apod_Mandible_Nip(-interval);	
+	char cmd[130];
+	uint16_t i;
+	//readADC();
+	//i = USART_ReceiveData(USART2);
+	if (Servos[19] < 1800 )
+	{
+	MANDIBLE(MANDIBLE_LEFT,-interval);
+	MANDIBLE(MANDIBLE_RIGHT,-interval);
+	
+	GenerateCommand_All(cmd);
+	sendUSART(USART2,cmd,sizeof(cmd));
+	}
+	else{}
+	//USART_SendData(USART1,i);
+}
 // ----------------------------------------
 // Command generator
 // ----------------------------------------
 // generate command for all 32 servos: 128 bytes +2 bytes
+void readADC()
+{
+	char cmd[2];
+	cmd[0] = 'V';
+	cmd[1] = 'A';
+	sendUSART(USART2,cmd,2);
+}
+
 void GenerateCommand_All(char* cmd)
 {
 	int i =0;
@@ -488,4 +1302,77 @@ void GenerateCommand_Legs(char* cmd)
 	}
 	cmd[4*i] = 'T';
 	cmd[4*i+1] = 0x02;
+}
+
+
+
+					
+void ff()
+{
+	
+	while(isStop) 
+	{
+		//forward_(200,100);
+		Delay(500);
+	}
+}
+//int forward_(int intervalVertical, int internalHorizontal)
+//{
+//					if (checkstage == 0)
+//					{
+//						forward_0(intervalVertical,internalHorizontal);
+//						checkstage++;
+//					}
+//					else if (checkstage == 1)
+//					{
+//						forward_1(intervalVertical,internalHorizontal);
+//						checkstage++;
+//					}
+//					else if (checkstage == 2)
+//					{
+//						forward_2(intervalVertical,internalHorizontal);
+//						checkstage++;
+//					}
+//					else if (checkstage == 3)
+//					{
+//						forward_3(intervalVertical,internalHorizontal);
+//						checkstage++;
+//					}
+//					else if (checkstage == 4)
+//					{
+//						forward_4(intervalVertical,internalHorizontal);
+//						checkstage++;
+//					}
+//					else if (checkstage == 5)
+//					{
+//						forward_5(intervalVertical,internalHorizontal);
+//						checkstage++;
+//					}
+//					else if (checkstage == 6)
+//					{
+//						forward_6(intervalVertical,internalHorizontal);
+//						checkstage++;
+//					}
+//					else if (checkstage == 7)
+//					{
+//						forward_7(intervalVertical,internalHorizontal);
+//						checkstage++;
+//					}
+//					else if (checkstage == 8)
+//					{
+//						forward_8(intervalVertical,internalHorizontal);
+//						checkstage = 1;
+//					}
+
+//			return checkstage;
+//}
+
+
+void setNULL(char *string)
+{
+	int i;
+	for (i = 0; i < sizeof(string); i++)
+	{
+		string[i] = 0x00;
+	}
 }

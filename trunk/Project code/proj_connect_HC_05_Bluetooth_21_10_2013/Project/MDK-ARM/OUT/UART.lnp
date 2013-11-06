@@ -16,6 +16,7 @@
 ".\out\usart_bluetooth.o"
 ".\out\checkcommand.o"
 ".\out\testcmd.o"
+".\out\apod.o"
 --library_type=microlib --strict --scatter ".\OUT\UART.sct"
 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
