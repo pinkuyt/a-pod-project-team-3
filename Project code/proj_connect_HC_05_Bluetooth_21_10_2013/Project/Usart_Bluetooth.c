@@ -2,8 +2,11 @@
 #include "A_Pod_Command.h"
 #include "Usart.h"
 #include "testCmd.h"
+#include "APOD.h"
 uint16_t i;
 uint8_t checkStart = 0;
+char string [256];
+int checkstep = 0;
 /**
   * @brief  This function handles USARTx global interrupt request
   * @param  None
@@ -11,18 +14,10 @@ uint8_t checkStart = 0;
   */
 void USART1_IRQHandler(void)
 {	char stringc[256];
-	char string [50];
-	char string1 [50];
-	char string2 [50];
-	char string3 [50];
-	char string4 [50];
-	char string5 [50];
-	char string6 [50];
-	char string7 [50];
-	char string8 [50];
+	//char string [256];
+	int interval = 100;//
 	uint16_t choice;
-	char T[] = {0x54,1};//
-	int compare;
+
     if ((USART1->SR & USART_FLAG_RXNE) != (u16)RESET)
 	{
 		i = USART_ReceiveData(USART1);
@@ -31,133 +26,212 @@ void USART1_IRQHandler(void)
 		choice = i;
 		switch (i)
 		{
-			case 0x31: 
+			case 0x31: //Start Apod
 			{
 				cmd_start();
-				initStart();
+				GenerateCommand_All(string);
+				sendUSART(USART2,string,sizeof(string));
 				
 				checkStart = 1;
 				break;
 			}
-			case 0x32:
+			case 0x32: // Stop Apod
 			{
 				initStop();
+				LEG_Reset_All();
 				cmd_stop();
+				
 				checkStart = 0;
 				break;
 			}
-			case 0x33:
+			case 0x33: // Move Forward
 			{
 				if (checkStart == 1)
-				{
-
-//				tripodA_vertical_Low(string,0x5DC,0x12C);
-//				tripodA_Horizontal_Front(string,0x5DC,0x12C);
-//				tripodB_vertical_Mid(string,0x5DC,0x12C);
-//				tripodB_Horizontal_Rear(string,0x5DC,0x12C);
-//				mergeCmd(string,T);
-//				USART_puts(USART2,string);
-
-				test_A_low();
+				{	
+					//ff();
+					//forward_(200,100);		
+					APOD_Forward(1,120,110,1638400);
 				}
 				break;
 			}
 			
-			case 0x34:
+			case 0x34:	//Move Backward
 			{
+				//isstop =0;
 				if (checkStart == 1)
 				{
-				test_A_front();
+				APOD_Backward(3,120,110,1638400);
 				}
 				break;
 			}
 			
-			case 0x35:
+			case 0x35:	//Move Left
 			{
 				if (checkStart == 1)
 				{
-				test_A_low();
-				test_A_front();
-				test_B_Mid();
-				test_B_Rear();
+						Apod_lift(100);
 				}
 				break;
 			}
-			case 0x36:
+			case 0x36:	// Move Right
 			{
 				if (checkStart == 1)
 				{
-				test_A_low();
-				test_A_Center();
-				test_B_high();
-				test_B_Center();
-				Delay(500);
+						Apod_Drop(100);
 				}
 				break;
 			}
-			case 0x37:
+			case 0x37:	//	Toward to Front
 			{
 				if (checkStart == 1)
 				{
-				
-				test_A_low();
-				test_A_Rear();
-				test_B_Mid();
-				test_B_front();
-
-//				test_A_low();
-//				test_A_front();
-//				test_B_Mid();
-//				test_B_Rear();
-				
+					//Apod_towardtheFront(100);
+					
 				}
 				break;
 			}
-			case 0x38:
+			case 0x38:	// Toward to Back
 			{
 				if (checkStart == 1)
 				{
-				test_A_low();
-				test_A_Rear();
-				test_B_low();
-				test_B_front();
+					//Apod_towardtheBack(100);
+					
 				}
 				break;
 			}
-			case 0x39:
+			case 0x39:	// Squeeze to Left
 			{
 				if (checkStart == 1)
 				{
-				test_A_Mid();
-				test_A_Rear();
-				test_B_low();
-				test_B_front();
+					//APOD_TurnLeft(1,120,110,1638400);
+					APod_Neck_Rotate_Left(100);
 				}
 				break;
 			}
-			case 0x40:
+			case 0x40:	// Squeeze to Right
 			{
 				if (checkStart == 1)
 				{
-				test_A_Mid();
-				test_A_front();
-				test_B_low();
-				test_B_Rear();
+					//APOD_TurnRight(1,120,110,1638400);
+					Apod_Neck_Rotate_Right(100);
 				}
 				break;
 			}
-			case 0x41:
+			case 0x41:	//Stand Lift
 			{
 				if (checkStart == 1)
 				{
-				test_A_low();
-				test_A_front();
-				test_B_low();
-				test_B_Rear();
+					Apod_Mandible_Nip(50);
+				}
+				break;
+			}
+			case 0x42:	//Stand Drop
+			{
+				if (checkStart == 1)
+				{
+					Apod_Mandible_Release(50);
+				}
+				break;
+			}
+			case 0x43:	//Stand Balance
+			{
+				if (checkStart == 1)
+				{
+					
+				}
+				break;
+			}
+			case 0x44:	// Wave the Tail
+			{
+				if (checkStart == 1)
+				{
+					
+				}
+				break;
+			}
+			case 0x45:	//Rotae Head to Left
+			{
+				if (checkStart == 1)
+				{
+					GenerateCommand_All(string);
+					sendUSART(USART2,string,130);
+				}
+				break;
+			}
+			case 0x46:	//Rotate Head to right
+			{
+				if (checkStart == 1)
+				{
+					
+				}
+				break;
+			}
+			case 0x47:	// Turn Head to Left
+			{
+				if (checkStart == 1)
+				{
+					
+				}
+				break;
+			}
+			case 0x48:	// turn Head to Right
+			{
+				if (checkStart == 1)
+				{
+					
+				}
+				break;
+			}
+			case 0x49:	//	Lift Head Up
+			{
+				if (checkStart == 1)
+				{
+					
+				}
+				break;
+			}
+			case 0x50:	// Drop head Down
+			{
+				if (checkStart == 1)
+				{
+					
+				}
+				break;
+			}
+			case 0x51:	//Nip Mandible
+			{
+				if (checkStart == 1)
+				{
+					
 				}
 				break;
 			}
 			
+			case 0x52:	//Release mandible
+			{
+				if (checkStart == 1)
+				{
+					
+				}
+				break;
+			}
+			
+			case 0x53:	//Greeting audience
+			{
+				if (checkStart == 1)
+				{
+					
+				}
+				break;
+			}
+			case 0x54:	//Select mode (1: MODE 1, 2:MODE 2)
+			{
+				if (checkStart == 1)
+				{
+					
+				}
+				break;
+			}
 			default: break;	
 		}
 	}
@@ -172,6 +246,27 @@ USART_SendData(USARTx, *s);
 }
 }
 
+void sendUSART(USART_TypeDef* USARTx,volatile char *s,int size)
+{
+    int index=0;
+    if (s==NULL)
+        return;
+ 
+    // Iterate over the buffer2 and print char by char
+    for (index = 0; index<size; index ++) {
+         
+        // Wait until the TXE bit is set to 1
+        while(!USART_GetFlagStatus(USARTx, USART_FLAG_TXE));
+ 
+        USART_SendData(USARTx, (uint8_t) s[index]);  
+ 
+        if (index>130)
+            break;
+    }
+ 
+    //Loop until the end of transmission; this is very important
+     while(USART_GetFlagStatus(USARTx, USART_FLAG_TC) == RESET);
+}
 
 void usart_rxtx(void)
 {
@@ -263,9 +358,10 @@ void NVIC_Configuration(void)
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
   NVIC_Init(&NVIC_InitStructure);
 }
-void Delay(__IO uint32_t nTime)
+/*---------------------------------
+8mhz = 2^13 or 8*1024*1000 hz per sencond --> 1ms = 8192
+---------------------------------*/
+void Delay(__IO uint32_t nCount)
 	{
-		while(nTime--)
-		{
-		}
+		for(; nCount != 0; nCount--);
 	}

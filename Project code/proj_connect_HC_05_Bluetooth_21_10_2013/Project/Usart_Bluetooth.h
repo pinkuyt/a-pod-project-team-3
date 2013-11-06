@@ -5,8 +5,9 @@
 #include <stdio.h>
 
 
+
 void TimingDelay_Decrement(void);
-void Delay(__IO uint32_t nTime);
+void Delay(__IO uint32_t nCount);
 void init_USART1(uint32_t baudrate);
 void initPA15();
 void setPA15On();
@@ -17,3 +18,5 @@ void USART_Configuration(void);
 void USART1_IRQHandler(void);
 void usart_rxtx(void);
 void USART_puts(USART_TypeDef* USARTx,volatile char *s);
+void USART_put(USART_TypeDef* USARTx,volatile char *s);
+void sendUSART(USART_TypeDef* USARTx, volatile char *s,int size);

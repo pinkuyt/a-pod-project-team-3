@@ -17,7 +17,7 @@ void UART2_CONFIG(uint32_t baudrate)  //(TX:PA2) (RX:PA3)
 
 	
 /* GPIOA Configuration:  USART2 TX on PA2 */
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2 | GPIO_Pin_2;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;

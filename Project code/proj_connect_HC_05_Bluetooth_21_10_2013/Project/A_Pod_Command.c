@@ -5,7 +5,7 @@
 	char left_Rear[] = {0x23, 0x18};
 	char right_Center[] = {0x23, 0x04};
 /*Tripod B horizontal*/	
-	char right_Front[] = {0x23, 0x03};
+	char right_Front[] = {0x23, 0x00};
 	char right_Rear[] = {0x23, 0x08};
 	char left_Center[] = {0x23, 0x14};
 /*Tripod A vertical*/	
@@ -37,14 +37,16 @@
 void cmd_start(void)
 {
 	char start[] = {0x53,1};
-	USART_puts(USART2,start);
+	//USART_puts(USART2,start);
+	sendUSART(USART2,start,strlen(start));
 }
 
 /*Command: stop Apod*/
 void cmd_stop(void)
 {
 	char stop[] = {0x53,2};
-	USART_puts(USART2,stop);
+	//USART_puts(USART2,stop);
+	sendUSART(USART2,stop,strlen(stop));
 }
 
 /*Command: set servos with pulsewitdh = */
@@ -80,7 +82,8 @@ void initStop(void)
 	
 	/*End command*/
 	mergeCmd(cmd,T);
-	USART_puts(USART2,cmd);
+	//USART_puts(USART2,cmd);
+	sendUSART(USART2,cmd,strlen(cmd));
 }
 /*Command: set all servos with pulsewitdh = 1500*/
 void initStart(void)
@@ -172,7 +175,8 @@ void initStart(void)
 	mergeCmd(cmd,lowP);
 	/*End command*/
 	mergeCmd(cmd,T);
-	USART_puts(USART2,cmd);
+	//USART_puts(USART2,cmd);
+	sendUSART(USART2,cmd,strlen(cmd));
 	
 }
 /*init stage: first time forward*/
