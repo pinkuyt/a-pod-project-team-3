@@ -40,3 +40,48 @@ E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\bin\Debug\AForge.Vid
 E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\bin\Debug\AForge.Vision.xml
 E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\obj\Debug\APOD.Object Tracking\ObjectExtractorDialog.baml
 E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\obj\Debug\APOD.Object Tracking\ObjectExtractorDialog.g.cs
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\bin\Debug\APOD Controller.exe.config
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\obj\Debug\APOD Controller.exe
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\obj\Debug\APOD Controller.pdb
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\bin\Debug\APOD Controller.exe
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\bin\Debug\APOD Controller.pdb
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\bin\Debug\AForge.Controls.dll
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\bin\Debug\AForge.dll
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\bin\Debug\AForge.Imaging.dll
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\bin\Debug\AForge.Math.dll
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\bin\Debug\AForge.Video.DirectShow.dll
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\bin\Debug\AForge.Video.dll
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\bin\Debug\AForge.Vision.dll
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\bin\Debug\Keypad.dll
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\bin\Debug\MahApps.Metro.dll
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\bin\Debug\Selen.Wpf.Core.dll
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\bin\Debug\Selen.Wpf.GenericAppTree.Contracts.dll
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\bin\Debug\Selen.Wpf.GenericAppTree.dll
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\bin\Debug\Selen.Wpf.SystemStyles.dll
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\bin\Debug\System.Windows.Interactivity.dll
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\bin\Debug\Keypad.pdb
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\bin\Debug\AForge.xml
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\bin\Debug\AForge.Controls.xml
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\bin\Debug\AForge.Imaging.xml
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\bin\Debug\AForge.Math.xml
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\bin\Debug\AForge.Video.xml
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\bin\Debug\AForge.Video.DirectShow.xml
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\bin\Debug\AForge.Vision.xml
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\obj\Debug\APOD Controller.csprojResolveAssemblyReference.cache
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\obj\Debug\APOD.Object Tracking\ObjectExtractorDialog.baml
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\obj\Debug\styles\MetroWindowResources.baml
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\obj\Debug\styles\Resources.baml
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\obj\Debug\App.baml
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\obj\Debug\MainWindow.g.cs
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\obj\Debug\APOD.Object Tracking\ObjectExtractorDialog.g.cs
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\obj\Debug\App.g.cs
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\obj\Debug\APOD Controller_Content.g.cs
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\obj\Debug\APOD Controller_MarkupCompile.cache
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\obj\Debug\APOD Controller_MarkupCompile.lref
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\obj\Debug\MainWindow.baml
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\obj\Debug\APOD Controller.g.resources
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\obj\Debug\APOD_Controller.Properties.Resources.resources
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\obj\Debug\APOD Controller.csproj.GenerateResource.Cache
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\obj\Debug\BluetoothConnection.baml
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\obj\Debug\BluetoothConnection.g.cs
+Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\obj\Debug\GeneratedInternalTypeHelper.g.cs
