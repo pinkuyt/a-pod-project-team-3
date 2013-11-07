@@ -874,5 +874,16 @@ namespace APOD_Controller
             }
         }
 
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            BluetoothConnection BTconnection = new BluetoothConnection();
+            BTconnection.Show();   
+        }
+
+        private void actL2_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }

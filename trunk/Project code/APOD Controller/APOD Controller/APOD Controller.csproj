@@ -114,7 +114,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="APOD.Connector\APod_control.cs" />
+    <Compile Include="APOD.Connector\Bluetooth_Init.cs" />
+    <Compile Include="APOD.Connector\BlutoothViewSource.cs" />
     <Compile Include="APOD.Connector\Connector.cs" />
+    <Compile Include="APOD.Connector\ControlHelper.cs" />
     <Compile Include="APOD.Input\GamepadDevice.cs" />
     <Compile Include="APOD.Object Tracking\ObjectDetector.cs" />
     <Compile Include="APOD.Object Tracking\ObjectExtractorDialog.xaml.cs">
@@ -124,6 +128,10 @@
     <Compile Include="APOD.Sequences\MoveItem.cs" />
     <Compile Include="APOD.Sequences\MoveItemsCollection.cs" />
     <Compile Include="APOD.Sequences\Preset.cs" />
+    <Page Include="BluetoothConnection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -131,6 +139,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BluetoothConnection.xaml.cs">
+      <DependentUpon>BluetoothConnection.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -182,6 +193,8 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\Glyphs.png" />
+    <Resource Include="images\bluetooth-icon.png" />
+    <Resource Include="images\bluetooth_logo.png" />
     <Content Include="library\layout\MahApps.Metro.dll" />
     <Content Include="library\layout\Selen.Wpf.Core.dll" />
     <Content Include="library\layout\Selen.Wpf.GenericAppTree.Contracts.dll" />
