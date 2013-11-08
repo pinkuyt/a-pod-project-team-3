@@ -43,3 +43,11 @@
 .\out\main.o: ..\Usart_Bluetooth.h
 .\out\main.o: C:\Keil\ARM\ARMCC\bin\..\include\string.h
 .\out\main.o: ..\button_init.h
+.\out\main.o: ..\APOD.h
+.\out\main.o: ..\Usart_Bluetooth.h
+.\out\main.o: ..\Usart.h
+.\out\main.o: ..\A_Pod_Command.h
+.\out\main.o: ..\A_Pod_define.h
+.\out\main.o: ..\Usart.h
+.\out\main.o: ..\Usart_Bluetooth.h
+.\out\main.o: ..\checkCommand.h

@@ -313,6 +313,20 @@ void Tripod_B_Right(int interval)
 // ----------------------------------------
 // APOD Control
 // ----------------------------------------
+/*Command: start Apod*/
+void cmd_start(void)
+{
+	char start[] = {0x53,1};
+	sendUSART(USART2,start,strlen(start));
+}
+
+/*Command: stop Apod*/
+void cmd_stop(void)
+{
+	char stop[] = {0x53,2};
+	sendUSART(USART2,stop,strlen(stop));
+}
+
 void APOD_Forward(int loop, int intervalVertical, int intervalHorizontal, int delay)
 {
 	char length ;
@@ -514,9 +528,9 @@ void APOD_Backward(int loop, int intervalVertical, int intervalHorizontal, int d
 		
 			/* TODO: Delay 500 ms */
 			Delay(delay);
-			// Tripod A: Center to Rear
+			// Tripod A: Center to Front
 			Tripod_A_Forward(intervalHorizontal);
-			// Tripod B: Center to Front
+			// Tripod B: Center to Rear
 			Tripod_B_Backward(intervalHorizontal);
 			// Tripod B: High to Mid
 			Tripod_B_Drop(intervalVertical);
@@ -560,9 +574,9 @@ void APOD_Backward(int loop, int intervalVertical, int intervalHorizontal, int d
 			Delay(delay);
 			// Tripod A: Mid to High
 			Tripod_A_Lift(intervalVertical);
-			// Tripod A: Rear to Center
+			// Tripod A: front to Center
 			Tripod_A_Backward(intervalHorizontal);
-			// Tripod B: Front to Center
+			// Tripod B: Rear to Center
 			Tripod_B_Forward(intervalHorizontal);
 			
 			/* TODO: Send Command */
@@ -1057,15 +1071,11 @@ void Apod_towardtheFront(int interval)
 	{
 	LEG_Lift(RIGHT_REAR, interval);
 	LEG_Lift(LEFT_REAR, interval);
-	LEG_Lift(RIGHT_CENTER, haflInterval);
-	LEG_Lift(LEFT_CENTER, haflInterval);
 	LEG_Lift(RIGHT_FRONT, -interval);
 	LEG_Lift(LEFT_FRONT, -interval);
 	
 	LEG_Stand(RIGHT_REAR);
 	LEG_Stand(LEFT_REAR);
-	LEG_Stand(RIGHT_CENTER);
-	LEG_Stand(LEFT_CENTER);
 	LEG_Stand(RIGHT_FRONT);
 	LEG_Stand(LEFT_FRONT);
 	
@@ -1083,15 +1093,11 @@ void Apod_towardtheBack(int interval)
 	{
 	LEG_Lift(RIGHT_REAR, -interval);
 	LEG_Lift(LEFT_REAR, -interval);
-	LEG_Lift(RIGHT_CENTER, haflInterval);
-	LEG_Lift(LEFT_CENTER, haflInterval);
 	LEG_Lift(RIGHT_FRONT, interval);
 	LEG_Lift(LEFT_FRONT, interval);
 	
 	LEG_Stand(RIGHT_REAR);
 	LEG_Stand(LEFT_REAR);
-	LEG_Stand(RIGHT_CENTER);
-	LEG_Stand(LEFT_CENTER);
 	LEG_Stand(RIGHT_FRONT);
 	LEG_Stand(LEFT_FRONT);
 	
@@ -1175,9 +1181,11 @@ void Apod_Head_Right(int interval)
 void Apod_Mandible_Nip(int interval)
 {
 	char cmd[130];
-	uint16_t i;
-	//readADC();
-	//i = USART_ReceiveData(USART2);
+	uint16_t i,j;
+	readADC();
+	Delay(8192);
+	i = USART_ReceiveData(USART2);
+	j = USART_ReceiveData(USART2);
 	if (Servos[19] > 1300 )
 	{
 	MANDIBLE(MANDIBLE_LEFT,interval);
@@ -1187,16 +1195,18 @@ void Apod_Mandible_Nip(int interval)
 	sendUSART(USART2,cmd,sizeof(cmd));
 	}
 	else {}
-	//USART_SendData(USART1,i);
+	USART_SendData(USART1,i);
+	USART_SendData(USART1,j);
 }
 
 void Apod_Mandible_Release(int interval)
 {	
-	//Apod_Mandible_Nip(-interval);	
+	
 	char cmd[130];
 	uint16_t i;
-	//readADC();
-	//i = USART_ReceiveData(USART2);
+	readADC();
+	Delay(8192);
+	i = USART_ReceiveData(USART2);
 	if (Servos[19] < 1800 )
 	{
 	MANDIBLE(MANDIBLE_LEFT,-interval);
@@ -1206,7 +1216,7 @@ void Apod_Mandible_Release(int interval)
 	sendUSART(USART2,cmd,sizeof(cmd));
 	}
 	else{}
-	//USART_SendData(USART1,i);
+	USART_SendData(USART1,i);
 }
 // ----------------------------------------
 // Command generator
@@ -1314,65 +1324,5 @@ void ff()
 	{
 		//forward_(200,100);
 		Delay(500);
-	}
-}
-//int forward_(int intervalVertical, int internalHorizontal)
-//{
-//					if (checkstage == 0)
-//					{
-//						forward_0(intervalVertical,internalHorizontal);
-//						checkstage++;
-//					}
-//					else if (checkstage == 1)
-//					{
-//						forward_1(intervalVertical,internalHorizontal);
-//						checkstage++;
-//					}
-//					else if (checkstage == 2)
-//					{
-//						forward_2(intervalVertical,internalHorizontal);
-//						checkstage++;
-//					}
-//					else if (checkstage == 3)
-//					{
-//						forward_3(intervalVertical,internalHorizontal);
-//						checkstage++;
-//					}
-//					else if (checkstage == 4)
-//					{
-//						forward_4(intervalVertical,internalHorizontal);
-//						checkstage++;
-//					}
-//					else if (checkstage == 5)
-//					{
-//						forward_5(intervalVertical,internalHorizontal);
-//						checkstage++;
-//					}
-//					else if (checkstage == 6)
-//					{
-//						forward_6(intervalVertical,internalHorizontal);
-//						checkstage++;
-//					}
-//					else if (checkstage == 7)
-//					{
-//						forward_7(intervalVertical,internalHorizontal);
-//						checkstage++;
-//					}
-//					else if (checkstage == 8)
-//					{
-//						forward_8(intervalVertical,internalHorizontal);
-//						checkstage = 1;
-//					}
-
-//			return checkstage;
-//}
-
-
-void setNULL(char *string)
-{
-	int i;
-	for (i = 0; i < sizeof(string); i++)
-	{
-		string[i] = 0x00;
 	}
 }

@@ -56,6 +56,9 @@ void Neck_Vertical(int interval);
 // ----------------------------------------
 // APOD Control
 // ----------------------------------------
+
+void cmd_start(void);
+void cmd_stop(void);
 void Apod_lift(int interval);// done
 void Apod_Drop(int interval);// done
 void Apod_Balance(); // done
