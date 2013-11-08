@@ -17,6 +17,4 @@ void GPIO_Configuration(void);
 void USART_Configuration(void);
 void USART1_IRQHandler(void);
 void usart_rxtx(void);
-void USART_puts(USART_TypeDef* USARTx,volatile char *s);
-void USART_put(USART_TypeDef* USARTx,volatile char *s);
 void sendUSART(USART_TypeDef* USARTx, volatile char *s,int size);

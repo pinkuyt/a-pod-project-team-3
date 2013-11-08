@@ -4,9 +4,11 @@
 #include "testCmd.h"
 #include "APOD.h"
 uint16_t i;
-uint8_t checkStart = 0;
-char string [256];
+
+
 int checkstep = 0;
+extern char RecievedCommand;
+extern char b_Command;
 /**
   * @brief  This function handles USARTx global interrupt request
   * @param  None
@@ -17,234 +19,17 @@ void USART1_IRQHandler(void)
 	//char string [256];
 	int interval = 100;//
 	uint16_t choice;
-
+	
     if ((USART1->SR & USART_FLAG_RXNE) != (u16)RESET)
 	{
 		i = USART_ReceiveData(USART1);
 		memset(stringc,0,sizeof(stringc[0])*256); // Clear all to 0 so string properly represented
 		sprintf(stringc,"%c",i);
-		choice = i;
-		switch (i)
-		{
-			case 0x31: //Start Apod
-			{
-				cmd_start();
-				GenerateCommand_All(string);
-				sendUSART(USART2,string,sizeof(string));
-				
-				checkStart = 1;
-				break;
-			}
-			case 0x32: // Stop Apod
-			{
-				initStop();
-				LEG_Reset_All();
-				cmd_stop();
-				
-				checkStart = 0;
-				break;
-			}
-			case 0x33: // Move Forward
-			{
-				if (checkStart == 1)
-				{	
-					//ff();
-					//forward_(200,100);		
-					APOD_Forward(1,120,110,1638400);
-				}
-				break;
-			}
-			
-			case 0x34:	//Move Backward
-			{
-				//isstop =0;
-				if (checkStart == 1)
-				{
-				APOD_Backward(3,120,110,1638400);
-				}
-				break;
-			}
-			
-			case 0x35:	//Move Left
-			{
-				if (checkStart == 1)
-				{
-						Apod_lift(100);
-				}
-				break;
-			}
-			case 0x36:	// Move Right
-			{
-				if (checkStart == 1)
-				{
-						Apod_Drop(100);
-				}
-				break;
-			}
-			case 0x37:	//	Toward to Front
-			{
-				if (checkStart == 1)
-				{
-					//Apod_towardtheFront(100);
-					
-				}
-				break;
-			}
-			case 0x38:	// Toward to Back
-			{
-				if (checkStart == 1)
-				{
-					//Apod_towardtheBack(100);
-					
-				}
-				break;
-			}
-			case 0x39:	// Squeeze to Left
-			{
-				if (checkStart == 1)
-				{
-					//APOD_TurnLeft(1,120,110,1638400);
-					APod_Neck_Rotate_Left(100);
-				}
-				break;
-			}
-			case 0x40:	// Squeeze to Right
-			{
-				if (checkStart == 1)
-				{
-					//APOD_TurnRight(1,120,110,1638400);
-					Apod_Neck_Rotate_Right(100);
-				}
-				break;
-			}
-			case 0x41:	//Stand Lift
-			{
-				if (checkStart == 1)
-				{
-					Apod_Mandible_Nip(50);
-				}
-				break;
-			}
-			case 0x42:	//Stand Drop
-			{
-				if (checkStart == 1)
-				{
-					Apod_Mandible_Release(50);
-				}
-				break;
-			}
-			case 0x43:	//Stand Balance
-			{
-				if (checkStart == 1)
-				{
-					
-				}
-				break;
-			}
-			case 0x44:	// Wave the Tail
-			{
-				if (checkStart == 1)
-				{
-					
-				}
-				break;
-			}
-			case 0x45:	//Rotae Head to Left
-			{
-				if (checkStart == 1)
-				{
-					GenerateCommand_All(string);
-					sendUSART(USART2,string,130);
-				}
-				break;
-			}
-			case 0x46:	//Rotate Head to right
-			{
-				if (checkStart == 1)
-				{
-					
-				}
-				break;
-			}
-			case 0x47:	// Turn Head to Left
-			{
-				if (checkStart == 1)
-				{
-					
-				}
-				break;
-			}
-			case 0x48:	// turn Head to Right
-			{
-				if (checkStart == 1)
-				{
-					
-				}
-				break;
-			}
-			case 0x49:	//	Lift Head Up
-			{
-				if (checkStart == 1)
-				{
-					
-				}
-				break;
-			}
-			case 0x50:	// Drop head Down
-			{
-				if (checkStart == 1)
-				{
-					
-				}
-				break;
-			}
-			case 0x51:	//Nip Mandible
-			{
-				if (checkStart == 1)
-				{
-					
-				}
-				break;
-			}
-			
-			case 0x52:	//Release mandible
-			{
-				if (checkStart == 1)
-				{
-					
-				}
-				break;
-			}
-			
-			case 0x53:	//Greeting audience
-			{
-				if (checkStart == 1)
-				{
-					
-				}
-				break;
-			}
-			case 0x54:	//Select mode (1: MODE 1, 2:MODE 2)
-			{
-				if (checkStart == 1)
-				{
-					
-				}
-				break;
-			}
-			default: break;	
-		}
+		RecievedCommand = i;
+		b_Command = 1;
 	}
 }
-void USART_puts(USART_TypeDef* USARTx,volatile char *s){
 
-while(*s){
-// wait until data register is empty
-while( !(USARTx->SR & 0x00000040) );
-USART_SendData(USARTx, *s);
- *s++;
-}
-}
 
 void sendUSART(USART_TypeDef* USARTx,volatile char *s,int size)
 {
