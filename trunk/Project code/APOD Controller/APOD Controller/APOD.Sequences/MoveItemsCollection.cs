@@ -84,6 +84,12 @@ namespace APOD_Controller.APOD.Sequences
         /// <returns>XMLDocument instane contain states of sequence</returns>
         public XmlDocument Export()
         {
+            /** ---------------- Using LINQ ----------------
+             * var xml = new XElement("MoveItems", Sequence.Select(x => new XElement("MoveItem",
+             *                                     new XAttribute("Name", x.Name),
+             *                                     new XAttribute("Interval", x.Interval))));                                    
+             */
+
             /*----------------- Create XML document -----------------*/
             var doc = new XmlDocument();
             //root

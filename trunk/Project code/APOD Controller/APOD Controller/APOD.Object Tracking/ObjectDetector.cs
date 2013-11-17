@@ -52,7 +52,7 @@ namespace APOD_Controller.APOD.Object_Tracking
                 (byte)templateInfo.Red.Mean,
                 (byte)templateInfo.Green.Mean,
                 (byte)templateInfo.Blue.Mean);
-            filter.Radius = 10;
+            filter.Radius = 30;
             // apply the filter
             filter.ApplyInPlace(image);
 
@@ -134,7 +134,7 @@ namespace APOD_Controller.APOD.Object_Tracking
 
                     // check average difference, which tells how much outside is lighter than
                     // inside on the average
-                    if (diff > 5)
+                    if (diff > 20)
                     {
                         lists.Add(blobs[i].Rectangle);
                     }
@@ -200,5 +200,6 @@ namespace APOD_Controller.APOD.Object_Tracking
             }
             return diff / pixelCount;
         }
+
     }
 }

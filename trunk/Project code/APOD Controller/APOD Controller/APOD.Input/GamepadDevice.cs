@@ -10,19 +10,49 @@ namespace APOD_Controller.APOD.Input
 {
     public class GamepadDevice
     {
+        /// <summary>
+        /// Report current status of worker
+        /// </summary>
         public bool IsScanning
         {
             get { return Scanner.IsBusy; }
         }
+        
+        /// <summary>
+        /// Device button event listener
+        /// </summary>
         private BackgroundWorker Scanner;
 
+        /// <summary>
+        /// Virtual navigation button
+        /// </summary>
         private Key Up;
         private Key Down;
         private Key Left;
         private Key Right;
 
+        /// <summary>
+        /// Virtual action button
+        /// </summary>
         private Key[] Buttons;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="up"></param>
+        /// <param name="down"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="button0"></param>
+        /// <param name="button1"></param>
+        /// <param name="button2"></param>
+        /// <param name="button3"></param>
+        /// <param name="button4"></param>
+        /// <param name="button5"></param>
+        /// <param name="button6"></param>
+        /// <param name="button7"></param>
+        /// <param name="button8"></param>
+        /// <param name="button9"></param>
         public GamepadDevice(Key up, Key down, Key left, Key right,
             Key button0, Key button1, Key button2, Key button3, Key button4,
             Key button5, Key button6, Key button7, Key button8, Key button9)
@@ -50,16 +80,42 @@ namespace APOD_Controller.APOD.Input
             Scanner.DoWork += Scan;
         }
 
+        /// <summary>
+        /// Get number of avalable gamepad device
+        /// </summary>
+        /// <returns>Number of devices found</returns>
+        public static List<Joystick.DeviceInfo> Scan()
+        {
+            return Joystick.GetAvailableDevices();
+        }
+
+        /// <summary>
+        /// Start scanning for device input
+        /// </summary>
         public void Start()
         {
-            Scanner.RunWorkerAsync();
+            if (!Scanner.IsBusy)
+            {
+                Scanner.RunWorkerAsync();
+            }
         }
 
+        /// <summary>
+        /// Stop scanning for device input
+        /// </summary>
         public void Stop()
         {
-            Scanner.CancelAsync();
+            if (Scanner.IsBusy)
+            {
+                Scanner.CancelAsync();
+            }
         }
 
+        /// <summary>
+        /// Scanning routine for device input
+        /// </summary>
+        /// <param name="sender">Event Source</param>
+        /// <param name="e">Event arguments</param>
         private void Scan(object sender, DoWorkEventArgs e)
         {
             Joystick joystick = new Joystick(0);
@@ -163,13 +219,29 @@ namespace APOD_Controller.APOD.Input
             }
         }
 
+        /// <summary>
+        /// Callback for setting click value
+        /// </summary>
+        /// <param name="id">Button id</param>
+        /// <param name="clicked">Click value</param>
         public delegate void SetClickCallBack(string id, bool clicked);
 
+        /// <summary>
+        /// Set button click value
+        /// </summary>
+        /// <param name="id">Button id</param>
+        /// <param name="clicked">Click value</param>
         void SetClick(string id, bool clicked)
         {
             Buttons[int.Parse(id)].Click = clicked;
         }
 
-        
+        /// <summary>
+        /// Dispose object
+        /// </summary>
+        public void Dispose(bool val)
+        {
+            Scanner.Dispose();
+        }
     }
 }

@@ -114,21 +114,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="APOD.Connector\APod_control.cs" />
-    <Compile Include="APOD.Connector\Bluetooth_Init.cs" />
-    <Compile Include="APOD.Connector\BlutoothViewSource.cs" />
-    <Compile Include="APOD.Connector\Connector.cs" />
-    <Compile Include="APOD.Connector\ControlHelper.cs" />
+    <Compile Include="APOD.Communication\Command.cs" />
+    <Compile Include="APOD.Configuration\Configuration.xaml.cs">
+      <DependentUpon>Configuration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="APOD.Communication\BluetoothDevice.cs" />
     <Compile Include="APOD.Input\GamepadDevice.cs" />
+    <Compile Include="APOD.Object Tracking\Indicator.cs" />
     <Compile Include="APOD.Object Tracking\ObjectDetector.cs" />
     <Compile Include="APOD.Object Tracking\ObjectExtractorDialog.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>ObjectExtractorDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="APOD.Object Tracking\ObjectTracker.cs" />
     <Compile Include="APOD.Sequences\MoveItem.cs" />
     <Compile Include="APOD.Sequences\MoveItemsCollection.cs" />
+    <Compile Include="APOD.Sequences\Player.cs" />
     <Compile Include="APOD.Sequences\Preset.cs" />
-    <Page Include="BluetoothConnection.xaml">
+    <Page Include="APOD.Configuration\Configuration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -139,9 +142,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="BluetoothConnection.xaml.cs">
-      <DependentUpon>BluetoothConnection.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -193,8 +193,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\Glyphs.png" />
-    <Resource Include="images\bluetooth-icon.png" />
-    <Resource Include="images\bluetooth_logo.png" />
+    <Resource Include="images\TOOLS.png" />
+    <Resource Include="images\transformers.png" />
+    <Resource Include="images\Controller.png" />
+    <Resource Include="images\APOD.png" />
+    <Resource Include="images\lynxmotion-hexapod-apoda-kt.jpg" />
+    <Resource Include="images\Preview.png" />
+    <Resource Include="images\Bluetooth.png" />
+    <Resource Include="images\Camera.png" />
+    <Resource Include="images\SETTINGS.png" />
     <Content Include="library\layout\MahApps.Metro.dll" />
     <Content Include="library\layout\Selen.Wpf.Core.dll" />
     <Content Include="library\layout\Selen.Wpf.GenericAppTree.Contracts.dll" />
@@ -203,7 +210,7 @@
     <Content Include="library\layout\System.Windows.Interactivity.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="library\images\" />
+    <Folder Include="APOD\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

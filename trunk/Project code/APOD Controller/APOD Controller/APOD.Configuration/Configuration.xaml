@@ -1,0 +1,82 @@
+﻿<Control:MetroWindow x:Class="APOD_Controller.APOD.Configuration.Configuration"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Control="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="Configuration" Height="500" Width="500" Icon="/APOD Controller;component/images/SETTINGS.png"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid Margin="0,10,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Image HorizontalAlignment="Left" Height="50" Margin="332,0,0,0" Grid.Row="0"
+               VerticalAlignment="Top" Width="50" Grid.Column="1" Source="/APOD Controller;component/images/Camera.png"/>
+
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0"
+                   Margin="0,0,0,0" TextWrapping="Wrap" Text="CAMERA" FontFamily="Calibri" FontWeight="Bold" FontSize="18" Foreground="#FFBDBDBD" />
+        
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1"
+                   Margin="0,0,0,0" TextWrapping="Wrap" Text="Camera's IP: " Name="lblCameraIp" FontSize="16" />
+        <TextBox Margin="10,10,0,10" TextWrapping="Wrap" Text="" Grid.Column="1" Grid.Row="1" Name="txtCameraIP"
+                     Background="{StaticResource Background}"
+                     Foreground="{StaticResource Foreground}"
+                 VerticalContentAlignment="Center"
+                 HorizontalAlignment="Left" Width="300" TextAlignment="Center" FontSize="16" />
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2"
+                   Margin="0,0,0,0" TextWrapping="Wrap" Text="Log in:"  FontSize="16" />
+        <TextBox Margin="10,10,0,10" TextWrapping="Wrap" Text="" Grid.Column="1" Grid.Row="2"
+                     Background="{StaticResource Background}"
+                     Foreground="{StaticResource Foreground}"
+                 VerticalContentAlignment="Center" Name="txtLogin"
+                 HorizontalAlignment="Left" Width="300" TextAlignment="Left" FontSize="16" />
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3"
+                   Margin="0,0,0,0" TextWrapping="Wrap" Text="Password: "  FontSize="16" />
+        <PasswordBox Margin="10,10,0,10" Grid.Column="1" Grid.Row="3"
+                     Background="{StaticResource Background}"
+                     Foreground="{StaticResource Foreground}"
+                 VerticalContentAlignment="Center" Name="txtPassword"
+                 HorizontalAlignment="Left" Width="300"  FontSize="16" />
+        
+        
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
+        	Margin="0,0,0,0" TextWrapping="Wrap" Text="BLUETOOTH" Grid.Row="4" FontFamily="Calibri" FontWeight="Bold" FontSize="18" Foreground="#FFBDBDBD" />
+        <Image HorizontalAlignment="Left" Height="50" Margin="332,0,0,0" Grid.Row="4"
+        	VerticalAlignment="Top" Width="50" Grid.Column="1" Source="/APOD Controller;component/images/Bluetooth.png"/>
+
+        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Name="lblBTOutPort" 
+        	Margin="0,0,5,0" Grid.Row="5" TextWrapping="Wrap" Text="COM Port: " FontSize="16" />
+        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center"
+        	Margin="0,0,5,0" Grid.Row="6" TextWrapping="Wrap" Text="Baudrate: " FontSize="16"/>
+        <ComboBox Name="cbBTOutgoing" Grid.Column="1" Grid.Row="5" Margin="10,10" Width="200" HorizontalAlignment="Left" FontSize="16"/>
+        <ComboBox Name="cbBTOutgoingBaud" Grid.Column="1" Grid.Row="6" Margin="10,10" Width="100" HorizontalAlignment="Left"
+                  SelectedIndex="3" FontSize="16">
+            <ComboBoxItem Content="115200"/>
+            <ComboBoxItem Content="57600"/>
+            <ComboBoxItem Content="19200"/>
+            <ComboBoxItem Content="9600"/>
+        </ComboBox>
+
+        <Button Name="btnBTRefresh" Grid.Column="1" Grid.Row="7" Width="100" Height="30"
+                HorizontalAlignment="Left" Content="Refresh" Margin="10,10,0,10" Click="btnBTRefresh_Click" FontSize="16" />
+
+        <StackPanel Grid.Row="8" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="btnOK" Content="OK" Width="100" Height="40" Margin="5" 
+                    IsDefault="True" FontWeight="Bold" FontSize="16" Click="btnOK_Click"/>
+            <Button x:Name="btnCancel" Content="Cancel" Width="100" Height="40" Margin="5,0"
+                    IsCancel="True" FontWeight="Bold" FontSize="16"/>
+        </StackPanel>
+    </Grid>
+</Control:MetroWindow>

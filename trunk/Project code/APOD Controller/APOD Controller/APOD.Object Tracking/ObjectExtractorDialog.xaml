@@ -3,19 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:forms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="APOD_Controller.APOD.Object_Tracking.ObjectExtractorDialog"
-        Title="Object Extractor Dialog" Width="640" Height="577" ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterOwner">
-    <Window.Background>
-        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-            <GradientStop Color="Black" Offset="0.865"/>
-            <GradientStop Color="White" Offset="1"/>
-        </LinearGradientBrush>
-    </Window.Background>
+        Title="Object Extractor Dialog" Width="640" Height="600" ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterOwner" Icon="/APOD Controller;component/images/standard.png">
     <StackPanel>
         <WindowsFormsHost Height="480" Width="640" HorizontalAlignment="Center" >
             <forms:Panel x:Name="pnlCapture" MouseDown="pnlCapture_MouseDown" MouseMove="pnlCapture_MouseMove" MouseUp="pnlCapture_MouseUp" Paint="pnlCapture_Paint"/>
         </WindowsFormsHost>
         <!--<Image Name="imgCapture" Height="480" Width="640" />-->
-        <Grid Margin="0,10,0,10" Height="30">
+        <Grid Margin="0,10,0,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"></RowDefinition>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="120"/>
@@ -23,8 +20,14 @@
                 <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="20"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnOK" Content="OK" IsDefault="True" Grid.Column="1" Click="btnOK_Click"/>
-            <Button x:Name="btnESC" Content="Cancel" IsCancel="True" Grid.Column="3" Click="btnESC_Click"/>
+            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                <Border BorderBrush="Red" Margin="10,0" BorderThickness="5" Height="20" Width="20" VerticalAlignment="Center"></Border>
+                <TextBlock Text="Old Target" Margin="10,0" VerticalAlignment="Center" FontSize="16"/>
+                <Border BorderBrush="Yellow" Margin="10,0" BorderThickness="5" Height="20" Width="20" VerticalAlignment="Center"></Border>
+                <TextBlock Text="New Target" Margin="10,0" VerticalAlignment="Center" FontSize="16"/>
+            </StackPanel>
+            <Button x:Name="btnOK" Content="OK" IsDefault="True" Grid.Row="0" Grid.Column="1" Margin="0,10" Click="btnOK_Click" FontSize="16"/>
+            <Button x:Name="btnESC" Content="Cancel" IsCancel="True" Grid.Row="0" Grid.Column="3" Margin="0,10" Click="btnESC_Click" FontSize="16"/>
         </Grid>
     </StackPanel>
 </Window>
