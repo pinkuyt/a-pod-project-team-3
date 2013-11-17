@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\obj\Debug\
+E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\obj\Debug\
 APOD_Controller
 none
 false
 DEBUG;TRACE
-Z:\Documents\FPT University\DO AN TOT NGHIEP\Code Project\APOD Controller\APOD Controller\App.xaml
-5-1037775795
+E:\[@] Capstone Project\WPF\APOD Controller\APOD Controller\App.xaml
+5616719113
 6-516432893
-21-61339076
-36-74337351
-BluetoothConnection.xaml;MainWindow.xaml;APOD.Object Tracking\ObjectExtractorDialog.xaml;styles\MetroWindowResources.xaml;styles\Resources.xaml;
+21614422571
+36-403133076
+APOD.Configuration\Configuration.xaml;MainWindow.xaml;APOD.Object Tracking\ObjectExtractorDialog.xaml;styles\MetroWindowResources.xaml;styles\Resources.xaml;
 images\splashscreen.png
 False
 

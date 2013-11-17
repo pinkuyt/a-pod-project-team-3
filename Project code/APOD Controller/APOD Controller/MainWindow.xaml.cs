@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +25,8 @@ using AForge.Imaging;
 using AForge.Imaging.Filters;
 using AForge.Video;
 using AForge.Video.DirectShow;
-
+using APOD_Controller.APOD.Configuration;
+using APOD_Controller.APOD.Communication;
 using APOD_Controller.APOD.Input;
 using APOD_Controller.APOD.Object_Tracking;
 using APOD_Controller.APOD.Sequences;
@@ -44,34 +46,49 @@ namespace APOD_Controller
     public partial class MainWindow
     {
         /// <summary>
-        /// List of current sequence's states
+        /// Locker for all communication activities
         /// </summary>
-        private MoveItemsCollection Sequence;
+        private bool IsLocked
+        {
+            get
+            {
+                bool result = ((SequencePlayer != null) && SequencePlayer.IsPlaying()) ||
+                              (btnTrackingLock.IsChecked == true);
+                return result;
+            }
+        }
 
         /// <summary>
-        /// List of preloaded Presets
+        /// Bluetooth device connector
         /// </summary>
-        private List<Preset> Presets;
+        private BluetoothDevice Bluetooth;
 
         /// <summary>
-        /// Local video imput devices
+        /// Virtual button objects
         /// </summary>
-        FilterInfoCollection VideoDevices;
+        private Key[] VirtualButtons;
 
-        /// <summary>
-        /// Camera IP for video stream
-        /// </summary>
-        private String CamIP = "http://192.168.2.3:80/mjpg/video.mjpg";
-        
         /// <summary>
         /// gamepad device control
         /// </summary>
         private GamepadDevice GamePad;
 
         /// <summary>
-        /// Virtual button objects
+        /// List of current sequence's states
         /// </summary>
-        private Key[] VirtualButtons;
+        private MoveItemsCollection Sequence;
+
+        /// <summary>
+        /// Player 
+        /// </summary>
+        private Player SequencePlayer;
+
+        private ObjectTracker Tracker;
+
+        /// <summary>
+        /// Local video devices array
+        /// </summary>
+        protected FilterInfoCollection LocalVideoDevices;
 
         /// <summary>
         /// Default constructor
@@ -84,20 +101,21 @@ namespace APOD_Controller
             tblSequences.ItemsSource = Sequence;
             
             // get local video device information
-            VideoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            LocalVideoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
 
             // initialize gamepad Control object
             GamePad = new GamepadDevice(navUp, navDown, navLeft, navRight, actTriangle, actCircle, actCross, actSquare,
                                        actL2, actR2, actL1, actR1, actSelect, actStart);
+
+
             // Organize virtual keypad
             VirtualButtons = new Key[14];
             Keypad_Init();
             Keypad_CommandMap();
 
-            // Default mode: Normal
-            rdModeNormal.IsChecked = true;
+            tabControl.Items.Remove(tabPlayer);
         }
-        
+
         /**
          * User define method
          */
@@ -173,45 +191,65 @@ namespace APOD_Controller
         }
 
         /// <summary>
+        /// register handler for keyboard input
+        /// </summary>
+        void Keypad_KeyboardMap()
+        {
+            tabLiveControl.KeyDown += Keyboard_KeyDown;
+            tabLiveControl.KeyUp += Keyboard_KeyUp;
+        }
+
+        /// <summary>
+        /// unregister handler for keyboard input
+        /// </summary>
+        void Keypad_KeyboardUnmap()
+        {
+            tabLiveControl.KeyDown -= Keyboard_KeyDown;
+            tabLiveControl.KeyUp -= Keyboard_KeyUp;
+        }
+
+        /// <summary>
         /// Register command sender
         /// </summary>
         void Keypad_CommandMap()
         {
             foreach (Key button in VirtualButtons)
             {
-                button.PropertyChanged += Command;
+                button.PropertyChanged += OnCommand;
             }
         }
 
         /// <summary>
-        /// Load existing Presets
+        /// Check for configuration
         /// </summary>
-        private int LoadPreset()
+        /// <returns></returns>
+        public bool CheckConfig() 
         {
-            // check existence of preset pool
-            if (System.IO.Directory.Exists("Presets"))
+            if (Configuration.Initiated) return true;
+            MessageBoxResult result = MessageBox.Show("No Configuration was made. \nDo you want to config now?", "Configuration required", MessageBoxButton.YesNo,
+                            MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
             {
-                MoveItemsCollection collection;
-                // get all presets name
-                string[] files = System.IO.Directory.GetFiles("Presets");
-                // start loading states of each preset.
-                foreach (string file in files)
+                Configuration config = new Configuration();
+                if (config.ShowDialog() == true)
                 {
-                    collection = MoveItemsCollection.Import(file);
-                    // add only incorrupted data
-                    if (collection != null)
+                    Bluetooth = new BluetoothDevice(Configuration.OutgoingPort, Configuration.OutgoingBaudrate);
+                    //Bluetooth.ComPort.DataReceived += (sender, args) =>
+                    //    {
+                    //        MessageBox.Show(Bluetooth.ComPort.ReadByte().ToString());
+                    //    };
+                        
+                    if (Bluetooth.Open() == 1)
                     {
-                        Presets.Add(
-                            new Preset(
-                                file.Split(new[] {"Presets\\", ".xml"}, StringSplitOptions.RemoveEmptyEntries)[0],
-                                collection));
+                        return true;
                     }
+                    MessageBox.Show("Bluetooth connetion fail.");
+                    Configuration.Initiated = false;
                 }
-                return files.Length;
             }
-            return 0;
+            return false;
         }
-        
+
         /// <summary>
         /// Open video source
         /// </summary>
@@ -257,6 +295,77 @@ namespace APOD_Controller
                 viewCam.VideoSource = null;
             }
         }
+
+        /// <summary>
+        /// Virtual button command mapping
+        /// </summary>
+        /// <param name="key">Virtual button</param>
+        private void CommandMap(Key key)
+        {
+            if (key.Click)
+            {
+                int mode = 0;
+                mode += (actL1.Click ? 1 : 0);
+                mode += (actL2.Click ? 2 : 0);
+                switch (key.Type)
+                {
+                    // Action key
+                    case Key.Start:
+                        if (actL1.Click && !actL2.Click)
+                        {
+                            //reset
+                            Bluetooth.SendCommand(0x11);
+                            break;
+                        }
+                        Bluetooth.SendCommand(Command.Start);
+                        break;
+                    case Key.Select:
+                        if (actL1.Click && !actL2.Click)
+                        {
+                            //read distance
+                            Bluetooth.SendCommand(0x13);
+                            break;
+                        }
+                        Bluetooth.SendCommand(Command.Stop);
+                        break;
+                    case Key.NavigationUp:
+                        Bluetooth.SendCommand(Command.Get(mode, 0));
+                        break;
+                    case Key.NavigationDown:
+                        Bluetooth.SendCommand(Command.Get(mode, 1));
+                        break;
+                    case Key.NavigationLeft:
+                        Bluetooth.SendCommand(Command.Get(mode, 2));
+                        break;
+                    case Key.NavigationRight:
+                        Bluetooth.SendCommand(Command.Get(mode, 3));
+                        break;
+                    case Key.Triangle:
+                        Bluetooth.SendCommand(Command.Get(mode, 4));
+                        break;
+                    case Key.Cross:
+                        Bluetooth.SendCommand(Command.Get(mode, 5));
+                        break;
+                    case Key.Square:
+                        Bluetooth.SendCommand(Command.Get(mode, 6));
+                        break;
+                    case Key.Circle:
+                        Bluetooth.SendCommand(Command.Get(mode, 7));
+                        break;
+                    case Key.R1:
+                        Bluetooth.SendCommand(Command.Get(mode, 8));
+                        break;
+                    case Key.R2:
+                        Bluetooth.SendCommand(Command.Get(mode, 9));
+                        break;
+                }
+            }
+            else
+            {
+                Bluetooth.SendCommand(0xAA);
+            }
+        }
+
         #endregion
 
         /**
@@ -269,22 +378,40 @@ namespace APOD_Controller
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Streaming_Trigger(object sender, MouseButtonEventArgs e)
+        private void Streaming_Trigger(object sender, RoutedEventArgs e)
         {
+            if (!CheckConfig())
+            {
+                MessageBox.Show("Configuration is required to perform this task.", "Error", MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+                return;
+            }
             if (viewCam.VideoSource == null)
             {
-                VideoCaptureDevice webcam = new VideoCaptureDevice("@device:pnp:\\\\?\\usb#vid_0c45&pid_6481&mi_00#7&2e61ff31&0&0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\\global");
                 // get new source from IP
-                CamIP = "http://192.168.2.7:80/mjpg/video.mjpg";
-                MJPEGStream source = new MJPEGStream(CamIP);
-                source.Login = "admin";
-                source.Password = "1234";
+                string cameraUrl = "http://" + Configuration.CameraIp + ":80/mjpg/video.mjpg";
+                //string cameraUrl = "http://192.168.2.101:80/mjpg/video.mjpg";
+                MJPEGStream source = new MJPEGStream(cameraUrl)
+                    {
+                        Login = Configuration.Login,
+                        Password = Configuration.Password
+                    };
 
-                OpenVideoSource(new VideoCaptureDevice(VideoDevices[0].MonikerString));
+                //OpenVideoSource(new VideoCaptureDevice(LocalVideoDevices[0].MonikerString));
+                OpenVideoSource(source);
+                hostCam.Visibility = Visibility.Visible;
+                imgSplash.Visibility = Visibility.Collapsed;
             }
             else
             {
+                if (rdModeObjTracking.IsChecked == true)
+                {
+                    rdModeObjTracking.IsChecked = false;
+                }
+                
                 CloseCurrentVideoSource();
+                hostCam.Visibility = Visibility.Collapsed;
+                imgSplash.Visibility = Visibility.Visible;
             }
         }
 
@@ -299,6 +426,16 @@ namespace APOD_Controller
         /// <param name="e">Event arguments</param>
         private void rdModeNormal_Checked(object sender, RoutedEventArgs e)
         {
+            if (!CheckConfig())
+            {
+                MessageBox.Show("Configuration is required to perform this task.", "Error", MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+                rdModeNormal.IsChecked = false;
+                return;
+            }
+            // register handler for mouse click effect
+            Keypad_MouseMap();
+            Keypad_KeyboardMap();
             // update status text
             txtStatusValue.Text = "Normal";
             // undo highlight keypad control panel
@@ -306,8 +443,6 @@ namespace APOD_Controller
             pnlAction.BorderBrush = (Brush)FindResource("BorderBrushNormal");
             pnlFunction.BorderBrush = (Brush)FindResource("BorderBrushNormal");
 
-            // register handler for mouse click effect
-            Keypad_MouseMap();
         }
 
         /// <summary>
@@ -319,6 +454,7 @@ namespace APOD_Controller
         {
             // unregister handler for mouse click effect
             Keypad_MouseUnmap();
+            Keypad_KeyboardUnmap();
         }
 
         /// <summary>
@@ -357,6 +493,114 @@ namespace APOD_Controller
             }
         }
 
+        /// <summary>
+        /// Keyboard input handler
+        /// </summary>
+        /// <param name="sender">Event source</param>
+        /// <param name="e">Event arguments</param>
+        private void Keyboard_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case System.Windows.Input.Key.W:
+                    navUp.Click = true;
+                    break;
+                case System.Windows.Input.Key.S:
+                    navDown.Click = true;
+                    break;
+                case System.Windows.Input.Key.A:
+                    navLeft.Click = true;
+                    break;
+                case System.Windows.Input.Key.D:
+                    navRight.Click = true;
+                    break;
+                case System.Windows.Input.Key.Q:
+                    actL1.Click = true;
+                    break;
+                case System.Windows.Input.Key.E:
+                    actL2.Click = true;
+                    break;
+                case System.Windows.Input.Key.I:
+                    actTriangle.Click = true;
+                    break;
+                case System.Windows.Input.Key.K:
+                    actCross.Click = true;
+                    break;
+                case System.Windows.Input.Key.J:
+                    actSquare.Click = true;
+                    break;
+                case System.Windows.Input.Key.L:
+                    actCircle.Click = true;
+                    break;
+                case System.Windows.Input.Key.U:
+                    actR1.Click = true;
+                    break;
+                case System.Windows.Input.Key.O:
+                    actR2.Click = true;
+                    break;
+                case System.Windows.Input.Key.G:
+                    actSelect.Click = true;
+                    break;
+                case System.Windows.Input.Key.H:
+                    actStart.Click = true;
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Keyboard release handler
+        /// </summary>
+        /// <param name="sender">Event source</param>
+        /// <param name="e">Event arguments</param>
+        private void Keyboard_KeyUp(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case System.Windows.Input.Key.W:
+                    navUp.Click = false;
+                    break;
+                case System.Windows.Input.Key.S:
+                    navDown.Click = false;
+                    break;
+                case System.Windows.Input.Key.A:
+                    navLeft.Click = false;
+                    break;
+                case System.Windows.Input.Key.D:
+                    navRight.Click = false;
+                    break;
+                case System.Windows.Input.Key.Q:
+                    actL1.Click = false;
+                    break;
+                case System.Windows.Input.Key.E:
+                    actL2.Click = false;
+                    break;
+                case System.Windows.Input.Key.I:
+                    actTriangle.Click = false;
+                    break;
+                case System.Windows.Input.Key.K:
+                    actCross.Click = false;
+                    break;
+                case System.Windows.Input.Key.J:
+                    actSquare.Click = false;
+                    break;
+                case System.Windows.Input.Key.L:
+                    actCircle.Click = false;
+                    break;
+                case System.Windows.Input.Key.U:
+                    actR1.Click = false;
+                    break;
+                case System.Windows.Input.Key.O:
+                    actR2.Click = false;
+                    break;
+                case System.Windows.Input.Key.G:
+                    actSelect.Click = false;
+                    break;
+                case System.Windows.Input.Key.H:
+                    actStart.Click = false;
+                    break;
+            }
+        }
+
         #endregion
 
         #region Mode: GamePad
@@ -368,6 +612,21 @@ namespace APOD_Controller
         /// <param name="e">Event arguments</param>
         private void rdModeKeypad_Checked(object sender, RoutedEventArgs e)
         {
+            if (!CheckConfig())
+            {
+                MessageBox.Show("Configuration is required to perform this task.", "Error", MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+                rdModeKeypad.IsChecked = false;
+                return;
+            }
+
+            if (GamepadDevice.Scan().Count == 0)
+            {
+                MessageBox.Show("No Device Found! \nRe-Check if your device is connected.", "Error",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+                rdModeKeypad.IsChecked = false;
+                return;
+            }
             // update status text
             txtStatusValue.Text = "Keypad";
             // highlight keypad control panel
@@ -402,37 +661,39 @@ namespace APOD_Controller
         private void rdModeObjTracking_Checked(object sender, RoutedEventArgs e)
         {
             // check camera first
-            if (viewCam.IsRunning)
+            if (!viewCam.IsRunning)
             {
-                // update status text
-                txtStatusValue.Text = "Object Tracking";
-                // get tracking template
-                imgTrackingColor.Source = ObjectDetector.GetTrackingTemplate(viewCam.GetCurrentVideoFrame());
-                if (imgTrackingColor.Source != null)
-                {
-                    // open tracking panel
-                    pnlTrackingObject.IsEnabled = true;
-                    pnlTrackingObject.IsExpanded = true;
-                    // register tracking handler
-                    // Default method: color check
-                    viewCam.NewFrame += viewCam_NewFrame_ColorCheck;
-                    // Disable virtual key
-                    Keypad_Disable();
-                }
-                else
-                {
-                    // User press cancel: no template selected
-                    MessageBox.Show("No template selected.");
-                    // return to default mode
-                    rdModeNormal.IsChecked = true;
-                }
+                // camera unadvalable
+                MessageBox.Show("Video device hasn't been started.", "Warning",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                // return to default mode
+                rdModeObjTracking.IsChecked = false;
+                return;
+            }
+
+            // update status text
+            txtStatusValue.Text = "Object Tracking";
+            // initial tracker
+            Tracker = new ObjectTracker(Bluetooth,new Indicator());
+            // get tracking template
+            imgTrackingColor.Source = ObjectDetector.GetTrackingTemplate(viewCam.GetCurrentVideoFrame());
+            if (imgTrackingColor.Source != null)
+            {
+                // open tracking panel
+                pnlTrackingObject.IsEnabled = true;
+                pnlTrackingObject.IsExpanded = true;
+                // register tracking handler
+                // Default method: color check
+                viewCam.NewFrame += viewCam_NewFrame_ColorCheck;
+                // Disable virtual key
+                Keypad_Disable();
             }
             else
             {
-                // camera unadvalable
-                MessageBox.Show("No video device added.");
+                // User press cancel: no template selected
+                MessageBox.Show("No template selected.");
                 // return to default mode
-                rdModeNormal.IsChecked = true;
+                rdModeObjTracking.IsChecked = false;
             }
         }
 
@@ -481,6 +742,14 @@ namespace APOD_Controller
 
                 // process
                 Rectangle rect = ObjectDetector.TemplateColorTracking(statistics, ref uImage);
+                txtStatusValue.Dispatcher.Invoke(() =>
+                    {
+                        txtStatusValue.Text = rect.X + " -- " + rect.Y + " // "+ rect.Width;
+                    });
+
+                Tracker.Target.X = rect.X;
+                Tracker.Target.Y = rect.Y;
+                Tracker.Target.Width = rect.Width;
 
                 if (!rect.IsEmpty)
                 {
@@ -578,7 +847,27 @@ namespace APOD_Controller
                     btnTrackingChangeTarget.IsEnabled = false;
                     break;
             }
-        } 
+        }
+
+        /// <summary>
+        /// Start tracking
+        /// </summary>
+        /// <param name="sender">Event source</param>
+        /// <param name="e">Event arguments</param>
+        private void btnTrackingLock_Checked(object sender, RoutedEventArgs e)
+        {
+            Tracker.Start();
+        }
+
+        /// <summary>
+        /// Exit tracking
+        /// </summary>
+        /// <param name="sender">Event source</param>
+        /// <param name="e">Event arguments</param>
+        private void btnTrackingLock_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Tracker.Stop();
+        }
         #endregion
 
         #endregion
@@ -589,10 +878,22 @@ namespace APOD_Controller
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Command(object sender, PropertyChangedEventArgs e)
+        private void OnCommand(object sender, PropertyChangedEventArgs e)
         {
-            // TODO: do something
+            if (IsLocked)
+            {
+                MessageBox.Show("This function is temporary locked down. Wait for other task to finish.", "Locked",
+                                MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            Key key = (Key)sender;
+            if ((e.PropertyName == "Click") && (IsLocked == false))
+            {
+                txtStatusValue.Text = key.Type + ": " + (key.Click ? "pressed" : "release");
+                CommandMap(key);
+            }
         }
+
         #endregion
 
         #endregion
@@ -609,7 +910,7 @@ namespace APOD_Controller
         private void btnSequenceAdd_Click(object sender, RoutedEventArgs e)
         {
             int interval;
-            if (int.TryParse(txtInterval.Text, out interval) & (interval != 0))
+            if (int.TryParse(txtInterval.Text, out interval) && (interval < 10))
             {
                 interval = int.Parse(txtInterval.Text);
                 Sequence.Add(new MoveItem(Sequence.Count, cbDirection.Text, interval));
@@ -664,12 +965,6 @@ namespace APOD_Controller
         /// <param name="e">Event arguments</param>
         private void btnExport_Click(object sender, RoutedEventArgs e)
         {
-            /** ---------------- Using LINQ ----------------
-             * var xml = new XElement("MoveItems", Sequence.Select(x => new XElement("MoveItem",
-             *                                     new XAttribute("Name", x.Name),
-             *                                     new XAttribute("Interval", x.Interval))));                                    
-             */
-
             //-------------------------------------------------------------------------------------
             /*----------------- Create XML document -----------------*/
             var doc = Sequence.Export();
@@ -737,9 +1032,51 @@ namespace APOD_Controller
             }
         }
 
-        /**
-         * Preset control execution
-         */
+        /// <summary>
+        /// Change propety base on selected move
+        /// </summary>
+        /// <param name="sender">Event source</param>
+        /// <param name="e">Event arguments</param>
+        private void cbDirection_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (txtInterval == null) return;
+            if (cbDirection.SelectedIndex > 3)
+            {
+                txtInterval.Text = "0";
+                txtInterval.IsEnabled = false;
+            }
+            else
+            {
+                txtInterval.Text = "";
+                txtInterval.IsEnabled = true;
+            }
+        }
+
+        /// <summary>
+        /// Execute sequence
+        /// </summary>
+        /// <param name="sender">Event source</param>
+        /// <param name="e">Event arguments</param>
+        private void btnPlay_Click(object sender, RoutedEventArgs e)
+        {
+            if (!CheckConfig())
+            {
+                MessageBox.Show("Configuration is required to perform this task.", "Error", MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+                rdModeKeypad.IsChecked = false;
+                return;
+            }
+            if (IsLocked)
+            {
+                MessageBox.Show("This function is temporary locked down. Wait for other task to finish.", "Locked",
+                                MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            SequencePlayer = new Player(Sequence, Bluetooth);
+            SequencePlayer.Normalize();
+
+            SequencePlayer.Start();
+        }
         #endregion
 
         /**
@@ -758,11 +1095,11 @@ namespace APOD_Controller
             // if tab is currently closed
             if (!tabControl.Items.Contains(tabLiveControl))
             {
+                tabControl.Items.Remove(tabPlayer);
                 // reopen tab
                 tabControl.Items.Add(tabLiveControl);
+                tabLiveControl.Focus();
             }
-            // set focus
-            tabLiveControl.Focus();
         }
 
         /// <summary>
@@ -775,11 +1112,12 @@ namespace APOD_Controller
             // if tab is currently closed
             if (!tabControl.Items.Contains(tabPlayer))
             {
+                tabControl.Items.Remove(tabLiveControl);
                 // reopen tab
                 tabControl.Items.Add(tabPlayer);
+                tabPlayer.Focus();
+                tblSequences.Items.Refresh();
             }
-            // set focus
-            tabPlayer.Focus();
         }
 
         /// <summary>
@@ -789,14 +1127,19 @@ namespace APOD_Controller
         /// <param name="e">Event arguments</param>
         private void menuConfig_Click(object sender, RoutedEventArgs e)
         {
-            // if tab is currently closed
-            if (!tabControl.Items.Contains(tabConfig))
+            Configuration config = new Configuration();
+            if (config.ShowDialog() == true)
             {
-                // reopen tab
-                tabControl.Items.Add(tabConfig);
+                if (Bluetooth != null)
+                {
+                    Bluetooth.Close();
+                }
+                Bluetooth = new BluetoothDevice(Configuration.OutgoingPort, Configuration.OutgoingBaudrate);
+                if (Bluetooth.Open() == 0)
+                {
+                    MessageBox.Show("Bluetooth connetion fail.");
+                }
             }
-            // set focus
-            tabConfig.Focus();
         } 
         #endregion
 
@@ -807,7 +1150,11 @@ namespace APOD_Controller
         /// <param name="e">Event arguments</param>
         private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // TODO: inittial some component
+            // TODO: initiate some component
+            if (tabControl.Items.Count == 1)
+            {
+                
+            }
         }
 
         /// <summary>
@@ -822,8 +1169,11 @@ namespace APOD_Controller
             
             CloseCurrentVideoSource();
             // close serial port
+            if (Bluetooth != null)
+            {
+                Bluetooth.Close(); 
+            }
         }
-
         #endregion
 
 
@@ -870,19 +1220,17 @@ namespace APOD_Controller
                     Int32Rect.Empty,
                     BitmapSizeOptions.FromEmptyOptions());
 
-                imgtest.Source = bitmapSource;
+                //imgtest.Source = bitmapSource;
             }
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            BluetoothConnection BTconnection = new BluetoothConnection();
-            BTconnection.Show();   
-        }
-
-        private void actL2_Loaded(object sender, RoutedEventArgs e)
-        {
-
+            Bluetooth.SendCommand(0xA1);
+            if (IsLocked)
+            {
+                MessageBox.Show("lock");
+            }
         }
 
     }

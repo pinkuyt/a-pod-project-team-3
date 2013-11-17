@@ -9,17 +9,17 @@
         xmlns:aforge="clr-namespace:AForge.Controls;assembly=AForge.Controls"
         x:Class="APOD_Controller.MainWindow"
         Title="APOD Controller" Height="768" Width="1366"  ResizeMode="NoResize" 
-        WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow" Closing="MetroWindow_Closing" Background="{x:Null}" WindowState="Maximized" Icon="images/standard.png">
+        WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow" Closing="MetroWindow_Closing" 
+        Background="{x:Null}" WindowState="Maximized" Icon="images/Controller.png">
     <DockPanel>
         <Menu DockPanel.Dock="Top" SnapsToDevicePixels="True" Margin="2,0,0,0">
-            <MenuItem Header="File"/>
-            <MenuItem Header="Tools">
+            <MenuItem Header="FILE"/>
+            <MenuItem Header="TOOLS">
                 <MenuItem Name="menuLive" Header="Live Controller" Click="menuLive_Click"/>
                 <MenuItem Name="menuPlayer" Header="Sequence Player" Click="menuPlayer_Click"/>
                 <MenuItem Name="menuConfig" Header="Configuration" Click="menuConfig_Click"/>
             </MenuItem>
-            <MenuItem Header="About"/>
-            <MenuItem Header="Connect" Click="MenuItem_Click"/>
+            <MenuItem Header="ABOUT"/>
         </Menu>
         <StatusBar Height="23" DockPanel.Dock="Bottom" Background="{Binding SelectedItem.Tag}">
             <StatusBarItem>
@@ -33,7 +33,7 @@
             <TextBlock.LayoutTransform>
                 <RotateTransform Angle="270"/>
             </TextBlock.LayoutTransform><Run Text="Lynxmotion APOD Controller"/></TextBlock>
-        <TabControl Name="tabControl" Margin="0,0,0,0" SelectionChanged="tabControl_SelectionChanged">
+        <TabControl Name="tabControl" Margin="0,0,0,0">
             <!--Live control-->
             <TabItem Name="tabLiveControl"  Header="Controller">
                 <DockPanel Margin="10,0,10,10">
@@ -43,15 +43,15 @@
                             <RowDefinition Height="230"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="250"/>
                             <ColumnDefinition/>
-                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="250"/>
                         </Grid.ColumnDefinitions>
 
                         <!--Navigation area-->
                         <Border Name="pnlNavigation" Grid.Row="1" Grid.Column="0" CornerRadius="30" Background="Gainsboro"
                                 BorderThickness="5" BorderBrush="{StaticResource BorderBrushNormal}" 
-                                HorizontalAlignment="Right"
+                                HorizontalAlignment="Center"
                                 VerticalAlignment="Top">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -82,13 +82,13 @@
                                 <user:Key x:Name="actL1" Type="L1" HorizontalAlignment="Center" VerticalAlignment="Center"
                                     Grid.Row="0" Grid.Column="1" Height="30" Width="50"  />
                                 <user:Key x:Name="actL2" Type="L2" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                                    Grid.Row="0" Grid.Column="3" Height="30" Width="50" Loaded="actL2_Loaded"  />
+                                    Grid.Row="0" Grid.Column="3" Height="30" Width="50"  />
                             </Grid>
                         </Border>
                         <!--Action area-->
                         <Border Name="pnlAction" Grid.Row="1" Grid.Column="2" CornerRadius="30" Background="Gainsboro"
                                 BorderThickness="5" BorderBrush="{StaticResource BorderBrushNormal}"
-                                HorizontalAlignment="Right"
+                                HorizontalAlignment="Center"
                                 VerticalAlignment="Top">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -125,22 +125,27 @@
                             </Grid>
                         </Border>
                         <!--Miscellaneos-->
-                        <Border Name="pnlFunction" BorderBrush="{StaticResource BorderBrushNormal}" BorderThickness="5" Grid.Column="1" 
-                                Background="Gainsboro"
-                                HorizontalAlignment="Left" Height="60" Margin="137,160,0,0" Grid.Row="1" VerticalAlignment="Top" 
+                        <Border Name="pnlFunction" BorderBrush="{StaticResource BorderBrushNormal}" BorderThickness="5" 
+                                Grid.Column="1" Grid.Row="1"  Background="Gainsboro"
+                                HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="60"  
                                 Width="220" CornerRadius="30">
                             <Grid>
                                 <user:Key x:Name="actStart" Type="Start" Height="30" Width="50" Margin="118,10,30,10" />
-                                <user:Key x:Name="actSelect" Type="Select" Height="30" Width="50" Margin="30,10,118,10" MouseUp="Streaming_Trigger" />
+                                <user:Key x:Name="actSelect" Type="Select" Height="30" Width="50" Margin="30,10,118,10"/>
                             </Grid>
                         </Border>
+                        <Button Grid.Row="1" Grid.Column="1" Width="100" Height="40" Margin="587,143,127,47" Click="Button_Click_1" ></Button>
                         <!--Live Cam view-->
-                        <WindowsFormsHost x:Name="hostCam" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"
+                        <Image Name="imgSplash" Source="images/Preview.png" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"
+                                          VerticalAlignment="Top" HorizontalAlignment="Center" 
+                                          Width="640" Height="480"></Image>
+                        <WindowsFormsHost x:Name="hostCam" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Visibility="Collapsed"
                                           VerticalAlignment="Top" HorizontalAlignment="Center" 
                                           Width="640" Height="480">
                             <aforge:VideoSourcePlayer x:Name="viewCam"  Margin="0,0,0,0" BackgroundImageLayout="Center"/>
                         </WindowsFormsHost>
-                        <!--Control Methods Area-->
+                        <Button Name="btnStream" Grid.Row="1" Grid.Column="1" Content="Start Video" Width="200" Height="40" Click="Streaming_Trigger"/>
+                        <!--Control Mode Area-->
                         <StackPanel Grid.Column="2" Grid.Row="0" Margin="0,0,0,0">
                             <TextBlock Text="CONTROL METHODS"  Foreground="FloralWhite" FontSize="20" TextAlignment="Center" TextDecorations="{x:Null}"/>
                             <RadioButton x:Name="rdModeNormal" Content="NORMAL"  Margin="0,5,0,5" Height="40"
@@ -152,9 +157,8 @@
                             <RadioButton x:Name="rdModeObjTracking" Content="OBJECT TRACKING"  Margin="0,5,0,5" Height="40"
                                          Style="{StaticResource {x:Type ToggleButton}}"
                                          GroupName="LiveMode" FontSize="16" FontFamily="Calibri" FontWeight="Bold" Checked="rdModeObjTracking_Checked" Unchecked="rdModeObjTracking_Unchecked" />
-                            <Image x:Name="imgIcon" Margin="0,0,0,0" Source="images/standard.png" Height="183"/>
                         </StackPanel>
-
+                        <!--Tracking-->
                         <Expander Name="pnlTrackingObject" IsEnabled="False" 
                                   Grid.Column="0" Grid.Row="0" Margin="0,20,0,0">
                             <StackPanel>
@@ -167,7 +171,7 @@
                                 <Image Name="imgTrackingGlyph"  MaxHeight="200" Stretch="Uniform" Source="images/Glyphs.png" Visibility="Collapsed"/>
                                 <Button Name="btnTrackingChangeTarget" Content="Change Target" Height="40" Click="btnTrackingChangeTarget_Click"/>
                                 <CheckBox x:Name="btnTrackingLock" Content="Lock"  Margin="0,5,0,5" Height="40"
-                                         Style="{StaticResource {x:Type ToggleButton}}" />
+                                         Style="{StaticResource {x:Type ToggleButton}}" Checked="btnTrackingLock_Checked" Unchecked="btnTrackingLock_Unchecked" />
                             </StackPanel>
                         </Expander>
                     </Grid>
@@ -175,74 +179,83 @@
             </TabItem>
             <!--Sequence control-->
             <TabItem Name="tabPlayer" Header="Sequences Player">
-                <StackPanel Margin="10,10,699,10">
-                    <!--State input-->
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                                    Foreground="{StaticResource Foreground}"   Text="Direction: "/>
-                        <ComboBox Name="cbDirection" Grid.Column="1" Grid.Row="0" Margin="10,0,0,0" SelectedIndex="0">
-                            <ComboBoxItem>Forward</ComboBoxItem>
-                            <ComboBoxItem>Backward</ComboBoxItem>
-                            <ComboBoxItem>Left</ComboBoxItem>
-                            <ComboBoxItem>Right</ComboBoxItem>
-                        </ComboBox>
-                        <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                                     Foreground="{StaticResource Foreground}"  Text="Distance/Degree: "/>
-                        <TextBox x:Name="txtInterval" Grid.Column="1" Grid.Row="1" TextAlignment="Right" Margin="10,5,405,0" PreviewTextInput="txtInterval_PreviewTextInput"></TextBox>
-                        <Button Name="btnSequenceAdd" Grid.Column="1"  Grid.Row="1" Content="Add"  Margin="145,5,264,0" Click="btnSequenceAdd_Click"/>
-                    </Grid>
-                    <Border MaxHeight="400" Margin="0,10" BorderThickness="1" BorderBrush="{StaticResource BorderBrushNormal}" >
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Width="640">
+                        <!--State input-->
                         <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
                                 <RowDefinition Height="50"/>
                                 <RowDefinition Height="50"/>
                             </Grid.RowDefinitions>
-                            <!--Table content states sequence-->
-                            <DataGrid x:Name="tblSequences"  Margin="10" IsReadOnly="True" AutoGenerateColumns="False"
-                    			CanUserResizeColumns="False" CanUserSortColumns="False" Grid.Row="0">
-                                <DataGrid.Columns>
-                                    <DataGridTemplateColumn Header="States" Width="50" >
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <CheckBox HorizontalAlignment="Center" Checked="CheckBox_Checked"
-                    								Content="{Binding ID}" Foreground="{StaticResource Foreground}" Unchecked="CheckBox_Unchecked"/>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                    <DataGridTextColumn Header="Name" Width="150" Binding="{Binding Name}"/>
-                                    <DataGridTextColumn Header="Measurement" Width="*" Binding="{Binding Interval}"/>
-                                </DataGrid.Columns>
-                            </DataGrid>
-                            <!--Button to remove selected states-->
-                            <Button Content="Remove" Click="StateRemove_Click" Grid.Row="1"  
-                                    VerticalAlignment="Center" HorizontalAlignment="Left"
-                                    Margin="10,0" Height="40" Width="100"/>
-                            <!--load/save Presets-->
-                            <StackPanel Grid.Row="2" Orientation="Horizontal" FlowDirection="RightToLeft"  >
-                                <Button x:Name="btnImport" Height="40" Width="100" Margin="10,0" Content="Import" Click="btnImport_Click" />
-                                <Button x:Name="btnExport" Height="40" Width="100" Margin="10,0" Content="Export" Click="btnExport_Click" />
-                            </StackPanel>
+
+                            <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                                    Foreground="{StaticResource Foreground}"   Text="Move: " FontSize="16"/>
+                            <ComboBox Name="cbDirection" SelectedIndex="0" Grid.Column="1" Grid.Row="0" Margin="10,5,5,5" FontSize="16" SelectionChanged="cbDirection_SelectionChanged">
+                                <ComboBoxItem>Forward</ComboBoxItem>
+                                <ComboBoxItem>Backward</ComboBoxItem>
+                                <ComboBoxItem>Turn Left</ComboBoxItem>
+                                <ComboBoxItem>Turn Right</ComboBoxItem>
+                                <ComboBoxItem>Body Lift</ComboBoxItem>
+                                <ComboBoxItem>Body Drop</ComboBoxItem>
+                                <ComboBoxItem>Toward Front</ComboBoxItem>
+                                <ComboBoxItem>Toward Back</ComboBoxItem>
+                                <ComboBoxItem>Squeeze Left</ComboBoxItem>
+                                <ComboBoxItem>Squeeze Right</ComboBoxItem>
+                                <ComboBoxItem>Head Up</ComboBoxItem>
+                                <ComboBoxItem>Head Down</ComboBoxItem>
+                                <ComboBoxItem>Head Left</ComboBoxItem>
+                                <ComboBoxItem>Head Right</ComboBoxItem>
+                                <ComboBoxItem>Head Roll Left</ComboBoxItem>
+                                <ComboBoxItem>Head Roll Right</ComboBoxItem>
+                            </ComboBox>
+                            <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                            	Foreground="{StaticResource Foreground}" FontSize="16" ><Run Text="Time Interval:"/><LineBreak/><Run Text=" (Seconds) "/></TextBlock>
+                            <TextBox x:Name="txtInterval" Grid.Column="1" Grid.Row="1" TextAlignment="Right" VerticalContentAlignment="Center"
+                                     Margin="10,5,405,5" PreviewTextInput="txtInterval_PreviewTextInput" FontSize="16"/>
+                            <Button Name="btnSequenceAdd" Grid.Column="1"  Grid.Row="1" Content="Add"  Margin="145,5,264,5" Click="btnSequenceAdd_Click" FontSize="16"/>
                         </Grid>
-                    </Border>
-                </StackPanel>
-
-            </TabItem>
-
-            <TabItem Name="tabConfig" Header="Config">
-                <StackPanel Orientation="Horizontal" >
-                    <Button Content="Test"  VerticalAlignment="Top" Height="50" Width="75" Click="Button_Click"/>
-                    <Image Name="imgtest" Margin="0,0,0,0" Width="1079">
-                    </Image>
+                        <Border MaxHeight="400" Margin="0,10" BorderThickness="1" BorderBrush="{StaticResource BorderBrushNormal}" >
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="50"/>
+                                    <RowDefinition Height="50"/>
+                                </Grid.RowDefinitions>
+                                <!--Table content states sequence-->
+                                <DataGrid x:Name="tblSequences"  Margin="10" IsReadOnly="True" AutoGenerateColumns="False"
+                    			CanUserResizeColumns="False" CanUserSortColumns="False" Grid.Row="0">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn Header="States" Width="50" >
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <CheckBox HorizontalAlignment="Center" Checked="CheckBox_Checked"
+                    								Content="{Binding ID}" Foreground="{StaticResource Foreground}" Unchecked="CheckBox_Unchecked"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTextColumn Header="Name" Width="150" Binding="{Binding Name}"/>
+                                        <DataGridTextColumn Header="Measurement" Width="*" Binding="{Binding Interval}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <!--Button to remove selected states-->
+                                <Button Content="Remove" Click="StateRemove_Click" Grid.Row="1"  
+                                    VerticalAlignment="Center" HorizontalAlignment="Left"
+                                    Margin="10,0" Height="40" Width="100" FontSize="16"/>
+                                <!--load/save Presets-->
+                                <StackPanel Grid.Row="2" Orientation="Horizontal" FlowDirection="RightToLeft"  >
+                                    <Button x:Name="btnImport" Height="40" Width="100" Margin="10,0" Content="Import" Click="btnImport_Click" FontSize="16" />
+                                    <Button x:Name="btnExport" Height="40" Width="100" Margin="10,0" Content="Export" Click="btnExport_Click" FontSize="16" />
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                    <StackPanel Width="680">
+                        <Button Name="btnPlay" Content="Play" Width="200" Height="50" Margin="50" Click="btnPlay_Click" FontSize="16"></Button>
+                    </StackPanel>
                 </StackPanel>
             </TabItem>
         </TabControl>

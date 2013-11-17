@@ -23,20 +23,20 @@ namespace APOD_Keypad
     public partial class Key : INotifyPropertyChanged
     {
         // key type's name
-        public static readonly string NavigationUp = "Up";
-        public static readonly string NavigationDown = "Down";
-        public static readonly string NavigationLeft = "Left";
-        public static readonly string NavigationRight = "Right";
-        public static readonly string Circle = "Circle";
-        public static readonly string Cross = "Cross";
-        public static readonly string Square = "Square";
-        public static readonly string Triangle = "Triangle";
-        public static readonly string Select = "Select";
-        public static readonly string Start = "Start";
-        public static readonly string R1 = "R1";
-        public static readonly string R2 = "R2";
-        public static readonly string L1 = "L1";
-        public static readonly string L2 = "L2";
+        public const string NavigationUp = "Up";
+        public const string NavigationDown = "Down";
+        public const string NavigationLeft = "Left";
+        public const string NavigationRight = "Right";
+        public const string Circle = "Circle";
+        public const string Cross = "Cross";
+        public const string Square = "Square";
+        public const string Triangle = "Triangle";
+        public const string Select = "Select";
+        public const string Start = "Start";
+        public const string R1 = "R1";
+        public const string R2 = "R2";
+        public const string L1 = "L1";
+        public const string L2 = "L2";
 
         /// <summary>
         /// is this control disabled
