@@ -389,16 +389,16 @@ namespace APOD_Controller
             if (viewCam.VideoSource == null)
             {
                 // get new source from IP
-                string cameraUrl = "http://" + Configuration.CameraIp + ":80/mjpg/video.mjpg";
-                //string cameraUrl = "http://192.168.2.101:80/mjpg/video.mjpg";
+                string cameraUrl = "http://" + Configuration.CameraIp + ":" + Configuration.CameraPort + "/videostream.cgi";
+                //string cameraUrl = "http://192.168.2.15:80/videostream.cgi";
                 MJPEGStream source = new MJPEGStream(cameraUrl)
                     {
-                        Login = Configuration.Login,
-                        Password = Configuration.Password
+                        Login = "admin",// Configuration.Login,
+                        Password =""// Configuration.Password
                     };
 
-                //OpenVideoSource(new VideoCaptureDevice(LocalVideoDevices[0].MonikerString));
-                OpenVideoSource(source);
+                OpenVideoSource(new VideoCaptureDevice(LocalVideoDevices[0].MonikerString));
+                //OpenVideoSource(source);
                 hostCam.Visibility = Visibility.Visible;
                 imgSplash.Visibility = Visibility.Collapsed;
             }
@@ -674,7 +674,7 @@ namespace APOD_Controller
             // update status text
             txtStatusValue.Text = "Object Tracking";
             // initial tracker
-            Tracker = new ObjectTracker(Bluetooth,new Indicator());
+            Tracker = new ObjectTracker(Bluetooth,new Indicator(),btnTrackingLock);
             // get tracking template
             imgTrackingColor.Source = ObjectDetector.GetTrackingTemplate(viewCam.GetCurrentVideoFrame());
             if (imgTrackingColor.Source != null)
@@ -742,14 +742,11 @@ namespace APOD_Controller
 
                 // process
                 Rectangle rect = ObjectDetector.TemplateColorTracking(statistics, ref uImage);
-                txtStatusValue.Dispatcher.Invoke(() =>
-                    {
-                        txtStatusValue.Text = rect.X + " -- " + rect.Y + " // "+ rect.Width;
-                    });
 
                 Tracker.Target.X = rect.X;
                 Tracker.Target.Y = rect.Y;
                 Tracker.Target.Width = rect.Width;
+                Tracker.Target.Lost = ((rect.Width < 20) || (rect.Width > 600));
 
                 if (!rect.IsEmpty)
                 {
@@ -867,6 +864,14 @@ namespace APOD_Controller
         private void btnTrackingLock_Unchecked(object sender, RoutedEventArgs e)
         {
             Tracker.Stop();
+            if (Tracker.Found)
+            {
+                MessageBox.Show("Reached target.");
+            }
+            else
+            {
+                MessageBox.Show("Lost target.");
+            }
         }
         #endregion
 
@@ -1166,7 +1171,7 @@ namespace APOD_Controller
         {
             // close connected devices
             GamePad.Stop();
-            
+
             CloseCurrentVideoSource();
             // close serial port
             if (Bluetooth != null)

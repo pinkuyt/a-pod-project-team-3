@@ -1,9 +1,15 @@
 #include <stdio.h>
 #include "Usart_Bluetooth.h"
 #include "Usart.h"
+#include "Global.h"
 
 #define DEFAULT_Left 1200
 #define DEFAULT_Right 1800
+#define DEFAULT_MANDIBLE_LEFT 1500
+#define DEFAULT_MANDIBLE_RIGHT 1500
+#define DEFAULT_NECK_ROTATE 1700
+#define DEFAULT_NECK_HORIZONTAL 1500	
+#define DEFAULT_NECK_VERTICAL 1500
 
 // ----------------------------------------
 // Servo value
@@ -49,27 +55,36 @@ void Tripod_B_Left(int interval);
 void Tripod_B_Right(int interval);
 
 void MANDIBLE(char mandible, int interval);
+int MANDIBLE_EXPAND(void);
+void MANDIBLE_Reset_All(void);
 
 void Neck_Rotate(int interval);
 void Neck_Horizontal(int interval);
 void Neck_Vertical(int interval);
+void NECK_Reset_All(void);
 // ----------------------------------------
 // APOD Control
 // ----------------------------------------
-
 void cmd_start(void);
 void cmd_stop(void);
 void Apod_lift(int interval);// done
 void Apod_Drop(int interval);// done
-void Apod_Balance(); // done
+void Apod_Balance(void); // done
 void Apod_towardtheFront(int interval);// done
 void Apod_towardtheBack(int interval);// done
 void Apod_Squeeze_Left(int interval);// done
 void Apod_Squeeze_Right(int interval);// done
+
 void APOD_Forward(int loop, int intervalVertical, int intervalHorizontal, int delay);// done
 void APOD_Backward(int loop, int intervalVertical, int intervalHorizontal, int delay);//donw
 void APOD_TurnLeft(int loop, int intervalVertical, int intervalHorizontal, int delay);//done
 void APOD_TurnRight(int loop, int intervalVertical, int intervalHorizontal, int delay);//done
+
+void APOD_Forward_Advance(int intervalVertical, int intervalHorizontal, int delay);// done
+void APOD_Backward_Advance(int intervalVertical, int intervalHorizontal, int delay);// done
+void APOD_TurnLeft_Advance(int intervalVertical, int intervalHorizontal, int delay);// done
+void APOD_TurnRight_Advance(int intervalVertical, int intervalHorizontal, int delay);// done
+
 void APOD_WaveTail(int loop, int interval);
 void APOD_waitingforOrder(int stype);
 
@@ -80,20 +95,22 @@ void Apod_Head_Down(int interval);
 void Apod_Head_Left(int interval);
 void Apod_Head_Right(int interval);
 
+int Apod_Mandibles_Expand(void);
 void Apod_Mandible_Nip(int interval);
 void Apod_Mandible_Release(int interval);
-
+unsigned char Apod_Read_Distance(void);
 // ----------------------------------------
 //	Generate Command
 // ----------------------------------------
 void GenerateCommand_All(char* cmd);
+void GenerateCommand_Head(char* cmd);
 void GenerateCommand_Legs(char* cmd);
-
+void GenerateCommand_Mandibles(char* cmd);
+void GenerateCommand_Neck(char* cmd);
 // ----------------------------------------
 //	Step
 // ----------------------------------------
 void setNULL(char *string);
-void readADC();
-
+void APOD_Grip(void);
 
 

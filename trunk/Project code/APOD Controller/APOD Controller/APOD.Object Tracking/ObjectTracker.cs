@@ -17,30 +17,32 @@ namespace APOD_Controller.APOD.Object_Tracking
         public Indicator Target { get; set; }
 
         /// <summary>
+        /// Activator
+        /// </summary>
+        public System.Windows.Controls.CheckBox Activator { get; set; }
+
+        /// <summary>
         /// Timer for checking position;
         /// </summary>
         private Timer TimerClock;
 
-        /// <summary>
-        /// Device button event listener
-        /// </summary>
-        private BackgroundWorker Worker;
+        public bool Found { get; set; }
 
         /// <summary>
         /// Communication channel
         /// </summary>
         private BluetoothDevice Bluetooth;
         
-        public ObjectTracker(BluetoothDevice bluetooth, Indicator target)
+        public ObjectTracker(BluetoothDevice bluetooth, Indicator target, System.Windows.Controls.CheckBox activator)
         {
             Target = target;
             Bluetooth = bluetooth;
+            Activator = activator;
             TimerClock = new Timer();
             TimerClock.Interval = 5000;
             TimerClock.Tick += TimerClockTick;
 
-            Worker = new BackgroundWorker();
-            Worker.DoWork+= worker_DoWork;
+            Found = false;
         }
 
         void TimerClockTick(object sender, EventArgs e)
@@ -53,6 +55,23 @@ namespace APOD_Controller.APOD.Object_Tracking
             {
                 Bluetooth.SendCommand(0xAA);
                 while (!Bluetooth.Read().Contains(".")) ;
+            }
+            // check distance
+            Bluetooth.SendCommand(0x13);
+            System.Threading.Thread.Sleep(500);
+            // reached the object
+            if (Bluetooth.ReadResponse() <= 6)
+            {
+                TimerClock.Stop();
+                Activator.IsChecked = false;
+                Found = true;
+                return;
+            } 
+            if (Target.Lost)
+            {
+                TimerClock.Stop();
+                Activator.IsChecked = false;
+                return;
             }
             // left region
             if (Target.X < 200)
@@ -67,11 +86,6 @@ namespace APOD_Controller.APOD.Object_Tracking
                 return;
             }
             Bluetooth.SendCommand(Command.MoveForwardCont);
-        }
-
-        private void worker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
         public void Start()

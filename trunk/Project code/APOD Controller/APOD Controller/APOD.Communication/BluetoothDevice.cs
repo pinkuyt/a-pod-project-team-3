@@ -197,6 +197,42 @@ namespace APOD_Controller.APOD.Communication
         }
 
         /// <summary>
+        ///  Reading response from APOD
+        /// </summary>
+        /// <param name="num">Number of responses expected</param>
+        /// <returns></returns>
+        public byte ReadResponse()
+        {
+            if (!ComPort.IsOpen) return 0;
+            byte[] responses = new byte[1];
+            try
+            {
+                ComPort.Read(responses, 0, 1);
+            }
+
+            catch (ArgumentNullException)
+            {
+                return 0;
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                return 0;
+            }
+            catch (ArgumentException)
+            {
+                return 0;
+            }
+            catch (InvalidOperationException)
+            {
+                return 0;
+            }
+            catch (TimeoutException)
+            {
+                return 0;
+            }
+            return responses[0];
+        }
+        /// <summary>
         /// Read all current response in buffer
         /// </summary>
         /// <returns>String contain response value</returns>

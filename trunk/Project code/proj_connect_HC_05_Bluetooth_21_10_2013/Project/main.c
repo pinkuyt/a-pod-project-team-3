@@ -1,17 +1,25 @@
 #include "main.h"
 #include "APOD.h"
-#include "A_Pod_Command.h"
-char RecievedCommand;
+
+uint16_t RecievedCommand;
+char Argument;
 char b_Command;
 
+char b_Release;
 
 char b_Start;
 char b_Stop;
+char b_Reset;
 
 char b_Forward;
 char b_Backward;
 char b_TurnLeft;
 char b_TurnRight;
+
+char b_Forward_Advance;
+char b_Backward_Advance;
+char b_TurnLeft_Advance;
+char b_TurnRight_Advance;
 
 char b_TowardTheFront;
 char b_TowardTheBack;
@@ -39,25 +47,32 @@ char b_ReleaseMandible;
 char b_Greeting;
 
 
-char string[256];
+char cmd[94];
 uint8_t checkStart = 0;
 
 
 int main(void)
 {
-	
+	unsigned char temp;
 	usart_rxtx();
 // Reset States
 	RecievedCommand = 0x00;
 	b_Command = 0;
+	b_Release = 0;
 
 	b_Start 					= 0;
 	b_Stop 						= 0;
+	b_Reset						= 0;
 
 	b_Forward 				= 0;
 	b_Backward 				= 0;
 	b_TurnLeft 				= 0;
 	b_TurnRight 			= 0;
+	
+	b_Forward_Advance  = 0;
+	b_Backward_Advance = 0;
+	b_TurnLeft_Advance = 0;
+	b_TurnRight_Advance= 0;
 	
 	b_TowardTheFront 	= 0;
 	b_TowardTheBack  	= 0;
@@ -93,6 +108,9 @@ int main(void)
 		{
 			switch (RecievedCommand)
 			{
+				case 0x11: // reset
+					b_Reset = 1;
+					break;
 				case 0x31: 	// Start Apod
 					b_Start = 1;
 					break;
@@ -108,7 +126,7 @@ int main(void)
 				case 0x35:	// Move Left
 					b_TurnLeft = 1;
 					break;
-				case 0x36:	// Move Right6
+				case 0x36:	// Move Right
 					b_TurnRight = 1;
 					break;
 				case 0x37:	// Toward the Front
@@ -120,6 +138,20 @@ int main(void)
 				case 0x39:	// Squeeze to Left
 					b_SqueezeToLeft = 1;
 					break;
+					// -----
+				case 0x3A:	// Move Forward
+					b_Forward_Advance = 1;
+					break;
+				case 0x3B:	// Move BackWard
+					b_Backward_Advance = 1;
+					break;
+				case 0x3C:	// Move Left
+					b_TurnLeft_Advance = 1;
+					break;
+				case 0x3D:	// Move Right
+					b_TurnRight_Advance = 1;
+					break;
+					// -----
 				case 0x40:	// Squeeze to Right
 					b_SqueezeToRight = 1;
 					break;
@@ -162,80 +194,152 @@ int main(void)
 				case 0x53:	// Greeting Audience
 					b_Greeting = 1;
 					break;
-				
+				// AUTO
+				case 0x13:
+					temp = Apod_Read_Distance();
+					USART_SendData(USART1,temp);				
+					break;
+				case 0xA1:
+					APOD_Grip();
+					break;
 			}
 			// Clear state
 			b_Command = 0;
 		}
+		// ---------------------------------- ------
+		// Forward move
+		if (b_Forward_Advance)
+		{
+			b_Release = 0;
+			/* do something */
+			APOD_Forward_Advance(120,60,3000000);
+			// send finish token
+			USART_SendData(USART1,'.');
+			// Clear state
+			b_Forward_Advance = 0;
+			
+		}
+		// Backward move
+		if (b_Backward_Advance)
+		{
+			b_Release = 0;
+			/* do something */
+			APOD_Backward_Advance(120,60,3000000);
+			// send finish token
+			USART_SendData(USART1,'.');
+			// Clear state
+			b_Backward_Advance = 0;
+			
+		}
+		// Forward move
+		if (b_TurnLeft_Advance)
+		{
+			b_Release = 0;
+			/* do something */
+			APOD_TurnLeft_Advance(120,60,3000000);
+			// send finish token
+			USART_SendData(USART1,'.');
+			// Clear state
+			b_TurnLeft_Advance = 0;
+			
+		}
+		// Forward move
+		if (b_TurnRight_Advance)
+		{
+			b_Release = 0;
+			/* do something */
+			APOD_TurnRight_Advance(120,60,3000000);
+			// send finish token
+			USART_SendData(USART1,'.');
+			// Clear state
+			b_TurnRight_Advance = 0;
+			
+		}
 		// ----------------------------------------
+		if (b_Reset)
+		{
+			MANDIBLE_Reset_All();
+			NECK_Reset_All();
+			LEG_Reset_All();
+			GenerateCommand_All(cmd);
+			sendUSART(USART2,cmd,94);
+			b_Reset = 0;
+		}
 		if (b_Start)
 		{
 			/* do something */
-				cmd_start();
-				GenerateCommand_All(string);
-				sendUSART(USART2,string,sizeof(string));
-				
-				checkStart = 1;
+			cmd_start();			
+			checkStart = 1;
 			// Clear state
 			b_Start = 0;
+			
 		}
 		if (b_Stop)
 		{
 			/* do something */
-				Apod_Balance();  
-				LEG_Reset_All();
-				cmd_stop();
-				
-				checkStart = 0;
+			cmd_stop();
 			// Clear state
 			b_Stop = 0;
+			
 		}
 		// ----------------------------------------
 		// Forward move
 		if (b_Forward)
 		{
 			/* do something */
-			APOD_Forward(2,100,100,1638400);
+			APOD_Forward(2,120,60,4000000);
+			// send finish token
+			USART_SendData(USART1,'.');
 			// Clear state
 			b_Forward = 0;
+			
 		}
 		// Backward move
 		if (b_Backward)
 		{
 			/* do something */
-			APOD_Backward(2,100,100,1638400);
+			APOD_Backward(2,120,60,4000000);
+			// send finish token
+			USART_SendData(USART1,'.');
 			// Clear state
 			b_Backward = 0;
+			
 		}
 		// Turn Left
 		if (b_TurnLeft)
 		{
 			/* do something */
-			APOD_TurnLeft(1,100,100,1638400);
+			APOD_TurnLeft(1,120,60,4000000);
+			// send finish token
+			USART_SendData(USART1,'.');
 			// Clear state
 			b_TurnLeft = 0;
+			
 		}
 		// Turn Right
 		if (b_TurnRight)
 		{
 			/* do something */
-			APOD_TurnRight(1,100,100,1638400);
+			APOD_TurnRight(1,120,60,4000000);
+			// send finish token
+			USART_SendData(USART1,'.');
 			// Clear state
 			b_TurnRight = 0;
+			
 		}
 		// toward Front
 		if (b_TowardTheFront)
 		{
 			/* do something */
-			Apod_towardtheFront(50);
+			Apod_towardtheFront(40);
 			// Clear state
 			b_TowardTheFront = 0;
 		}
 		// toward Back
-		if (b_TowardTheFront)
+		if (b_TowardTheBack)
 		{
 			/* do something */
-			Apod_towardtheBack(50);
+			Apod_towardtheBack(40);
 			// Clear state
 			b_TowardTheBack = 0;
 		}
@@ -244,45 +348,50 @@ int main(void)
 		if (b_SqueezeToLeft)
 		{
 			/* do something */
-			Apod_Squeeze_Left(50);
+			Apod_Squeeze_Left(40);
 			// Clear state
 			b_SqueezeToLeft = 0;
+			
 		}
 		
 		// Squeeze to Right
 		if (b_SqueezeToRight)
 		{
 			/* do something */
-			Apod_Squeeze_Right(50);
+			Apod_Squeeze_Right(40);
 			// Clear state
 			b_SqueezeToRight = 0;
+			
 		}
 		
 		// Stand Lift
 		if (b_StandLift)
 		{
 			/* do something */
-			Apod_lift(50);
+			Apod_lift(40);
 			// Clear state
 			b_StandLift = 0;
+			
 		}
 		
 		// Stand Drop
 		if (b_StandDrop)
 		{
 			/* do something */
-			Apod_Drop(50);
+			Apod_Drop(40);
 			// Clear state
 			b_StandDrop = 0;
+			
 		}
 		
 		// Stand balance
 		if (b_StandBalance)
 		{
 			/* do something */
-			Apod_Balance(50);
+			Apod_Balance();
 			// Clear state
 			 b_StandBalance = 0;
+			
 		}
 		
 		// Wave the Tail
@@ -292,6 +401,7 @@ int main(void)
 			
 			// Clear state
 			 b_WavetheTail = 0;
+			
 		}
 		
 		// Rotate Head Left
@@ -318,6 +428,7 @@ int main(void)
 			Apod_Head_Left(100);
 			// Clear state
 			 b_TurnHeadLeft = 0;
+			
 		}
 		
 		// Turn Head Right
@@ -327,6 +438,7 @@ int main(void)
 			Apod_Head_Right(100);
 			// Clear state
 			 b_turnHeadRight = 0;
+			
 		}
 		
 		// Lift head Up
@@ -336,6 +448,7 @@ int main(void)
 			Apod_Head_Up(100);
 			// Clear state
 			 b_LiftHeadUp = 0;
+			
 		}
 		
 		// Drop head Down
@@ -345,24 +458,26 @@ int main(void)
 			Apod_Head_Down(100);
 			// Clear state
 			 b_DropHeadDown = 0;
+			
 		}
 		
 		// Nip Mandible
 		if (b_NipMandible)
 		{
 			/* do something */
-			Apod_Mandible_Nip(100);
+			Apod_Mandible_Nip(20);
 			// Clear state
 			 b_NipMandible = 0;
 		}
-		
+
 		// Release Mandible
 		if (b_ReleaseMandible)
 		{
 			/* do something */
-			Apod_Mandible_Release(100);
+			Apod_Mandible_Release(20);
 			// Clear state
 			 b_ReleaseMandible = 0;
+			
 		}
 		
 		// Greeting audience
@@ -372,6 +487,7 @@ int main(void)
 			
 			// Clear state
 			 b_Greeting = 0;
+			
 		}
 	}
 }

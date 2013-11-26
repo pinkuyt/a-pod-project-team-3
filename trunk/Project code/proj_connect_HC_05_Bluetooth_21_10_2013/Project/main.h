@@ -9,11 +9,8 @@
 #include "stm32f4xx_rcc.h"
 #include "misc.h"
 #include <stdio.h>
-#include "led_init.h"
-#include "led1.h"
 #include "Usart.h"
 #include "Usart_Bluetooth.h"
-#include "button_init.h"
 
 #include <string.h>
 

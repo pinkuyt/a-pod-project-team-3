@@ -30,25 +30,34 @@
         
         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1"
                    Margin="0,0,0,0" TextWrapping="Wrap" Text="Camera's IP: " Name="lblCameraIp" FontSize="16" />
-        <TextBox Margin="10,10,0,10" TextWrapping="Wrap" Text="" Grid.Column="1" Grid.Row="1" Name="txtCameraIP"
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1">
+            <TextBox Margin="0,10,0,10" TextWrapping="Wrap" Text="" Name="txtCameraIP"
                      Background="{StaticResource Background}"
                      Foreground="{StaticResource Foreground}"
                  VerticalContentAlignment="Center"
-                 HorizontalAlignment="Left" Width="300" TextAlignment="Center" FontSize="16" />
+                 HorizontalAlignment="Left" Width="200" TextAlignment="Center" FontSize="16" />
+            <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Port: " Name="lblCameraPort"
+                        Margin="10,10" FontSize="16"></TextBlock>
+            <TextBox Margin="0,10,0,10" TextWrapping="Wrap" Text=""  Name="txtCameraPort"
+                     Background="{StaticResource Background}"
+                     Foreground="{StaticResource Foreground}"
+                 VerticalContentAlignment="Center"
+                 HorizontalAlignment="Left" Width="100" TextAlignment="Center" FontSize="16" />
+        </StackPanel>
         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2"
                    Margin="0,0,0,0" TextWrapping="Wrap" Text="Log in:"  FontSize="16" />
-        <TextBox Margin="10,10,0,10" TextWrapping="Wrap" Text="" Grid.Column="1" Grid.Row="2"
+        <TextBox Margin="0,10,0,10" TextWrapping="Wrap" Text="" Grid.Column="1" Grid.Row="2"
                      Background="{StaticResource Background}"
                      Foreground="{StaticResource Foreground}"
                  VerticalContentAlignment="Center" Name="txtLogin"
-                 HorizontalAlignment="Left" Width="300" TextAlignment="Left" FontSize="16" />
+                 HorizontalAlignment="Left" Width="200" TextAlignment="Left" FontSize="16" />
         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3"
                    Margin="0,0,0,0" TextWrapping="Wrap" Text="Password: "  FontSize="16" />
-        <PasswordBox Margin="10,10,0,10" Grid.Column="1" Grid.Row="3"
+        <PasswordBox Margin="0,10,0,10" Grid.Column="1" Grid.Row="3"
                      Background="{StaticResource Background}"
                      Foreground="{StaticResource Foreground}"
                  VerticalContentAlignment="Center" Name="txtPassword"
-                 HorizontalAlignment="Left" Width="300"  FontSize="16" />
+                 HorizontalAlignment="Left" Width="200"  FontSize="16" />
         
         
         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
@@ -60,8 +69,8 @@
         	Margin="0,0,5,0" Grid.Row="5" TextWrapping="Wrap" Text="COM Port: " FontSize="16" />
         <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center"
         	Margin="0,0,5,0" Grid.Row="6" TextWrapping="Wrap" Text="Baudrate: " FontSize="16"/>
-        <ComboBox Name="cbBTOutgoing" Grid.Column="1" Grid.Row="5" Margin="10,10" Width="200" HorizontalAlignment="Left" FontSize="16"/>
-        <ComboBox Name="cbBTOutgoingBaud" Grid.Column="1" Grid.Row="6" Margin="10,10" Width="100" HorizontalAlignment="Left"
+        <ComboBox Name="cbBTOutgoing" Grid.Column="1" Grid.Row="5" Margin="0,10" Width="200" HorizontalAlignment="Left" FontSize="16"/>
+        <ComboBox Name="cbBTOutgoingBaud" Grid.Column="1" Grid.Row="6" Margin="0,10" Width="100" HorizontalAlignment="Left"
                   SelectedIndex="3" FontSize="16">
             <ComboBoxItem Content="115200"/>
             <ComboBoxItem Content="57600"/>

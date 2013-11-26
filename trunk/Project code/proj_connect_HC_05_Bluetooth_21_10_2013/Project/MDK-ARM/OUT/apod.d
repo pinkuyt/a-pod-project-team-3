@@ -40,3 +40,4 @@
 .\out\apod.o: C:\Keil\ARM\ARMCC\bin\..\include\string.h
 .\out\apod.o: ..\Usart.h
 .\out\apod.o: C:\Keil\ARM\RV31\INC\stdio.h
+.\out\apod.o: ..\Global.h
