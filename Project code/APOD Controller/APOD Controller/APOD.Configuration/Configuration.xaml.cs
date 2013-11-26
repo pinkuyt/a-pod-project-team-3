@@ -23,6 +23,7 @@ namespace APOD_Controller.APOD.Configuration
     {
         public static bool Initiated = false;
         public static string CameraIp;
+        public static int CameraPort;
         public static string OutgoingPort;
         public static int OutgoingBaudrate;
         public static string IncomingPort;
@@ -33,7 +34,6 @@ namespace APOD_Controller.APOD.Configuration
         public Configuration()
         {
             InitializeComponent();
-
             LoadPort();
         }
 
@@ -58,6 +58,17 @@ namespace APOD_Controller.APOD.Configuration
                 lblCameraIp.Foreground = Brushes.FloralWhite;
             }
 
+            int port;
+            if (!int.TryParse(txtCameraPort.Text, out port))
+            {
+                lblCameraPort.Foreground = Brushes.OrangeRed;
+                result = false;
+            }
+            else
+            {
+                lblCameraPort.Foreground = Brushes.FloralWhite;
+            }
+
             if (cbBTOutgoing.Text == "")
             {
                 lblBTOutPort.Foreground = Brushes.OrangeRed;
@@ -77,11 +88,13 @@ namespace APOD_Controller.APOD.Configuration
             if (IsValid())
             {
                 CameraIp = txtCameraIP.Text;
-                OutgoingPort = cbBTOutgoing.Text;
-                OutgoingBaudrate = int.Parse(cbBTOutgoingBaud.Text);
+                CameraPort = int.Parse(txtCameraPort.Text);
                 Login = txtLogin.Text;
                 Password = txtPassword.Password;
 
+                OutgoingPort = cbBTOutgoing.Text;
+                OutgoingBaudrate = int.Parse(cbBTOutgoingBaud.Text);
+                
                 Initiated = true;
                 DialogResult = true;
                 Close();

@@ -1,32 +1,35 @@
 #include "Usart_Bluetooth.h"
-#include "A_Pod_Command.h"
 #include "Usart.h"
-#include "testCmd.h"
 #include "APOD.h"
+#include "Global.h"
+
 uint16_t i;
 
-
 int checkstep = 0;
-extern char RecievedCommand;
-extern char b_Command;
 /**
   * @brief  This function handles USARTx global interrupt request
   * @param  None
   * @retval None
   */
 void USART1_IRQHandler(void)
-{	char stringc[256];
+{	
+	char stringc[256];
 	//char string [256];
-	int interval = 100;//
-	uint16_t choice;
 	
-    if ((USART1->SR & USART_FLAG_RXNE) != (u16)RESET)
+  if ((USART1->SR & USART_FLAG_RXNE) != (u16)RESET)
 	{
-		i = USART_ReceiveData(USART1);
+		uint16_t data = USART_ReceiveData(USART1);
 		memset(stringc,0,sizeof(stringc[0])*256); // Clear all to 0 so string properly represented
 		sprintf(stringc,"%c",i);
-		RecievedCommand = i;
-		b_Command = 1;
+		switch(data)
+		{
+			case 0xAA:
+				b_Release = 1;
+				break;
+			default:
+				RecievedCommand = data;
+				b_Command = 1;
+		}
 	}
 }
 
@@ -34,9 +37,6 @@ void USART1_IRQHandler(void)
 void sendUSART(USART_TypeDef* USARTx,volatile char *s,int size)
 {
     int index=0;
-    if (s==NULL)
-        return;
- 
     // Iterate over the buffer2 and print char by char
     for (index = 0; index<size; index ++) {
          
@@ -60,6 +60,7 @@ void usart_rxtx(void)
     NVIC_Configuration();
 		init_USART1(9600);
 		UART2_CONFIG(9600);	
+		
 }
 
 void init_USART1(uint32_t baudrate){
@@ -115,12 +116,7 @@ void init_USART1(uint32_t baudrate){
   * if the USART1 receive interrupt occurs
   */
   USART_ITConfig(USART1, USART_IT_RXNE, ENABLE); // enable the USART1 receive interrupt
-  
-	//
-
-	//
-							 // the properties are passed to the NVIC_Init function which takes care of the low level stuff
-  
+  // the properties are passed to the NVIC_Init function which takes care of the low level stuff 
   // finally this enables the complete USART1 peripheral
   USART_Cmd(USART1, ENABLE);
 }
@@ -131,9 +127,7 @@ void init_USART1(uint32_t baudrate){
   */
 void NVIC_Configuration(void)
 {
-		/* Configure the Priority Group to 2 bits */
-	
-	
+	/* Configure the Priority Group to 2 bits */
   NVIC_InitTypeDef NVIC_InitStructure;
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
   /* Enable the USARTx Interrupt */
@@ -144,9 +138,10 @@ void NVIC_Configuration(void)
   NVIC_Init(&NVIC_InitStructure);
 }
 /*---------------------------------
-8mhz = 2^13 or 8*1024*1000 hz per sencond --> 1ms = 8192
+No fucking idea! :(
 ---------------------------------*/
 void Delay(__IO uint32_t nCount)
 	{
 		for(; nCount != 0; nCount--);
 	}
+

@@ -37,15 +37,10 @@
 .\out\usart_bluetooth.o: ..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\out\usart_bluetooth.o: C:\Keil\ARM\ARMCC\bin\..\include\string.h
 .\out\usart_bluetooth.o: C:\Keil\ARM\ARMCC\bin\..\include\stdio.h
-.\out\usart_bluetooth.o: ..\A_Pod_Command.h
-.\out\usart_bluetooth.o: ..\A_Pod_define.h
 .\out\usart_bluetooth.o: ..\Usart.h
 .\out\usart_bluetooth.o: C:\Keil\ARM\RV31\INC\stdio.h
-.\out\usart_bluetooth.o: ..\Usart_Bluetooth.h
-.\out\usart_bluetooth.o: ..\checkCommand.h
-.\out\usart_bluetooth.o: ..\Usart.h
-.\out\usart_bluetooth.o: ..\testCmd.h
-.\out\usart_bluetooth.o: ..\Usart_Bluetooth.h
 .\out\usart_bluetooth.o: ..\APOD.h
 .\out\usart_bluetooth.o: ..\Usart_Bluetooth.h
 .\out\usart_bluetooth.o: ..\Usart.h
+.\out\usart_bluetooth.o: ..\Global.h
+.\out\usart_bluetooth.o: ..\Global.h

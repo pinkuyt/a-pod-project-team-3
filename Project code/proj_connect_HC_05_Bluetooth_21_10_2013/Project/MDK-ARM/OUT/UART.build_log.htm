@@ -3,91 +3,29 @@
 <pre>
 <h1>µVision Build Log</h1>
 <h2>Project:</h2>
-Z:\Documents\FPT University\LOP CO BAN ARM\PROJECT\proj_connect_HC_05_Bluetooth_21_10_2013\Project\MDK-ARM\UART.uvproj
-Project File Date:  11/08/2013
+E:\[@] Capstone Project\STM\proj_connect_HC_05_Bluetooth_21_10_2013\Project\MDK-ARM\UART.uvproj
+Project File Date:  11/11/2013
 
 <h2>Output:</h2>
-Build target 'UART'
+Rebuild target 'UART'
+assembling startup_stm32f4xx.s...
+compiling misc.c...
+compiling stm32f4xx_gpio.c...
+compiling stm32f4xx_usart.c...
+compiling stm32f4xx_syscfg.c...
+compiling stm32f4xx_rcc.c...
+compiling stm32f4xx_exti.c...
+compiling stm32f4xx_dma.c...
 compiling main.c...
-..\Usart.h(13): warning:  #1-D: last line of file ends without a newline
-  void USART2_IRQHandler(void);
-..\Usart_Bluetooth.h(12): warning:  #1295-D: Deprecated declaration initPA15 - give arg types
-  void initPA15();
-..\Usart_Bluetooth.h(13): warning:  #1295-D: Deprecated declaration setPA15On - give arg types
-  void setPA15On();
-..\Usart_Bluetooth.h(14): warning:  #1295-D: Deprecated declaration togglePA15 - give arg types
-  void togglePA15();
-..\Usart_Bluetooth.h(20): warning:  #1-D: last line of file ends without a newline
-  void sendUSART(USART_TypeDef* USARTx, volatile char *s,int size);
-..\Usart_Bluetooth.h(12): warning:  #1295-D: Deprecated declaration initPA15 - give arg types
-  void initPA15();
-..\Usart_Bluetooth.h(13): warning:  #1295-D: Deprecated declaration setPA15On - give arg types
-  void setPA15On();
-..\Usart_Bluetooth.h(14): warning:  #1295-D: Deprecated declaration togglePA15 - give arg types
-  void togglePA15();
-..\Usart_Bluetooth.h(20): warning:  #1-D: last line of file ends without a newline
-  void sendUSART(USART_TypeDef* USARTx, volatile char *s,int size);
-..\Usart.h(13): warning:  #1-D: last line of file ends without a newline
-  void USART2_IRQHandler(void);
-..\APOD.h(64): warning:  #1295-D: Deprecated declaration Apod_Balance - give arg types
-  void Apod_Balance(); // done
-..\APOD.h(96): warning:  #1295-D: Deprecated declaration readADC - give arg types
-  void readADC();
-..\Usart.h(13): warning:  #1-D: last line of file ends without a newline
-  void USART2_IRQHandler(void);
-..\Usart_Bluetooth.h(12): warning:  #1295-D: Deprecated declaration initPA15 - give arg types
-  void initPA15();
-..\Usart_Bluetooth.h(13): warning:  #1295-D: Deprecated declaration setPA15On - give arg types
-  void setPA15On();
-..\Usart_Bluetooth.h(14): warning:  #1295-D: Deprecated declaration togglePA15 - give arg types
-  void togglePA15();
-..\Usart_Bluetooth.h(20): warning:  #1-D: last line of file ends without a newline
-  void sendUSART(USART_TypeDef* USARTx, volatile char *s,int size);
-..\checkCommand.h(10): warning:  #1-D: last line of file ends without a newline
-  void servos(char *command, char *servo, uint16_t Pulse,uint16_t weightNumber);
-..\A_Pod_Command.h(27): warning:  #1295-D: Deprecated declaration forward - give arg types
-  void forward();
-..\main.c: 19 warnings, 0 errors
+compiling system_stm32f4xx.c...
 compiling Usart.c...
-..\Usart.h(13): warning:  #1-D: last line of file ends without a newline
-  void USART2_IRQHandler(void);
-..\Usart.c(135): warning:  #1-D: last line of file ends without a newline
-  }
-..\Usart.c: 2 warnings, 0 errors
+compiling Usart_Bluetooth.c...
 compiling APOD.c...
-..\Usart_Bluetooth.h(12): warning:  #1295-D: Deprecated declaration initPA15 - give arg types
-  void initPA15();
-..\Usart_Bluetooth.h(13): warning:  #1295-D: Deprecated declaration setPA15On - give arg types
-  void setPA15On();
-..\Usart_Bluetooth.h(14): warning:  #1295-D: Deprecated declaration togglePA15 - give arg types
-  void togglePA15();
-..\Usart_Bluetooth.h(20): warning:  #1-D: last line of file ends without a newline
-  void sendUSART(USART_TypeDef* USARTx, volatile char *s,int size);
-..\Usart.h(13): warning:  #1-D: last line of file ends without a newline
-  void USART2_IRQHandler(void);
-..\APOD.h(64): warning:  #1295-D: Deprecated declaration Apod_Balance - give arg types
-  void Apod_Balance(); // done
-..\APOD.h(96): warning:  #1295-D: Deprecated declaration readADC - give arg types
-  void readADC();
-..\APOD.c(332): warning:  #177-D: variable "length" was declared but never referenced
-        char length ;
-..\APOD.c(498): warning:  #177-D: variable "length" was declared but never referenced
-        char length ;
-..\APOD.c(1068): warning:  #550-D: variable "haflInterval" was set but never used
-        int haflInterval;
-..\APOD.c(1090): warning:  #550-D: variable "haflInterval" was set but never used
-        int haflInterval;
-..\APOD.c(1328): warning:  #1-D: last line of file ends without a newline
-  }
-..\APOD.c: 12 warnings, 0 errors
 linking...
-Program Size: Code=10532 RO-data=424 RW-data=300 ZI-data=1284  
+Program Size: Code=13208 RO-data=424 RW-data=304 ZI-data=1376  
 FromELF: creating hex file...
-".\OUT\UART.axf" - 0 Error(s), 33 Warning(s).
-Load "Z:\\Documents\\FPT University\\LOP CO BAN ARM\\PROJECT\\proj_connect_HC_05_Bluetooth_21_10_2013\\Project\\MDK-ARM\\OUT\\UART.axf" 
+".\OUT\UART.axf" - 0 Error(s), 0 Warning(s).
+Load "E:\\[@] Capstone Project\\STM\\proj_connect_HC_05_Bluetooth_21_10_2013\\Project\\MDK-ARM\\OUT\\UART.axf" 
 Erase Done.
 Programming Done.
 Verify OK.
-</pre>
-</body>
-</html>
