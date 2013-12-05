@@ -1,0 +1,55 @@
+RAM Allocation
+Variable                                                          Address   Size
+--------------------------------------------------------------------------------
+Timer_Count                                                       0300h        2
+b_echo_back                                                       0302h        1
+Servo                                                             0303h       32
+PW_SPI_B0                                                         0323h       33
+PW_SPI_B1                                                         0344h       33
+PW_SPI_B2                                                         0365h       33
+PW_SPI_B3                                                         0386h       33
+Edges_Ctr                                                         03A7h        1
+Edges_Ptr                                                         03A8h        1
+PW_Mask                                                           03A9h      128
+PW_Time                                                           0429h       64
+PW_Width                                                          0469h       64
+SV_Width                                                          04A9h       64
+rx_buffer0                                                        04E9h      256
+tx_buffer0                                                        05E9h      256
+cmd                                                               06E9h        1
+CMD_Pattern                                                       06EAh        3
+CMD_Count                                                         06EDh        1
+CMD_Channel                                                       06EEh       32
+CMD_Time                                                          070Eh       64
+SP_Steps                                                          074Eh       32
+SP_Dir                                                            076Eh       32
+SP_Interval                                                       078Eh       32
+Interval                                                          07AEh        1
+i                                                                 07AFh        1
+j                                                                 07B0h        1
+channel                                                           07B1h        1
+tmp                                                               07B2h        1
+adc                                                               07B3h        2
+distance                                                          07B5h        2
+delay                                                             07B7h        1
+ctr                                                               07B8h        1
+p                                                                 07B9h        2
+
+EEPROM Allocation
+Variable                                                          Address   Size
+--------------------------------------------------------------------------------
+
+Register Allocation
+Variable                                                          Register  Size
+--------------------------------------------------------------------------------
+rx_wr_index0                                                      R3,R4        2
+rx_rd_index0                                                      R5,R6        2
+rx_counter0                                                       R7,R8        2
+rx_buffer_overflow0                                               GPIOR0.0  1bit
+tx_wr_index0                                                      R9,R10       2
+tx_rd_index0                                                      R11,R12      2
+tx_counter0                                                       R13,R14      2
+b_exec                                                            GPIOR0.1  1bit
+b_move                                                            GPIOR0.2  1bit
+b_step                                                            GPIOR0.3  1bit
+b_recieve_cmd                                                     GPIOR0.4  1bit
