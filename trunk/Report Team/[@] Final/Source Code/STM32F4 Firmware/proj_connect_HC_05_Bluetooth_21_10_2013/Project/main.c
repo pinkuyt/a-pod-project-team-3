@@ -313,17 +313,16 @@ int main(void)
 		}
 		if (b_Stop)
 		{
-			/* do something */
-			cmd_stop();
 			
 			// reset
-			MANDIBLE_Reset_All();
 			NECK_Reset_All();
 			LEG_Reset_All();
 			
 			GenerateCommand_All(cmd);
 			sendUSART(USART2,cmd,94);
 			
+			/* do something */
+			cmd_stop();
 			// Clear state
 			b_Stop = 0;
 			

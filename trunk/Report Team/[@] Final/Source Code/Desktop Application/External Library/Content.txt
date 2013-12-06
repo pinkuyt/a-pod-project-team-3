@@ -1,0 +1,13 @@
+- AForge.dll
+- AForge.Controls.dll
+- AForge.Imaging.dll
+- AForge.Math.dll
+- AForge.Video.DirectShow.dll
+- AForge.Video.dll
+- AForge.Vision.dll
+- MahApps.Metro.dll
+- Selen.Wpf.Core.dll
+- Selen.Wpf.GenericAppTree.Contracts.dll
+- Selen.Wpf.GenericAppTree.dll
+- Selen.Wpf.SystemStyles.dll
+- System.Windows.Interactivity.dll

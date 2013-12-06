@@ -342,12 +342,6 @@ namespace APOD_Controller
                 {
                         // Action key
                     case Key.Start:
-                        if (actL1.Click && !actL2.Click)
-                        {
-                            //reset
-                            result = Bluetooth.SendCommand(Command.Reset);
-                            break;
-                        }
                         result = Bluetooth.SendCommand(Command.Start);
                         break;
                     case Key.Select:
@@ -416,25 +410,24 @@ namespace APOD_Controller
         /// <param name="e"></param>
         private void Streaming_Trigger(object sender, RoutedEventArgs e)
         {
-            //if (!CheckConfig())
-            //{
-            //    MessageBox.Show("Configuration is required to perform this task.", "Error", MessageBoxButton.OK,
-            //                    MessageBoxImage.Error);
-            //    return;
-            //}
+            if (!CheckConfig())
+            {
+                MessageBox.Show("Configuration is required to perform this task.", "Error", MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+                return;
+            }
             if (viewCam.VideoSource == null)
             {
                 // get new source from IP
                 string cameraUrl = "http://" + Configuration.CameraIp + ":" + Configuration.CameraPort + "/videostream.cgi";
-                //string cameraUrl = "http://192.168.2.15:80/videostream.cgi";
                 MJPEGStream source = new MJPEGStream(cameraUrl) 
                     {
                         Login = "admin",// Configuration.Login,
                         Password =""// Configuration.Passwordco
                     };
 
-                OpenVideoSource(new VideoCaptureDevice(LocalVideoDevices[0].MonikerString));
-                //OpenVideoSource(source);
+                //OpenVideoSource(new VideoCaptureDevice(LocalVideoDevices[0].MonikerString));
+                OpenVideoSource(source);
                 hostCam.Visibility = Visibility.Visible;
                 imgSplash.Visibility = Visibility.Collapsed;
             }
@@ -926,11 +919,11 @@ namespace APOD_Controller
         private void Tracking(object sender, DoWorkEventArgs doWorkEventArgs)
         {
             BackgroundWorker worker = (BackgroundWorker)sender;
-            bool result = true;
+            bool result;
             while (!worker.CancellationPending)
             {
                 // terminate token
-                result = Bluetooth.SendCommand(0xAA);
+                if (!Bluetooth.SendCommand(0xAA)) return;
                 while (!Bluetooth.Read().Contains(".")) ;
                 // lost sight
                 if (Target.Lost)
@@ -940,7 +933,7 @@ namespace APOD_Controller
 
                 // check distance
                 Bluetooth.ClearPreviousResponse();
-                result = Bluetooth.SendCommand(0xDD);
+                if (!Bluetooth.SendCommand(0xDD)) return;
                 System.Threading.Thread.Sleep(600);
                 byte d = Bluetooth.ReadResponse();
 
