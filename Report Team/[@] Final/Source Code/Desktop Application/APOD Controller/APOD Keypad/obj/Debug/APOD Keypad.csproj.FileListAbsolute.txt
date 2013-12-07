@@ -1,0 +1,11 @@
+E:\[@] Capstone Project\WPF\APOD Controller\APOD Keypad\bin\Debug\Keypad.dll
+E:\[@] Capstone Project\WPF\APOD Controller\APOD Keypad\bin\Debug\Keypad.pdb
+E:\[@] Capstone Project\WPF\APOD Controller\APOD Keypad\obj\Debug\APOD Keypad.csprojResolveAssemblyReference.cache
+E:\[@] Capstone Project\WPF\APOD Controller\APOD Keypad\obj\Debug\Key.baml
+E:\[@] Capstone Project\WPF\APOD Controller\APOD Keypad\obj\Debug\Key.g.cs
+E:\[@] Capstone Project\WPF\APOD Controller\APOD Keypad\obj\Debug\Keypad_MarkupCompile.cache
+E:\[@] Capstone Project\WPF\APOD Controller\APOD Keypad\obj\Debug\Keypad.g.resources
+E:\[@] Capstone Project\WPF\APOD Controller\APOD Keypad\obj\Debug\Keypad.Properties.Resources.resources
+E:\[@] Capstone Project\WPF\APOD Controller\APOD Keypad\obj\Debug\APOD Keypad.csproj.GenerateResource.Cache
+E:\[@] Capstone Project\WPF\APOD Controller\APOD Keypad\obj\Debug\Keypad.dll
+E:\[@] Capstone Project\WPF\APOD Controller\APOD Keypad\obj\Debug\Keypad.pdb
