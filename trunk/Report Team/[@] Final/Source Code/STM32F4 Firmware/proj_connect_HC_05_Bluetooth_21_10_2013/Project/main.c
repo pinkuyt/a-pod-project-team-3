@@ -229,7 +229,7 @@ int main(void)
 			LEG_Reset_All();
 			
 			GenerateCommand_All(cmd);
-			sendUSART(USART2,cmd,94);
+			sendUSART(USART2,cmd,86);
 			b_Reset = 0;
 		}
 		if (b_Fast)
