@@ -37,7 +37,6 @@
 .\out\main.o: ..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\out\main.o: C:\Keil\ARM\ARMCC\bin\..\include\stdio.h
 .\out\main.o: ..\Usart.h
-.\out\main.o: C:\Keil\ARM\RV31\INC\stdio.h
 .\out\main.o: ..\Usart_Bluetooth.h
 .\out\main.o: C:\Keil\ARM\ARMCC\bin\..\include\string.h
 .\out\main.o: ..\APOD.h

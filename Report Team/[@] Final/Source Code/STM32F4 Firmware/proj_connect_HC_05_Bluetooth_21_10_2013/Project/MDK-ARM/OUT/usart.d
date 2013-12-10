@@ -35,9 +35,8 @@
 .\out\usart.o: ..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h
 .\out\usart.o: ..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h
 .\out\usart.o: ..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
-.\out\usart.o: C:\Keil\ARM\RV31\INC\stdio.h
-.\out\usart.o: ..\APOD.h
 .\out\usart.o: C:\Keil\ARM\ARMCC\bin\..\include\stdio.h
+.\out\usart.o: ..\APOD.h
 .\out\usart.o: ..\Usart_Bluetooth.h
 .\out\usart.o: C:\Keil\ARM\ARMCC\bin\..\include\string.h
 .\out\usart.o: ..\Usart.h

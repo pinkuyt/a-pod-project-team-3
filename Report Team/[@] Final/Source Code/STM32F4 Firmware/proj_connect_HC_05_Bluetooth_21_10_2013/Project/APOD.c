@@ -45,18 +45,30 @@ unsigned int LeftRear[3] = {24,25,26};
 unsigned int Neck[3] = {13,14,15};		
 unsigned int Mandible[2] = {3,19};
 
+unsigned char Valid(unsigned int servo)
+{
+	if ((Servos[servo] >900) && (Servos[servo] <2100))return 1;
+	return 0;
+}
 // ----------------------------------------
 // Mandible control
 // ----------------------------------------
+// interval: >0:grip <0:release
 void MANDIBLE(char mandible, int interval)
 {
 	switch(mandible)
 	{
 		case 0: //MANDIBLE_LEFT
-			Servos[Mandible[0]] -= interval;
+			if  (Valid(Mandible[0]))
+			{
+				Servos[Mandible[0]] -= interval;
+			}
 			break;
 		case 1: //MANDIBLE_RIGHT
-			Servos[Mandible[1]] += interval;
+			if  (Valid(Mandible[1]))
+			{
+				Servos[Mandible[1]] += interval;
+			}
 			break;
 	}
 }
@@ -78,17 +90,26 @@ void MANDIBLE_Reset_All(void)
 // ----------------------------------------
 void Neck_Rotate(int interval)
 {
-	Servos[(Neck[0])] += interval;
+	if (Valid(Neck[0]))
+	{
+		Servos[(Neck[0])] += interval;
+	}
 }
 
 void Neck_Horizontal(int interval)
 {
-	Servos[(Neck[1])] += interval;
+	if (Valid(Neck[1]))
+	{
+		Servos[(Neck[1])] += interval;
+	}
 }
 
 void Neck_Vertical(int interval)
 {
-	Servos[(Neck[2])] += interval;
+	if (Valid(Neck[2]))
+	{
+		Servos[(Neck[2])] += interval;
+	}
 }
 void NECK_Reset_All(void)
 {
@@ -105,21 +126,27 @@ void LEG_Lift(char leg, int interval)
 	switch(leg)
 	{
 		case 0: // RIGHT_FRONT
+			if (!Valid(RightFront[1])) {return;}
 			Servos[RightFront[1]] += interval;
 			break;
 		case 1: // RIGHT_CENTER
+			if (!Valid(RightCenter[1])) {return;}
 			Servos[RightCenter[1]] += interval;
 			break;
 		case 2: // RIGHT_REAR
+			if (!Valid(RightRear[1])) {return;}
 			Servos[RightRear[1]] += interval;
 			break;
 		case 3: // LEFT_FRONT
+			if (!Valid(LeftFront[1])) {return;}
 			Servos[LeftFront[1]] -= interval;
 			break;
 		case 4: // LEFT_CENTER
+			if (!Valid(LeftCenter[1])) {return;}
 			Servos[LeftCenter[1]] -= interval;
 			break;
 		case 5: // LEFT_REAR
+			if (!Valid(LeftRear[1])) {return;}
 			Servos[LeftRear[1]] -= interval;
 			break;
 	}
@@ -158,21 +185,27 @@ void LEG_Forward(char leg, int interval)
 	switch(leg)
 	{
 		case 0: // RIGHT_FRONT
+			if (!Valid(RightFront[0])) {return;}
 			Servos[RightFront[0]] += interval;
 			break;
 		case 1: // RIGHT_CENTER
+			if (!Valid(RightCenter[0])) {return;}
 			Servos[RightCenter[0]] += interval;
 			break;
 		case 2: // RIGHT_REAR
+			if (!Valid(RightRear[0])) {return;}
 			Servos[RightRear[0]] += interval;
 			break;
 		case 3: // LEFT_FRONT
+			if (!Valid(LeftFront[0])) {return;}
 			Servos[LeftFront[0]] -= interval;
 			break;
 		case 4: // LEFT_CENTER
+			if (!Valid(LeftCenter[0])) {return;}
 			Servos[LeftCenter[0]] -= interval;
 			break;
 		case 5: // LEFT_REAR
+			if (!Valid(LeftRear[0])) {return;}
 			Servos[LeftRear[0]] -= interval;
 			break;
 	}
@@ -1728,7 +1761,7 @@ void Apod_Balance(void)
 	sendUSART(USART2,cmd,sizeof(cmd));
 }
 
-void Apod_towardtheFront(int interval)
+void Apod_towardtheBack(int interval)
 {
 	char cmd[74];
 	if (Servos[1] > 900)
@@ -1748,7 +1781,7 @@ void Apod_towardtheFront(int interval)
 	}
 }
 
-void Apod_towardtheBack(int interval)
+void Apod_towardtheFront(int interval)
 {
 	char cmd[74];
 	if (Servos[1] < 2000)
@@ -1949,18 +1982,8 @@ void GenerateCommand_All(char* cmd)
 		cmd[4*i+3] = (Servos[servo])&0xFF;// low byte
 		i++;
 	}
-  //Mandible[2] = {3,19};
-	while(i<20) // cmd index : 72 -> 79
-	{
-		servo = Mandible[(i%3)];
-		cmd[4*i] = '#';
-		cmd[4*i+1] = servo;								// servo number
-		cmd[4*i+2] = (Servos[servo])>>8;  // high byte
-		cmd[4*i+3] = (Servos[servo])&0xFF;// low byte
-		i++;
-	}
 	//Neck[3] = {13,14,15};		
-	while(i<23) // cmd index : 80 -> 91
+	while(i<21) // cmd index : 72 -> 83
 	{
 		servo = Neck[(i%4)];
 		cmd[4*i] = '#';
@@ -1969,6 +1992,17 @@ void GenerateCommand_All(char* cmd)
 		cmd[4*i+3] = (Servos[servo])&0xFF;// low byte
 		i++;
 	}
+	
+//  //Mandible[2] = {3,19};
+//	while(i<23) // cmd index : 84 -> 91
+//	{
+//		servo = Mandible[(i%3)];
+//		cmd[4*i] = '#';
+//		cmd[4*i+1] = servo;								// servo number
+//		cmd[4*i+2] = (Servos[servo])>>8;  // high byte
+//		cmd[4*i+3] = (Servos[servo])&0xFF;// low byte
+//		i++;
+//	}
 	
 	cmd[4*i] = 'T';
 	cmd[4*i+1] = 0x01;
@@ -2130,15 +2164,13 @@ void GenerateCommand_Legs(char* cmd)
 // ----------------------------------------
 void APOD_Grip(void) 
 {
-	int count = 0;
 	int interval;
 	uint16_t d = Apod_Read_Distance();
 	interval = Apod_Mandibles_Expand();
-	while ((d>4) && (count<15))
-	{
-		APOD_Forward(1,120,60);
-	  d = Apod_Read_Distance();
-		count++;
-	}
+	
+	if (d>60) return;
+	APOD_Forward(2*d/10,120,60);
+	d = Apod_Read_Distance();
+	
 	Apod_Mandible_Nip(interval);
 }
