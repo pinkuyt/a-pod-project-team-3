@@ -2165,11 +2165,13 @@ void GenerateCommand_Legs(char* cmd)
 void APOD_Grip(void) 
 {
 	int interval;
+	int count; 
 	uint16_t d = Apod_Read_Distance();
 	interval = Apod_Mandibles_Expand();
 	
 	if (d>60) return;
-	APOD_Forward(2*d/10,120,60);
+	count = d/5;
+	APOD_Forward(count,120,60);
 	d = Apod_Read_Distance();
 	
 	Apod_Mandible_Nip(interval);

@@ -305,7 +305,14 @@ int main(void)
 		if (b_Start)
 		{
 			/* do something */
-			cmd_start();			
+			cmd_start();		
+			// reset
+			NECK_Reset_All();
+			LEG_Reset_All();
+			
+			GenerateCommand_All(cmd);
+			sendUSART(USART2,cmd,86);
+						
 			checkStart = 1;
 			// Clear state
 			b_Start = 0;
@@ -319,7 +326,7 @@ int main(void)
 			LEG_Reset_All();
 			
 			GenerateCommand_All(cmd);
-			sendUSART(USART2,cmd,94);
+			sendUSART(USART2,cmd,86);
 			
 			/* do something */
 			cmd_stop();
