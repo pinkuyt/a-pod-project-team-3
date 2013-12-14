@@ -154,7 +154,7 @@
                                          GroupName="LiveMode" FontSize="16" FontFamily="Calibri" FontWeight="Bold" Checked="rdModeKeypad_Checked" Unchecked="rdModeKeypad_Unchecked"/>
                             <RadioButton x:Name="rdModeObjTracking" Content="OBJECT TRACKING"  Margin="0,5,0,5" Height="40"
                                          Style="{StaticResource {x:Type ToggleButton}}"
-                                         GroupName="LiveMode" FontSize="16" FontFamily="Calibri" FontWeight="Bold" Checked="rdModeObjTracking_Checked" Unchecked="rdModeObjTracking_Unchecked" />
+                                         FontSize="16" FontFamily="Calibri" FontWeight="Bold" Checked="rdModeObjTracking_Checked" Unchecked="rdModeObjTracking_Unchecked" />
                             <Button Name="btnStream" Margin="0,5,0,5" Content="Start Video" Height="40" Click="Streaming_Trigger"/>
                             <!--Tracking-->
                             <Expander Name="pnlTrackingObject" IsEnabled="False" Margin="0,20,0,0">
