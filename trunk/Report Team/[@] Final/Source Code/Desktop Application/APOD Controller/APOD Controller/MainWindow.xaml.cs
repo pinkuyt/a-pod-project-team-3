@@ -269,7 +269,7 @@ namespace APOD_Controller
                     {
                         return true;
                     }
-                    MessageBox.Show("Bluetooth connetion fail.");
+                    MessageBox.Show("Bluetooth connetion fail.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     Configuration.Initiated = false;
                 }
             }
@@ -420,14 +420,15 @@ namespace APOD_Controller
             {
                 // get new source from IP
                 string cameraUrl = "http://" + Configuration.CameraIp + ":" + Configuration.CameraPort + "/videostream.cgi";
+                //string cameraUrl = "http://192.168.2.100:80/videostream.cgi";
                 MJPEGStream source = new MJPEGStream(cameraUrl) 
                     {
-                        Login = "admin",// Configuration.Login,
-                        Password =""// Configuration.Passwordco
+                        Login = Configuration.Login,
+                        Password = Configuration.Password
                     };
 
-                //OpenVideoSource(new VideoCaptureDevice(LocalVideoDevices[0].MonikerString));
-                OpenVideoSource(source);
+                OpenVideoSource(new VideoCaptureDevice(LocalVideoDevices[0].MonikerString));
+                //OpenVideoSource(source);
                 hostCam.Visibility = Visibility.Visible;
                 imgSplash.Visibility = Visibility.Collapsed;
             }
@@ -691,7 +692,7 @@ namespace APOD_Controller
         private void rdModeObjTracking_Checked(object sender, RoutedEventArgs e)
         {
             // check camera first
-            if (!viewCam.IsRunning)
+            if (!viewCam.IsRunning || (viewCam.GetCurrentVideoFrame() == null))
             {
                 // camera unadvalable
                 MessageBox.Show("Video device hasn't been started.", "Warning",
@@ -715,7 +716,7 @@ namespace APOD_Controller
                 // Default method: color check
                 viewCam.NewFrame += viewCam_NewFrame_ColorCheck;
                 // Disable virtual key
-                Keypad_Disable();
+                //Keypad_Disable();
             }
             else
             {
@@ -748,7 +749,7 @@ namespace APOD_Controller
                     break;
             }
             // enable virtual key
-            Keypad_Enable();
+            //Keypad_Enable();
         }
 
         /// <summary>
@@ -949,12 +950,14 @@ namespace APOD_Controller
                 {
                     result = Bluetooth.SendCommand(Command.TurnLeft);
                     System.Threading.Thread.Sleep(1000);
+                    if (Target.Found) return;
                 }
                 // right region
                 else if (Target.X >= Indicator.RightBoundary)
                 {
                     result = Bluetooth.SendCommand(Command.TurnRight);
                     System.Threading.Thread.Sleep(1000);
+                    if (Target.Found) return;
                 }
                 // middle region
                 else
@@ -1261,7 +1264,7 @@ namespace APOD_Controller
                 Bluetooth = new BluetoothDevice(Configuration.OutgoingPort, Configuration.OutgoingBaudrate);
                 if (Bluetooth.Open() == 0)
                 {
-                    MessageBox.Show("Bluetooth connetion fail.");
+                    MessageBox.Show("Bluetooth connetion fail.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         } 

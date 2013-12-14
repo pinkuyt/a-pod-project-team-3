@@ -65,7 +65,6 @@ namespace APOD_Controller.APOD.Sequences
         {
             bool result = true;
             result = Bluetooth.SendCommand(Command.Start);
-            System.Threading.Thread.Sleep(3000);
             foreach (MoveItem moveItem in Collection)
             {
                 System.Threading.Thread.Sleep(100);
@@ -136,6 +135,7 @@ namespace APOD_Controller.APOD.Sequences
                         result = Bluetooth.SendCommand(Command.RotateHeadRight);
                         break;
                 }
+                System.Threading.Thread.Sleep(100);
                 if (!result) return;
             }
         }
