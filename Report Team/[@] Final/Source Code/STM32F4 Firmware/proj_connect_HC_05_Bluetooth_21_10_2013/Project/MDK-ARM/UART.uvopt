@@ -352,9 +352,9 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>10</ColumnNumber>
+      <ColumnNumber>18</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>312</TopLine>
+      <TopLine>315</TopLine>
       <CurrentLine>318</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\main.c</PathWithFileName>
@@ -400,7 +400,7 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>29</ColumnNumber>
+      <ColumnNumber>32</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
       <TopLine>15</TopLine>
       <CurrentLine>16</CurrentLine>
@@ -464,10 +464,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>14</ColumnNumber>
+      <ColumnNumber>2</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>568</TopLine>
-      <CurrentLine>2173</CurrentLine>
+      <TopLine>1</TopLine>
+      <CurrentLine>1874</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\APOD.c</PathWithFileName>
       <FilenameWithoutPath>APOD.c</FilenameWithoutPath>

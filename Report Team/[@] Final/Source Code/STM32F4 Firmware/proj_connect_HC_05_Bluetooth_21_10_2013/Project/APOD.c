@@ -59,16 +59,10 @@ void MANDIBLE(char mandible, int interval)
 	switch(mandible)
 	{
 		case 0: //MANDIBLE_LEFT
-			if  (Valid(Mandible[0]))
-			{
-				Servos[Mandible[0]] -= interval;
-			}
+			Servos[Mandible[0]] -= interval;
 			break;
 		case 1: //MANDIBLE_RIGHT
-			if  (Valid(Mandible[1]))
-			{
-				Servos[Mandible[1]] += interval;
-			}
+			Servos[Mandible[1]] += interval;
 			break;
 	}
 }
@@ -90,26 +84,17 @@ void MANDIBLE_Reset_All(void)
 // ----------------------------------------
 void Neck_Rotate(int interval)
 {
-	if (Valid(Neck[0]))
-	{
-		Servos[(Neck[0])] += interval;
-	}
+	Servos[(Neck[0])] += interval;
 }
 
 void Neck_Horizontal(int interval)
 {
-	if (Valid(Neck[1]))
-	{
-		Servos[(Neck[1])] += interval;
-	}
+	Servos[(Neck[1])] += interval;
 }
 
 void Neck_Vertical(int interval)
 {
-	if (Valid(Neck[2]))
-	{
-		Servos[(Neck[2])] += interval;
-	}
+	Servos[(Neck[2])] += interval;
 }
 void NECK_Reset_All(void)
 {
@@ -126,27 +111,21 @@ void LEG_Lift(char leg, int interval)
 	switch(leg)
 	{
 		case 0: // RIGHT_FRONT
-			if (!Valid(RightFront[1])) {return;}
 			Servos[RightFront[1]] += interval;
 			break;
 		case 1: // RIGHT_CENTER
-			if (!Valid(RightCenter[1])) {return;}
 			Servos[RightCenter[1]] += interval;
 			break;
 		case 2: // RIGHT_REAR
-			if (!Valid(RightRear[1])) {return;}
 			Servos[RightRear[1]] += interval;
 			break;
 		case 3: // LEFT_FRONT
-			if (!Valid(LeftFront[1])) {return;}
 			Servos[LeftFront[1]] -= interval;
 			break;
 		case 4: // LEFT_CENTER
-			if (!Valid(LeftCenter[1])) {return;}
 			Servos[LeftCenter[1]] -= interval;
 			break;
 		case 5: // LEFT_REAR
-			if (!Valid(LeftRear[1])) {return;}
 			Servos[LeftRear[1]] -= interval;
 			break;
 	}
@@ -185,27 +164,21 @@ void LEG_Forward(char leg, int interval)
 	switch(leg)
 	{
 		case 0: // RIGHT_FRONT
-			if (!Valid(RightFront[0])) {return;}
 			Servos[RightFront[0]] += interval;
 			break;
 		case 1: // RIGHT_CENTER
-			if (!Valid(RightCenter[0])) {return;}
 			Servos[RightCenter[0]] += interval;
 			break;
 		case 2: // RIGHT_REAR
-			if (!Valid(RightRear[0])) {return;}
 			Servos[RightRear[0]] += interval;
 			break;
 		case 3: // LEFT_FRONT
-			if (!Valid(LeftFront[0])) {return;}
 			Servos[LeftFront[0]] -= interval;
 			break;
 		case 4: // LEFT_CENTER
-			if (!Valid(LeftCenter[0])) {return;}
 			Servos[LeftCenter[0]] -= interval;
 			break;
 		case 5: // LEFT_REAR
-			if (!Valid(LeftRear[0])) {return;}
 			Servos[LeftRear[0]] -= interval;
 			break;
 	}
@@ -1694,6 +1667,9 @@ void Apod_Squeeze_Left(int interval)
 {
 	char cmd[74];
 	
+	if ( (!Valid(LeftFront[0])) || (!Valid(LeftFront[1])) || (!Valid(LeftFront[2])) ) return;
+	if ( (!Valid(RightFront[0])) || (!Valid(RightFront[1])) || (!Valid(RightFront[2])) ) return;
+	
 	LEG_Drop(LEFT_FRONT,interval);
 	LEG_Drop(LEFT_CENTER,interval);
 	LEG_Drop(LEFT_REAR,interval);
@@ -1722,29 +1698,29 @@ void Apod_Squeeze_Right(int interval)
 void Apod_Drop(int interval)
 {
 	char cmd[74];
-	if (Servos[5] < 2100) // 1500 + (100* 6 times)
-	{
+	
+	if ( (!Valid(LeftFront[0])) || (!Valid(LeftFront[1])) || (!Valid(LeftFront[2])) ) return;
+	if ( (!Valid(RightFront[0])) || (!Valid(RightFront[1])) || (!Valid(RightFront[2])) ) return;
+	
 	Tripod_A_Lift(interval);
 	Tripod_B_Lift(interval);
+	
 	GenerateCommand_Legs(cmd);
 	sendUSART(USART2,cmd,sizeof(cmd));
-	}
-	else 
-	{}
-	
 }
 
 void Apod_lift(int interval)
 {
 	char cmd[74];
-	if (Servos[5] > 1000)  // 1500 - (100*5 times)
-	{
+	
+	if ( (!Valid(LeftFront[0])) || (!Valid(LeftFront[1])) || (!Valid(LeftFront[2])) ) return;
+	if ( (!Valid(RightFront[0])) || (!Valid(RightFront[1])) || (!Valid(RightFront[2])) ) return;
+	
 	Tripod_A_Drop(interval);
 	Tripod_B_Drop(interval);
 	
 	GenerateCommand_Legs(cmd);
 	sendUSART(USART2,cmd,sizeof(cmd));
-	}
 }
 
 void Apod_Balance(void)
@@ -1764,8 +1740,10 @@ void Apod_Balance(void)
 void Apod_towardtheBack(int interval)
 {
 	char cmd[74];
-	if (Servos[1] > 900)
-	{
+	
+	if ( (!Valid(LeftRear[0])) || (!Valid(LeftRear[1])) || (!Valid(LeftRear[2])) ) return;
+	if ( (!Valid(LeftFront[0])) || (!Valid(LeftFront[1])) || (!Valid(LeftFront[2])) ) return;
+	
 	LEG_Lift(RIGHT_REAR, interval);
 	LEG_Lift(LEFT_REAR, interval);
 	LEG_Lift(RIGHT_FRONT, -interval);
@@ -1778,14 +1756,15 @@ void Apod_towardtheBack(int interval)
 	
 	GenerateCommand_Legs(cmd);
 	sendUSART(USART2,cmd,74);
-	}
 }
 
 void Apod_towardtheFront(int interval)
 {
 	char cmd[74];
-	if (Servos[1] < 2000)
-	{
+	
+	if ( (!Valid(LeftRear[0])) || (!Valid(LeftRear[1])) || (!Valid(LeftRear[2])) ) return;
+	if ( (!Valid(LeftFront[0])) || (!Valid(LeftFront[1])) || (!Valid(LeftFront[2])) ) return;
+	
 	LEG_Lift(RIGHT_REAR, -interval);
 	LEG_Lift(LEFT_REAR, -interval);
 	LEG_Lift(RIGHT_FRONT, interval);
@@ -1798,7 +1777,6 @@ void Apod_towardtheFront(int interval)
 	
 	GenerateCommand_Legs(cmd);
 	sendUSART(USART2,cmd,74);
-	}
 }
 
 
@@ -1808,6 +1786,9 @@ void Apod_towardtheFront(int interval)
 void APod_Neck_Rotate_Left (int interval)
 {
 	char cmd[22];
+	
+	if (!Valid(Neck[0])) return;
+	
 	Neck_Rotate(interval);
 	
 	GenerateCommand_Head(cmd);
@@ -1817,6 +1798,9 @@ void APod_Neck_Rotate_Left (int interval)
 void Apod_Neck_Rotate_Right(int interval)
 {
 	char cmd[22];
+	
+	if (!Valid(Neck[0])) return;
+	
 	Neck_Rotate(-interval);
 	
 	GenerateCommand_Head(cmd);
@@ -1826,6 +1810,9 @@ void Apod_Neck_Rotate_Right(int interval)
 void Apod_Head_Down(int interval)
 {
 	char cmd[22];
+	
+	if (!Valid(Neck[2])) return;
+	
 	Neck_Vertical(interval);
 	
 	GenerateCommand_Head(cmd);
@@ -1835,6 +1822,9 @@ void Apod_Head_Down(int interval)
 void Apod_Head_Up(int interval)
 {
 	char cmd[22];
+	
+	if (!Valid(Neck[2])) return;
+	
 	Neck_Vertical(-interval);
 	
 	GenerateCommand_Head(cmd);
@@ -1844,6 +1834,9 @@ void Apod_Head_Up(int interval)
 void Apod_Head_Left(int interval)
 {
 	char cmd[22];
+	
+	if (!Valid(Neck[1])) return;
+	
 	Neck_Horizontal(interval);
 	
 	GenerateCommand_Head(cmd);
@@ -1853,6 +1846,9 @@ void Apod_Head_Left(int interval)
 void Apod_Head_Right(int interval)
 {
 	char cmd[22];
+	
+	if (!Valid(Neck[1])) return;
+	
 	Neck_Horizontal(-interval);
 	
 	GenerateCommand_Head(cmd);
@@ -1875,6 +1871,9 @@ int Apod_Mandibles_Expand(void)
 void Apod_Mandible_Nip(int interval)
 {
 	char cmd[10];
+	
+	if ( (!Valid(Mandible[0])) || (!Valid(Mandible[1])) ) return;
+	
 	MANDIBLE(MANDIBLE_LEFT,interval);
 	MANDIBLE(MANDIBLE_RIGHT,interval);
 	
