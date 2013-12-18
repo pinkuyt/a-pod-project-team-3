@@ -47,8 +47,18 @@ unsigned int Mandible[2] = {3,19};
 
 unsigned char Valid(unsigned int servo)
 {
-	if ((Servos[servo] >900) && (Servos[servo] <2100))return 1;
+	if ((Servos[servo] >900) && (Servos[servo] <2100)) return 1;
 	return 0;
+}
+unsigned char Max(unsigned int servo)
+{
+	if (Servos[servo] <2100) return 0;
+	return 1;
+}
+unsigned char Min(unsigned int servo)
+{
+	if (Servos[servo] >900) return 0;
+	return 1;
 }
 // ----------------------------------------
 // Mandible control
@@ -1667,8 +1677,7 @@ void Apod_Squeeze_Left(int interval)
 {
 	char cmd[74];
 	
-	if ( (!Valid(LeftFront[0])) || (!Valid(LeftFront[1])) || (!Valid(LeftFront[2])) ) return;
-	if ( (!Valid(RightFront[0])) || (!Valid(RightFront[1])) || (!Valid(RightFront[2])) ) return;
+	if (Max(RightFront[1])) return;
 	
 	LEG_Drop(LEFT_FRONT,interval);
 	LEG_Drop(LEFT_CENTER,interval);
@@ -1692,15 +1701,36 @@ void Apod_Squeeze_Left(int interval)
 
 void Apod_Squeeze_Right(int interval)
 {
-	Apod_Squeeze_Left(-interval);
+	
+	char cmd[74];
+	
+	if (Min(RightFront[1])) return;
+	
+	LEG_Lift(LEFT_FRONT,interval);
+	LEG_Lift(LEFT_CENTER,interval);
+	LEG_Lift(LEFT_REAR,interval);
+	
+	LEG_Drop(RIGHT_FRONT,interval);
+	LEG_Drop(RIGHT_CENTER,interval);
+	LEG_Drop(RIGHT_REAR,interval);
+	
+	LEG_Stand(LEFT_FRONT);
+	LEG_Stand(LEFT_CENTER);
+	LEG_Stand(LEFT_REAR);
+	
+	LEG_Stand(RIGHT_FRONT);
+	LEG_Stand(RIGHT_CENTER);
+	LEG_Stand(RIGHT_REAR);
+	
+	GenerateCommand_Legs(cmd);
+	sendUSART(USART2,cmd,sizeof(cmd));
 }
 
 void Apod_Drop(int interval)
 {
 	char cmd[74];
 	
-	if ( (!Valid(LeftFront[0])) || (!Valid(LeftFront[1])) || (!Valid(LeftFront[2])) ) return;
-	if ( (!Valid(RightFront[0])) || (!Valid(RightFront[1])) || (!Valid(RightFront[2])) ) return;
+	if (Max(RightFront[1])) return;
 	
 	Tripod_A_Lift(interval);
 	Tripod_B_Lift(interval);
@@ -1713,8 +1743,7 @@ void Apod_lift(int interval)
 {
 	char cmd[74];
 	
-	if ( (!Valid(LeftFront[0])) || (!Valid(LeftFront[1])) || (!Valid(LeftFront[2])) ) return;
-	if ( (!Valid(RightFront[0])) || (!Valid(RightFront[1])) || (!Valid(RightFront[2])) ) return;
+	if (Min(RightFront[1])) return;
 	
 	Tripod_A_Drop(interval);
 	Tripod_B_Drop(interval);
@@ -1741,8 +1770,7 @@ void Apod_towardtheBack(int interval)
 {
 	char cmd[74];
 	
-	if ( (!Valid(LeftRear[0])) || (!Valid(LeftRear[1])) || (!Valid(LeftRear[2])) ) return;
-	if ( (!Valid(LeftFront[0])) || (!Valid(LeftFront[1])) || (!Valid(LeftFront[2])) ) return;
+	if (Min(RightFront[1])) return;
 	
 	LEG_Lift(RIGHT_REAR, interval);
 	LEG_Lift(LEFT_REAR, interval);
@@ -1762,8 +1790,7 @@ void Apod_towardtheFront(int interval)
 {
 	char cmd[74];
 	
-	if ( (!Valid(LeftRear[0])) || (!Valid(LeftRear[1])) || (!Valid(LeftRear[2])) ) return;
-	if ( (!Valid(LeftFront[0])) || (!Valid(LeftFront[1])) || (!Valid(LeftFront[2])) ) return;
+	if (Max(RightFront[1])) return;
 	
 	LEG_Lift(RIGHT_REAR, -interval);
 	LEG_Lift(LEFT_REAR, -interval);
@@ -1787,7 +1814,7 @@ void APod_Neck_Rotate_Left (int interval)
 {
 	char cmd[22];
 	
-	if (!Valid(Neck[0])) return;
+	if (Max(Neck[0])) return;
 	
 	Neck_Rotate(interval);
 	
@@ -1799,7 +1826,7 @@ void Apod_Neck_Rotate_Right(int interval)
 {
 	char cmd[22];
 	
-	if (!Valid(Neck[0])) return;
+	if (Min(Neck[0])) return;
 	
 	Neck_Rotate(-interval);
 	
@@ -1811,7 +1838,7 @@ void Apod_Head_Down(int interval)
 {
 	char cmd[22];
 	
-	if (!Valid(Neck[2])) return;
+	if (Max(Neck[2])) return;
 	
 	Neck_Vertical(interval);
 	
@@ -1823,7 +1850,7 @@ void Apod_Head_Up(int interval)
 {
 	char cmd[22];
 	
-	if (!Valid(Neck[2])) return;
+	if (Min(Neck[2])) return;
 	
 	Neck_Vertical(-interval);
 	
@@ -1835,7 +1862,7 @@ void Apod_Head_Left(int interval)
 {
 	char cmd[22];
 	
-	if (!Valid(Neck[1])) return;
+	if (Max(Neck[1])) return;
 	
 	Neck_Horizontal(interval);
 	
@@ -1847,7 +1874,7 @@ void Apod_Head_Right(int interval)
 {
 	char cmd[22];
 	
-	if (!Valid(Neck[1])) return;
+	if (Min(Neck[1])) return;
 	
 	Neck_Horizontal(-interval);
 	
@@ -1872,7 +1899,7 @@ void Apod_Mandible_Nip(int interval)
 {
 	char cmd[10];
 	
-	if ( (!Valid(Mandible[0])) || (!Valid(Mandible[1])) ) return;
+	if (Max(Mandible[1])) return;
 	
 	MANDIBLE(MANDIBLE_LEFT,interval);
 	MANDIBLE(MANDIBLE_RIGHT,interval);
@@ -1883,7 +1910,15 @@ void Apod_Mandible_Nip(int interval)
 
 void Apod_Mandible_Release(int interval)
 {	
-	Apod_Mandible_Nip(-interval);
+	char cmd[10];
+	
+	if (Min(Mandible[1])) return;
+	
+	MANDIBLE(MANDIBLE_LEFT,interval);
+	MANDIBLE(MANDIBLE_RIGHT,interval);
+	
+	GenerateCommand_Mandibles(cmd);
+	sendUSART(USART2,cmd,sizeof(cmd));
 }
 // ------------------------------------
 // TAILS
